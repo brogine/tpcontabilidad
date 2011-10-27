@@ -2,14 +2,14 @@
       <div class="sidebar">
         <h3>Ingresar</h3>
         <h5>Sólamente usuarios logueados</h5>
-        <?php echo form_open('inicio/login', 'id="search_form"'); ?>
+        <form method="post" id="frmLogin" action="#" id="search_form">
             <label>Usuario:</label>
             <input type="text" name="txtUsuario" id="txtUsuario" />
             <label>Password:</label>
             <input type="password" name="txtPassword" id="txtPassword" />
             <h5><input type="checkbox" name="chkRecordarme" id="chkRecordarme" /> Recordarme</h5>
             <input type="submit" id="btnIngresar" value="Aceptar" />
-        <?php echo form_close(); ?>
+        </form>
       </div>
       <div id="content">
         <h1>Curabitur pulvinar quam a</h1>
