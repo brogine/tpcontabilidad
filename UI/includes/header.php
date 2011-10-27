@@ -42,14 +42,14 @@
     <div id="header">
       <div id="logo">
         <div id="logo_text">
-          <h1><a href="<?php echo base_url(); ?>"><span class="logo_colour">Turnos</span></a></h1>
+          <h1><a href="#"><span class="logo_colour">Turnos</span></a></h1>
           <h2>Algun slogan.</h2>
         </div>
       </div>
       <div id="menubar">
         <ul id="menu">
           <!-- put class="selected" in the li tag for the selected page - to highlight which page you're on -->
-          <li class="selected"><a href="<?php echo base_url(); ?>">Inicio</a></li>
+          <li class="selected"><a href="#">Inicio</a></li>
           <li><a href="#">Ejemplos</a></li>
           <li><a href="#">Una página</a></li>
           <li><a href="#">otra pagina</a></li>
