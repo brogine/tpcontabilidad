@@ -10,6 +10,9 @@
             <h5><input type="checkbox" name="chkRecordarme" id="chkRecordarme" /> Recordarme</h5>
             <input type="submit" id="btnIngresar" value="Aceptar" />
         </form>
+        <?php
+        if(isset($error)){ echo $error; }
+        ?>
       </div>
       <div id="content">
         <h1>Curabitur pulvinar quam a</h1>
