@@ -2,42 +2,36 @@
 
 class Conexion
 {  
-public $Server; 
-public $User;
-public $Pass;
-public $BDD;
-public $Conex;  
+	private $Server; 
+	private $User;
+	private $Pass;
+	private $BDD;
+	private $Conex;
   public function Conexion()
   {
     $this->LeerXml("Configuracion.xml");
-    
-    if(!isset($this->Conex))
-    {
-        $this->Conex = (mysql_connect($this->Server,$this->User,$this->Pass) or die mysql_error());
-            mysql_select_db($this->BDD,$this->Conex) or die(mysql_error()); 
-    }
-    
+    $this->Conex = mysqli_connect($this->Server, $this->User, $this->Pass, $this->BDD) or die(mysqli_connect_error());
   }
   
-  public function StoreProcedureConRetorno($StoreProcedure,$Parametros)
+  public function StoreProcedureConRetorno($StoreProcedure, $Parametros = '')
   {
-   $Resultado = mysql_query("Call $StoreProcedure($Parametros)",$this->Conex);
-   return $Resultado
-    mysql_close();
+	$Resultado = $this->Conex->query("Call $StoreProcedure($Parametros)");
+	mysqli_close($this->Conex);
+	return $Resultado;
   }
   
-  public function StoreProcedureSinRetorno($StoreProcedure,$Parametros)
+  public function StoreProcedureSinRetorno($StoreProcedure, $Parametros = '')
   {
-   mysql_query("Call $StoreProcedure($Parametros)",$this->Conex);
-   mysql_close();
+	$this->Conex->query("Call $StoreProcedure($Parametros)");
+	mysqli_close();
   }
-  
   
   private function LeerXml($Archivo)
   {
     $xml = new DOMDocument('1.0', 'utf-8');
-    $xml->Load("Conexion/".$Archivo);
-    $Datos = $xml->getElementsByTagName("Configuracion");
+    $xml->Load("../Repositorio/Conexion/".$Archivo);
+    $DatosRoot = $xml->getElementsByTagName("configuraciones");
+    $Datos = $xml->getElementsByTagName("config");
     foreach ($Datos as $Value)
     {
         $Nodos = $Value->getElementsByTagName("Server");
@@ -49,8 +43,6 @@ public $Conex;
         $Nodos = $Value->getElementsByTagName("BDD");
         $this->BDD = $Nodos->item(0)->nodeValue;
     }
-    
-    
   }
 }
 ?>

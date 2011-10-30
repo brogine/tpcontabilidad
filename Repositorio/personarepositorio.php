@@ -1,11 +1,11 @@
 <?PHP
 class PersonaRepositorio
 {
-    private $persona
+    private $persona;
     private $Conexion;
     public function __construct()
     {
-        $this->Conexion=new Conexion();
+        $this->Conexion = new Conexion();
     }
     
     public function Agregar($Persona)
@@ -21,7 +21,7 @@ class PersonaRepositorio
         $parametros[6]=$this->persona->Ubicacion->Localidad->IdLocalidad;
         $parametros[7]=$this->persona->Ubicacion->Domicilio;
         $parametros[8]=$this->persona->Estado;
-        $this->Conexion->StoreProcedureSinRetorno('PersonasAlta',)
+        //$this->Conexion->StoreProcedureSinRetorno('PersonasAlta',)
         
     }
     
@@ -38,7 +38,7 @@ class PersonaRepositorio
         $parametros[6]=$this->persona->Ubicacion->Localidad->IdLocalidad;
         $parametros[7]=$this->persona->Ubicacion->Domicilio;
         $parametros[8]=$this->persona->Estado;
-        $this->Conexion->StoreProcedureSinRetorno('PersonasMod',)
+        //$this->Conexion->StoreProcedureSinRetorno('PersonasMod',)
          
         
     }
@@ -67,7 +67,7 @@ class PersonaRepositorio
     
     public function Mapear($Datarow)
     {
-        $tabla = mysql_fetch_array($Datarow)
+        $tabla = mysql_fetch_array($Datarow);
         
         
     }
