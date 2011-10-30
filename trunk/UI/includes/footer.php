@@ -1,4 +1,4 @@
-<div>
+<div id="galeriacontainer">
 <div class="prev"><img src="style/prev.jpg" alt="prev" /></div>
 <div id="galeria" class="gal">
       <ul style="width=3000">

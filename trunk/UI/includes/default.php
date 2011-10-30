@@ -15,8 +15,19 @@
         ?>
       </div>
       <div id="content">
-        <h1>Curabitur pulvinar quam a</h1>
-        <p>ipsum pretium eget hendrerit risus interdum. Nulla hendrerit euismod congue. In facilisis risus dapibus turpis rutrum consequat.</p>
+        <h1>Quiero sacar un turno...</h1>
+        <h5>Rubro 	
+	        <select id="cmbRubro" name="cmbRubro" >
+				<?php
+					include_once '../Servicio/rubroservicio.php';
+					$servicioRubros = new RubroServicio();
+					$listaRubros = $servicioRubros->Listar();
+					foreach($listaRubros as $rubro):
+						echo "<option value=".$rubro->Id.">".$rubro->Descripcion."</option>";
+					endforeach;
+				?>
+			</select>
+        </h5>
         <p>Nulla in neque nulla. Maecenas sed arcu mauris, id venenatis leo.</p>
         <p>Donec blandit tincidunt sapien, vel volutpat nulla scelerisque vel.</p>
         <p>Ut a purus nec eros rutrum ornare. Suspendisse sit amet risus urna.</p>

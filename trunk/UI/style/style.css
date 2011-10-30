@@ -163,21 +163,38 @@ ul#menu li a:hover, ul#menu li.selected a, ul#menu li.selected a:hover
   padding: 20px 24px 20px 37px;
   background: #FFF url(content.png) repeat-y;} 
 
+#galeriacontainer{
+	float:left;	
+	border:1px solid #000;	
+	margin-left:4%;
+	display: block;
+}
+
+#galeriacontainer div{
+	display: inline-block;
+	float:left;
+	border:1px solid #000;
+}
+	
+.prev{
+	width:25px;
+}
+
+.next{
+	width:25px;
+}
+	
 #galeria{
-    visibility: visible;
     overflow: hidden;
-    position: relative;
     z-index: 2;
+    position:absolute;
     margin-left:5%;
-    margin-right:5%;
-    left: 0px;
-    width: 85%;
+    width: 100%;
 }
 
 #galeria ul{
     margin: 0pt;
     padding: 0pt;
-    position: relative;
     list-style-type: none;
     z-index: 1;
 }
@@ -308,7 +325,9 @@ ul#menu li a:hover, ul#menu li.selected a, ul#menu li.selected a:hover
   height: 0;
   border-top: 1px solid #D9D5CF;
   border-bottom: 1px solid #FFF;
-  margin: 0 0 20px 0;}
+  margin: 0 0 20px 0;
+  clear:both;
+  }
   
 table
 { margin: 10px 0 30px 0;}

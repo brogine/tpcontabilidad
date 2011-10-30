@@ -1,0 +1,8 @@
+﻿<?xml version="1.0" ?>
+<configuraciones>
+  <config>
+  	<Server>localhost</Server>
+  	<User>root</User>
+  	<Pass></Pass>
+  	<BDD>MegaTurnos</BDD></config>
+</configuraciones> 
