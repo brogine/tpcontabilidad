@@ -164,23 +164,23 @@ ul#menu li a:hover, ul#menu li.selected a, ul#menu li.selected a:hover
   background: #FFF url(content.png) repeat-y;} 
 
 #galeriacontainer{
-	float:left;	
-	border:1px solid #000;	
-	margin-left:4%;
+	margin-left:2%;
 	display: block;
 }
 
 #galeriacontainer div{
 	display: inline-block;
-	float:left;
-	border:1px solid #000;
 }
 	
 .prev{
+	float:left;
+	margin-top:65px;
 	width:25px;
 }
 
 .next{
+	float:right;
+	margin-top:65px;
 	width:25px;
 }
 	
@@ -188,8 +188,13 @@ ul#menu li a:hover, ul#menu li.selected a, ul#menu li.selected a:hover
     overflow: hidden;
     z-index: 2;
     position:absolute;
-    margin-left:5%;
+    margin-left:3%;
     width: 100%;
+}
+
+#galeria img{
+	height:145px;
+	width:170px;
 }
 
 #galeria ul{
@@ -201,7 +206,6 @@ ul#menu li a:hover, ul#menu li.selected a, ul#menu li.selected a:hover
 
 #galeria li{
     overflow: hidden;
-    float: left;
     width: 170px;
     height: 145px;
 }
@@ -245,7 +249,7 @@ ul#menu li a:hover, ul#menu li.selected a, ul#menu li.selected a:hover
   line-height: 1.5em;}
 
 #footer
-{ width: 800px;
+{ width: 100%;
   font: normal 100% 'lucida sans unicode', arial, sans-serif;
   height: 33px;
   margin-top:10px;
