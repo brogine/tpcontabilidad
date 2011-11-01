@@ -1,6 +1,5 @@
 <?php
-    include_once("controlador.php");
-    include_once("includes/header.php");
-    include_once("includes/default.php");
-    include_once("includes/footer.php");
+    include_once("home/header.php");
+    include_once("home/default.php");
+    include_once("home/footer.php");
 ?>
