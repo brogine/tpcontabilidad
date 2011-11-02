@@ -1,6 +1,10 @@
 <?PHP
+include_once 'Conexion/conexion.php';
+include_once '../Dominio/persona.php';
 class PersonaRepositorio
+
 {
+    
     private $persona;
     private $Conexion;
     public function __construct()
@@ -21,7 +25,7 @@ class PersonaRepositorio
         $parametros[6]=$this->persona->Ubicacion->Localidad->IdLocalidad;
         $parametros[7]=$this->persona->Ubicacion->Domicilio;
         $parametros[8]=$this->persona->Estado;
-        //$this->Conexion->StoreProcedureSinRetorno('PersonasAlta',)
+        //$this->Conexion->StoreProcedureSinRetorno('PersonasAlta',$parametros);
         
     }
     
@@ -38,7 +42,7 @@ class PersonaRepositorio
         $parametros[6]=$this->persona->Ubicacion->Localidad->IdLocalidad;
         $parametros[7]=$this->persona->Ubicacion->Domicilio;
         $parametros[8]=$this->persona->Estado;
-        //$this->Conexion->StoreProcedureSinRetorno('PersonasMod',)
+        //$this->Conexion->StoreProcedureSinRetorno('PersonasMod',$parametros);
          
         
     }
