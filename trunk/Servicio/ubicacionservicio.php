@@ -7,27 +7,27 @@ class UbicacionServicio{
         $this->ubicacionRepositorio = new UbicacionRepositorio();
     }
     
-    public function AgregarLocalidad($Localidad){
+    public function AgregarLocalidad(Localidad $Localidad){
         $this->ubicacionRepositorio->AgregarLocalidad($Localidad);
     }
     
-    public function AgregarProvincia($Provincia){
+    public function AgregarProvincia(Provincia $Provincia){
         $this->ubicacionRepositorio->AgregarProvincia($Provincia);
     }
     
-    public function AgregarPais($Pais){
+    public function AgregarPais(Pais $Pais){
         $this->ubicacionRepositorio->AgregarPais($Pais);
     }
     
-    public function ModificarLocalidad($Localidad){
+    public function ModificarLocalidad(Localidad $Localidad){
         $this->ubicacionRepositorio->ModificarLocalidad($Localidad);
     }
     
-    public function ModificarProvincia($Provincia){
+    public function ModificarProvincia(Provincia $Provincia){
         $this->ubicacionRepositorio->ModificarProvincia($Provincia);
     }
     
-    public function ModificarPais($Pais){
+    public function ModificarPais(Pais $Pais){
         $this->ubicacionRepositorio->ModificarPais($Pais);
     }
     

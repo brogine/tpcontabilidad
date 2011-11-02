@@ -7,11 +7,11 @@ class TurnoServicio{
         $this->turnoRepositorio = new TurnoRepositorio();
     }
     
-    public function Agregar($Turno){
+    public function Agregar(Turno $Turno){
         $this->turnoRepositorio->Agregar($Turno);
     }
     
-    public function Modificar($Turno){
+    public function Modificar(Turno $Turno){
         $this->turnoRepositorio->Modificar($Turno);
     }
     

@@ -9,11 +9,11 @@ class ProfesionalServicio{
         $this->profesionalRepo = new ProfesionalRepositorio();
     }
     
-    public function Agregar($Profesional){
+    public function Agregar(Profesional $Profesional){
         $this->profesionalRepositorio->Agregar($Profesional);
     }
     
-    public function Modificar($Profesional){
+    public function Modificar(Profesional $Profesional){
         $this->profesionalRepositorio->Modificar($Profesional);
     }
     
@@ -21,7 +21,7 @@ class ProfesionalServicio{
         return $this->profesionalRepositorio->Buscar($DniCuitCuil);
     }
     
-    public function Listar($Profesional){
+    public function Listar(){
         return $this->profesionalRepositorio->Listar();
     }
 }

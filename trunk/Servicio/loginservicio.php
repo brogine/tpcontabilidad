@@ -7,7 +7,7 @@ class LoginServicio{
         $this->loginRepositorio = new LoginRepositorio();
     }
     
-    public function Validar($Login)
+    public function Validar(Login $Login)
     {
         //$resultado = $this->loginRepositorio->Validar(md5($Login->Usuario), md5($Login->Password));
         //if($resultado){

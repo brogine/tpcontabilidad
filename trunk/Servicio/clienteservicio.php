@@ -7,11 +7,11 @@ class ClienteServicio{
         $this->clienteRepositorio = new ClienteRepositorio();
     }
     
-    public function Agregar($Cliente){
+    public function Agregar(Cliente $Cliente){
         $this->clienteRepositorio->Agregar($Cliente);
     }
     
-    public function Modificar($Cliente){
+    public function Modificar(Cliente $Cliente){
         $this->clienteRepositorio->Modificar($Cliente);
     }
     

@@ -7,11 +7,11 @@ class ObraSocialServicio{
         $this->obrasocialRepositorio = new ObraSocialRepositorio();
     }
     
-    public function Agregar($ObraSocial){
+    public function Agregar(ObraSocial $ObraSocial){
         $this->obrasocialRepositorio->Agregar($ObraSocial);
     }
     
-    public function Modificar($ObraSocial){
+    public function Modificar(ObraSocial $ObraSocial){
         $this->obrasocialRepositorio->Modificar($ObraSocial);
     }
     
