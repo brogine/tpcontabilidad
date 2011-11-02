@@ -7,11 +7,11 @@ class RubroServicio{
 		$this->rubroRepositorio = new RubroRepositorio();
 	}
 	
-	public function Agregar($Rubro){
+	public function Agregar(Rubro $Rubro){
         $this->rubroRepositorio->Agregar($Rubro);
     }
     
-    public function Modificar($Rubro){
+    public function Modificar(Rubro $Rubro){
         $this->rubroRepositorio->Modificar($Rubro);
     }
     
