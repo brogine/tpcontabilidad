@@ -4,76 +4,31 @@ include_once '../Dominio/persona.php';
 class PersonaRepositorio
 
 {
-    
-    private $persona;
-    private $Conexion;
+	private $Conexion;
     public function __construct()
     {
         $this->Conexion = new Conexion();
     }
+
     
-    public function Agregar($Persona)
+    public function CompletarDatosPersonalesBasicos(Persona $Persona,$array)
     {
-        $this->persona = $Persona;
-        $parametros=array();
-        $parametros[0]=$this->persona->DniCuitCuil;
-        $parametros[1]=$this->persona->Apellido;
-        $parametros[2]=$this->persona->Nombre;
-        $parametros[3]=$this->persona->Contacto->Telefono;
-        $parametros[4]=$this->persona->Contacto->Celular;
-        $parametros[5]=$this->persona->Contacto->Email;
-        $parametros[6]=$this->persona->Ubicacion->Localidad->IdLocalidad;
-        $parametros[7]=$this->persona->Ubicacion->Domicilio;
-        $parametros[8]=$this->persona->Estado;
-        //$this->Conexion->StoreProcedureSinRetorno('PersonasAlta',$parametros);
-        
+    	$parametros=$array; 
+        $parametros[0]=$Persona->DniCuitCuil;
+        $parametros[1]=$Persona->Apellido;
+        $parametros[2]=$Persona->Nombre;
+        $parametros[3]=$Persona->Password;
+        return $array;
     }
     
-    public function Modificar($Persona)
+    public function Mapear(Persona $Persona,$Datarow)
     {
-        $this->persona = $Persona;
-        $parametros=array();
-        $parametros[0]=$this->persona->DniCuitCuil;
-        $parametros[1]=$this->persona->Apellido;
-        $parametros[2]=$this->persona->Nombre;
-        $parametros[3]=$this->persona->Contacto->Telefono;
-        $parametros[4]=$this->persona->Contacto->Celular;
-        $parametros[5]=$this->persona->Contacto->Email;
-        $parametros[6]=$this->persona->Ubicacion->Localidad->IdLocalidad;
-        $parametros[7]=$this->persona->Ubicacion->Domicilio;
-        $parametros[8]=$this->persona->Estado;
-        //$this->Conexion->StoreProcedureSinRetorno('PersonasMod',$parametros);
-         
-        
-    }
-    
-    public function Buscar($Persona)
-    {
-        $this->ObjetoPrivado = ObjetoDominio;
-        $ObjetoTemporal = $this->Conexion->StoreProcedureConRetorno(NombreStoreProcedure,Parametros);
-        if(isset($ObjetoTemporal))
-        {
-        return $this->Mapear($ObjetoTemporal);
-        }
-    }
-    
-    public function Borrar($Persona)
-    {
-         $this->ObjetoPrivado = ObjetoDominio;
-        
-    }
-    
-    public function Listar($Persona)
-    {
-         $this->ObjetoPrivado = ObjetoDominio;
-        
-    }
-    
-    public function Mapear($Datarow)
-    {
-        $tabla = mysql_fetch_array($Datarow);
-        
-        
+    	
+        $Persona->DniCuitCuil=$Datarow['DniCuitCuil'];
+        $Persona->Apellido=$Datarow['Apellido'];
+        $Persona->Nombre=$Datarow['Nombre'];
+        $Persona->Password=$Datarow['Password'];
+        return $Persona;        
     }
 }
 ?>
