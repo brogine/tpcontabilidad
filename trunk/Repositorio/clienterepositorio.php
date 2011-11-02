@@ -44,6 +44,7 @@ class ClienteRepositorio{
     	//$obraSocialRepo = new ObraSocialRepositorio();
     	$obraSocial = new ObraSocial();
     	$PersonaRepo = new PersonaRepositorio();
+    	
 		$cliente = new Cliente($DataRow['Apellido'], $DataRow['Nombre'], $DataRow['DniCuitCuil'], $DataRow['Password'], $contacto, $ubicacion, $obraSocial);
 		return $cliente;
     }
