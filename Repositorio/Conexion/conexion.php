@@ -7,11 +7,10 @@ class Conexion
 	private $Pass;
 	private $BDD;
 	private $Conex;
-  public function Conexion()
-  {
-    $this->LeerXml("Configuracion.xml");
-    $this->Conex = mysqli_connect($this->Server, $this->User, $this->Pass, $this->BDD) or die(mysqli_connect_error());
-  }
+	public function __construct(){
+		$this->LeerXml("Configuracion.xml");
+    	$this->Conex = mysqli_connect($this->Server, $this->User, $this->Pass, $this->BDD) or die(mysqli_connect_error());
+	}
   
   public function StoreProcedureConRetorno($StoreProcedure, $Parametros = '')
   {
@@ -23,7 +22,7 @@ class Conexion
   public function StoreProcedureSinRetorno($StoreProcedure, $Parametros = '')
   {
 	$this->Conex->query("Call $StoreProcedure($Parametros)");
-	mysqli_close();
+	mysqli_close($this->Conex);
   }
   
   private function LeerXml($Archivo)
