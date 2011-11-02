@@ -18,7 +18,9 @@ class RubroRepositorio{
     }
     
     public function Buscar($idRubro){
-        return $this->Conexion->StoreProcedureConRetorno($StoreProcedure, $Parametros);
+        $result = $this->Conexion->StoreProcedureConRetorno($StoreProcedure, $idRubro);
+    	$DataRow = mysqli_fetch_array($result);
+        return $this->Mapear($DataRow);
     }
     
     public function Listar(){

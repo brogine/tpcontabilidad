@@ -5,6 +5,7 @@ include_once '../Dominio/cliente.php';
 
 class ClienteRepositorio{
 	private $Conexion;
+	private $PersonaRepo;
 	
 	public function __construct(){
 		$this->Conexion = new Conexion();
@@ -19,7 +20,9 @@ class ClienteRepositorio{
     }
     
     public function Buscar($DniCuitCuil){
-        return $this->Mapear($this->Conexion->StoreProcedureConRetorno($StoreProcedure, $DniCuitCuil));
+    	$result = $this->Conexion->StoreProcedureConRetorno($StoreProcedure, $DniCuitCuil);
+    	$DataRow = mysqli_fetch_array($result);
+        return $this->Mapear($DataRow);
     }
     
     public function Listar(){
@@ -40,6 +43,7 @@ class ClienteRepositorio{
     	$ubicacion = new Ubicacion();
     	//$obraSocialRepo = new ObraSocialRepositorio();
     	$obraSocial = new ObraSocial();
+    	$PersonaRepo = new PersonaRepositorio();
 		$cliente = new Cliente($DataRow['Apellido'], $DataRow['Nombre'], $DataRow['DniCuitCuil'], $DataRow['Password'], $contacto, $ubicacion, $obraSocial);
 		return $cliente;
     }
