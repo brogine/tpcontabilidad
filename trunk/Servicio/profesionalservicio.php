@@ -1,10 +1,12 @@
 <?php
-
+include_once '../Dominio/profesional.php';
+include_once '../Repositorio/profesionalRepositorio.php';
 class ProfesionalServicio{
-    private $profesionalRepositorio;
+    private $profesionalRepo;
     
-    public function __construct(){
-        $this->profesionalRepositorio = new ProfesionalRepositorio();
+    public function __construct()
+    {
+        $this->profesionalRepo = new ProfesionalRepositorio();
     }
     
     public function Agregar($Profesional){
@@ -19,7 +21,7 @@ class ProfesionalServicio{
         return $this->profesionalRepositorio->Buscar($DniCuitCuil);
     }
     
-    public function Listar(){
+    public function Listar($Profesional){
         return $this->profesionalRepositorio->Listar();
     }
 }
