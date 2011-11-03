@@ -3,13 +3,18 @@
 <div id="galeria" class="gal">
 	<ul style="width=3000">
 	<?php 
-	if(is_dir("../carousel")){
+	$dir = "./carousel";
+	if(is_dir($dir)){
 		if ($fotos = opendir($dir)) {
-			while ($archivo = readdir($fotos)) {
-				$nombre = substr($archivo, 0, count($archivo) - 4);
-				echo "<li><img src=".$archivo." alt".$nombre." /></li>";
+			while (($archivo = readdir($fotos)) !== false) {
+				$ext = substr($archivo, count($archivo) - 4, 3);
+				if($ext == "jpg" || $ext == "png" || $ext == "gif")	{
+					$nombre = substr($archivo, 0, count($archivo) - 5);
+					echo "<li><img src='$dir/$archivo' alt'$nombre' /></li>";
+				}
 			}
-			closedir($gd);
+			closedir($fotos);
+		}
 	}
 	?>
     </ul>
@@ -21,6 +26,7 @@
             Copyright &copy;  algo
       </div>
       <div style="text-align: center; font-size: 0.75em;">Algo mas</div>
-  </div>
+   </div>
+</div>
 </body>
 </html>
