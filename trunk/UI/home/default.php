@@ -12,29 +12,6 @@
         </form>
       </div>
       <div id="content">
-        <h1>Quiero sacar un turno...</h1>
-        <h5>Rubro 	
-	        <select id="cmbRubro" name="cmbRubro" >
-				<?php
-					include_once '../Servicio/rubroservicio.php';
-					$servicioRubros = new RubroServicio();
-					$listaRubros = $servicioRubros->Listar();
-					foreach($listaRubros as $rubro):
-						echo "<option value=".$rubro->Id.">".$rubro->Descripcion."</option>";
-					endforeach;
-				?>
-			</select>
-        </h5>
-        <p>Nulla in neque nulla. Maecenas sed arcu mauris, id venenatis leo.</p>
-        <p>Donec blandit tincidunt sapien, vel volutpat nulla scelerisque vel.</p>
-        <p>Ut a purus nec eros rutrum ornare. Suspendisse sit amet risus urna.</p>
-        <h2>Maecenas ut placerat augue.</h2>
-        <p>Quisque ornare nunc eget quam pellentesque molestie.</p>
-        <ul>
-          <li>Ut eget venenatis</li>
-          <li>Nam felis metus</li>
-          <li>pulvinar volutpat cursus non</li>
-          <li>lacinia id ligula</li>
-          <li>Suspendisse in sollicitudin ligula</li>
-        </ul>
+        <input type="button" id="btnSacar" name="btnSacar" class="megabutton" value="Quiero sacar un turno!" />
+        <input type="button" id="btnDar" name="btnDar" class="megabutton" value="Quiero dar turnos!" />
       </div>
