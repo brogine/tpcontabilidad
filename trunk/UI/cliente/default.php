@@ -1,3 +1,6 @@
+<?php 
+	include_once 'header.php';
+?>
 <div id="site_content">
       <div class="sidebar">
         <h3>Ingresar</h3>
@@ -20,3 +23,6 @@
       <label>Ingrese Un Telefono (Opcional)</label><input type="text" id="txtTelefono">
       <input type="button" id="btnRegistrar" name="btnSacar" class="megabutton" value="Registrame!" />
       </div>
+<?php 
+	include_once 'footer.php';
+?>
