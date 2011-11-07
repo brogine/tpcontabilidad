@@ -43,7 +43,7 @@ class ProfesionalRepositorio
 	
 	public function Borrar(Profesional $Profesional)
 	{
-	    $Datarow= $this->conexion->StoreProcedureSinRetorno('ProfesionalesBorrar',$Profesional->DniCuitCuil);
+	    $this->conexion->StoreProcedureSinRetorno('ProfesionalesBorrar',$Profesional->DniCuitCuil);
 	}
 	
 	public function ListarPorEspecialidad(Profesional $Profesional)
