@@ -19,8 +19,12 @@ class TurnoServicio{
         return $this->turnoRepositorio->Buscar($idTurno);
     }
     
-    public function Listar(){
-        return $this->turnoRepositorio->Listar();
+    public function ListarProfesional($DniCuitCuil){
+        return $this->turnoRepositorio->ListarProfesional($DniCuitCuil);
+    }
+    
+    public function ListarCliente($DniCuitCuil){
+    	return $this->turnoRepositorio->ListarCliente($DniCuitCuil);
     }
 }
 
