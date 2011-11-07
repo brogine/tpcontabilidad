@@ -59,3 +59,13 @@
         </ul>
       </div>
     </div>
+    <div id="site_content">
+    
+<?php
+	include_once 'default.php';
+	include_once 'footer.php';
+?>
+	</div>
+  </div>
+</body>
+</html>
