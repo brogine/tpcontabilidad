@@ -1,3 +1,4 @@
+<div class="separator"></div>
 <div id="galeriacontainer">
 <div class="prev"><img src="style/prev.jpg" alt="prev" /></div>
 <div id="galeria" class="gal">
