@@ -12,10 +12,10 @@ class Profesional extends Persona {
     public function __construct(){ }
     
     // Constructor completo Profesional
-    public function __construct1($Especialidad,$Titulo,$TelGuardia,$Estado){
-        $this->Especialidad=$Especialidad;
-        $this->Titulo=$Titulo;
-        $this->TelGuardia=$TelGuardia;
+    public function __construct1($Especialidad, $Titulo, $TelGuardia, $Estado){
+        $this->Especialidad = $Especialidad;
+        $this->Titulo = $Titulo;
+        $this->TelGuardia = $TelGuardia;
         $this->Estado = $Estado;
         
     }
