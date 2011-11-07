@@ -12,6 +12,7 @@ class ClienteRepositorio{
 	}
 	
 	public function Agregar(Cliente $Cliente){
+		
 		$this->Conexion->StoreProcedureSinRetorno($StoreProcedure, $Parametros);
     }
     
@@ -37,15 +38,13 @@ class ClienteRepositorio{
     }
     
     private function Mapear($DataRow){
-    	//$contactoRepo = new ContactoRepositorio();
-    	$contacto = new Contacto();
-    	//$ubicacionRepo = new UbicacionRepositorio();
-    	$ubicacion = new Ubicacion();
-    	//$obraSocialRepo = new ObraSocialRepositorio();
-    	$obraSocial = new ObraSocial();
     	$PersonaRepo = new PersonaRepositorio();
-    	
-		$cliente = new Cliente($DataRow['Apellido'], $DataRow['Nombre'], $DataRow['DniCuitCuil'], $DataRow['Password'], $contacto, $ubicacion, $obraSocial);
+    	$contacto = new Contacto($DataRow['Telefono'], $DataRow['Celular'], $DataRow['Email']);
+        $UbicaRepo = new UbicacionRepositorio();
+    	$Localidad = $UbicaRepo->BuscarLocalidad($DataRow['IdLocalidad']);
+    	$ubicacion = new Ubicacion($Localidad, $domicilio);
+    	$cliente = new Cliente($DataRow['Apellido'], $DataRow['Nombre'], $DataRow['DniCuitCuil'], $DataRow['Password'], $contacto, $ubicacion, $obraSocial);
+    	$PersonaRepo->CompletarDatosPersonalesBasicos($cliente, $DataRow);
 		return $cliente;
     }
 }

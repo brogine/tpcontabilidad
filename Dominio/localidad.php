@@ -7,7 +7,7 @@ class Localidad{
     
     public function __construct(){ }
     
-    public function __construct1($idLocalidad, $descripcion, $provincia){
+    public function __construct1($idLocalidad, $descripcion,Provincia $provincia){
         $this->IdLocalidad = $idLocalidad;
         $this->Descripcion = $descripcion;
         $this->Provincia = $provincia;
