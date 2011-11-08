@@ -7,7 +7,7 @@
             <label>Usuario:</label>
             <input type="text" name="txtUsuario" id="txtUsuario" class="texto" />
             <label>Password:</label>
-            <input type="password" name="txtPassword" id="txtPassword" class="texto" />
+            <input type="password" name="txtContrasenia" id="txtContrasenia" class="texto" />
             <label><input type="checkbox" name="chkRecordarme" id="chkRecordarme" /> Recordarme</label>
             <input type="submit" id="btnIngresar" value="Aceptar" class="botonenviar" />
         </form>
