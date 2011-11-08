@@ -7,9 +7,9 @@
   <meta name="keywords" content="website keywords, website keywords" />
   <meta http-equiv="content-type" content="text/html; charset=windows-1252" />
   
-  <link rel="stylesheet" type="text/css" href="../style/header.css" title="style" />
-  <link rel="stylesheet" type="text/css" href="../style/style.css" title="style" />
-  <link rel="stylesheet" type="text/css" href="../style/footer.css" title="style" />
+  <link rel="stylesheet" type="text/css" href="style/header.css" title="style" />
+  <link rel="stylesheet" type="text/css" href="style/contenido.css" title="style" />
+  <link rel="stylesheet" type="text/css" href="style/footer.css" title="style" />
   
   <script type="text/javascript" src="js/jquery.js"></script>
   <script type="text/javascript" src="js/jCarouselLite.js"></script>
@@ -62,3 +62,12 @@
         </ul>
       </div>
     </div>
+    <div id="site_content">
+    	<?php 
+    		include_once 'default.php';
+			include_once 'footer.php';
+    	?>
+    </div>
+  </div>
+</body>
+</html>
