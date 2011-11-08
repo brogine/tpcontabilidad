@@ -26,8 +26,3 @@
       <div id="footer">
             Copyright &copy;  algo
       </div>
-      <div style="text-align: center; font-size: 0.75em;">Algo mas</div>
-   </div>
-</div>
-</body>
-</html>
