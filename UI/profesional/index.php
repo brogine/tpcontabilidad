@@ -6,11 +6,16 @@
   <meta name="description" content="website description" />
   <meta name="keywords" content="website keywords, website keywords" />
   <meta http-equiv="content-type" content="text/html; charset=windows-1252" />
-  <link rel="stylesheet" type="text/css" href="style/style.css" title="style" />
   
-  <script type="text/javascript" src="js/jquery.js"></script>
-  <script type="text/javascript" src="js/jCarouselLite.js"></script>
-  <script type="text/javascript" src="js/captify.tiny.js"></script>
+  <link rel="stylesheet" type="text/css" href="../style/header.css" title="style" />
+  <link rel="stylesheet" type="text/css" href="../style/jvalidaciones.css" title="style" />
+  <link rel="stylesheet" type="text/css" href="../style/profesional-reg.css" title="style" />
+  <link rel="stylesheet" type="text/css" href="../style/footer.css" title="style" />
+  
+  <script type="text/javascript" src="../js/jquery.js"></script>
+  <script type="text/javascript" src="../js/jCarouselLite.js"></script>
+  <script type="text/javascript" src="../js/captify.tiny.js"></script>
+  <script type="text/javascript" src="../js/jvalidaciones/profesional-registro.js"></script>
   
   <script type="text/javascript">
     $(function() {
