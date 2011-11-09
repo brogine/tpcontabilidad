@@ -1,4 +1,11 @@
-<div id="content">
-	<input type="button" id="btnSacar" name="btnSacar" class="megabutton" value="Quiero sacar un turno!" />
-	<input type="button" id="btnDar" name="btnDar" class="megabutton" value="Quiero dar turnos!" />
-</div>
+
+	<table>
+	<tr>
+	<td>
+	<div onclick="location.href='../UI/cliente/index.php'" class="button" id="btnSacar"><label>Quiero sacar un turno!</label></div>
+	</td>
+	<td>
+	<div onclick="location.href='../UI/profesional/index.php'" class="button" id="btnDar"><label>Quiero dar turnos!</label></div>
+	</td>
+	</tr>
+	</table>

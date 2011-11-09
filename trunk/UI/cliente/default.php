@@ -1,27 +1,30 @@
-
-	<div>
-		<!-- Formulario de Login -->
+      <div class="sidebar">
+        <fieldset id="registrousuario">
         <h3>Ingresar</h3>
-        <h5>Sólamente usuarios logueados</h5>
-        <form method="post" id="frmLogin" action="#" id="search_form">
+        <h5>Sólamente usuarios con cuenta</h5>
+        <form method="post" id="frmLogin" action="#" class="form_settings">
             <label>Usuario:</label>
-            <input type="text" name="txtUsuario" id="txtUsuario" />
+            <input type="text" name="txtUsuario" id="txtUsuario" class="texto" />
             <label>Password:</label>
-            <input type="password" name="txtPassword" id="txtPassword" />
-            <h5><input type="checkbox" name="chkRecordarme" id="chkRecordarme" /> Recordarme</h5>
-            <input type="submit" id="btnIngresar" value="Aceptar" />
+            <input type="password" name="txtContrasenia" id="txtContrasenia" class="texto" />
+            <label><input type="checkbox" name="chkRecordarme" id="chkRecordarme" /> Recordarme</label>
+            <input type="submit" id="btnIngresar" value="Aceptar" class="botonenviar" />
         </form>
-    </div>
+        </fieldset>
+        </div>
       
       <!-- Formulario de Registro -->
-      <div>
-      <form action="">
-      <label>Ingrese Su Dni:</label><input type="text" id="txtDni">
-      <label>Ingrese Su Nombre</label><input type="text" id="txtNombre">
-      <label>Ingrese Su Apellido</label><input type="text" id="txtApellido">
-      <label>Ingrese Su E-mail</label><input type="text" id="txtEmail">
-      <label>Ingrese Un Telefono (Opcional)</label><input type="text" id="txtTelefono">
-      <input type="submit" id="btnRegistrar" name="btnSacar" class="megabutton" value="Registrame!" />
+      <div id="content">
+      <fieldset id="registrousuario">
+      <h3>Registro de Nuevo Cliente</h3>
+      <form action="" class="form_settings">
+      <label for="txtDni">Ingrese Su Dni:</label><input type="text" id="txtDni" class="texto" name="txtDni">
+      <label for="txtNombre">Ingrese Su Nombre</label><input type="text" id="txtNombre" class="texto" name="txtNombre">
+      <label for="txtApellido">Ingrese Su Apellido</label><input type="text" id="txtApellido" class="texto" name="txtApellido">
+      <label for="txtEmail">Ingrese Su E-mail</label><input type="text" id="txtEmail" class="texto" name="txtEmail">
+      <label for="txtTelefono">Ingrese Un Telefono (Opcional)</label><input type="text" id="txtTelefono" class="texto" name="txtTelefono">
+      <input type="submit" id="btnRegistrar" name="btnSacar" class="botonenviar" value="Registrame!" />
 	  </form>
+	  </fieldset>
       </div>
 

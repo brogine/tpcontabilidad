@@ -15,6 +15,7 @@
 	        <li>Brinda reportes de gestión e historia de los turnos (concretados, cancelados por el establecimiento, cancelados por los pacientes/clientes, turnos ausentes)</li>
 	        <li>El servicio es confidencial: sus clientes/pacientes sólo verán si un turno está disponible/ocupado de acuerdo a como usted lo disponga</li>
 		</ul>
+		</div>
 <?php 
 	include_once("home/footer.php");
 ?>
