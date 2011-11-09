@@ -4,8 +4,8 @@ include_once '../Dominio/cliente.php';
 
 class UbicacionRepositorio
 {
-private $Conexion;
-public function __construct(){
+	private $Conexion;
+	public function __construct(){
 		$this->Conexion = new Conexion();
 	}
 	public function AgregarPais(Pais $Pais){

@@ -21,6 +21,14 @@
 	      	<input type="text" id="txtNombre" name="txtNombre" class="texto" />
 	      	<label for="cboPais">Pais: </label>
 	      	<select id="cboPais">
+	      	<?php 
+	      		include_once '../../Servicio/ubicacionservicio.php';
+	      		$ubicacionServicio = new UbicacionServicio();
+	      		$listaPaises = $ubicacionServicio->ListarPaises();
+	      		foreach ($listaPaises as $Pais){
+	      			echo "<option value='$Pais->IdPais'>$Pais->Descripcion</option>";
+	      		}
+	      	?>
 	      	</select>
 	      	<label for="cboProvincia">Provincia: </label>
 	      	<select id="cboProvincia">
@@ -34,7 +42,7 @@
 	      	<input type="text" id="txtTelefono" name="txtTelefono" class="texto" />
 	      	<label for="txtPassword">Password: </label>
 	      	<input type="password" id="txtPassword" name="txtPassword" class="texto" />
-        	<input type="submit" id="btnAceptar" name="btnAceptar" value="Aceptar" class="botonenviar"  />
+        	<input type="submit" id="btnAceptar" name="btnAceptar" value="Registrarme!" class="botonenviar"  />
         </form>
         </fieldset>
       </div>

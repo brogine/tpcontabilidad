@@ -1,5 +1,6 @@
 <?php
 
+include_once '../Repositorio/ubicacionrepositorio.php';
 class UbicacionServicio{
     private $ubicacionRepositorio;
     
