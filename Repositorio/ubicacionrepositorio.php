@@ -1,6 +1,8 @@
 <?php 
 include_once 'Conexion/conexion.php';
-include_once '../Dominio/cliente.php';
+include_once '../../Dominio/pais.php';
+include_once '../../Dominio/provincia.php';
+include_once '../../Dominio/localidad.php';
 
 class UbicacionRepositorio
 {
@@ -15,7 +17,7 @@ class UbicacionRepositorio
 	}
 	
 	public function ModificarPais(Pais $Pais){
-	$parametros[0]=$Pais->IdPais;
+		$parametros[0]=$Pais->IdPais;
 		$parametros[1]=$Pais->Descripcion;
 		$this->Conexion->StoreProcedureSinRetorno('PaisesMod',$parametros);	
 	}
@@ -25,13 +27,26 @@ class UbicacionRepositorio
 	}
 	
 	public function Buscarpais($IdPais){
-	$tabla = $this->Conexion->StoreProcedureConRetorno('PaisesBuscar');
-	$datarow = mysql_fetch_array($tabla);
-	return $this->MapearPais($datarow);	
+		$tabla = $this->Conexion->StoreProcedureConRetorno('PaisesBuscar');
+		$datarow = mysql_fetch_array($tabla);
+		return $this->MapearPais($datarow);	
+	}
+	
+	public function ListarPaises(){
+		$lista = array();
+    	$i = 0;
+        $result = $this->Conexion->StoreProcedureConRetorno('PaisesListar');
+        if($result){
+	        while ($DataRow = mysqli_fetch_array($result)){
+	        	$lista[$i] = $this->MapearPais($DataRow);
+	        	$i++;
+	        }
+        }
+        return $lista;
 	}
 	
 	public function MapearPais($Datarow){
-		$pais = new Pais($Datarow['$IdPais'],$Datarow['$Descripcion']);
+		$pais = new Pais($Datarow['idPais'], $Datarow['Descripcion']);
 		return $pais;
 	}
 	
@@ -59,24 +74,37 @@ class UbicacionRepositorio
     	return $this->MapearProvincia($datarow);
     }
     
+	public function ListarProvincias($IdPais){
+		$lista = array();
+    	$i = 0;
+        $result = $this->Conexion->StoreProcedureConRetorno('ProvinciasListar', $IdPais);
+        if($result){
+	        while ($DataRow = mysqli_fetch_array($result)){
+	        	$lista[$i] = $this->MapearProvincia($DataRow);
+	        	$i++;
+	        }
+        }
+        return $lista;
+	}
+    
     public function MapearProvincia($Datarow){
-    	$pais=$this->Buscarpais($Datarow['IdPais']);
-    	$Provincia = new Provincia($Datarow['IdProvincia'],$Datarow['$Descripcion'],$pais);
+    	$pais = $this->Buscarpais($Datarow['idPais']);
+    	$Provincia = new Provincia($Datarow['IdProvincia'],$Datarow['Descripcion'],$pais);
     	return $Provincia;
     }
     
     public function AgregarLocalidad(Localidad $Localidad){
-    $parametros[0]=$Localidad->Provincia->IdProvincia;
-    $parametros[1]=$Localidad->IdLocalidad;
-    $parametros[2]=$Localidad->Descripcion;
-    $this->Conexion->StoreProcedureSinRetorno('LocalidadesAlta',$parametros);	
+	    $parametros[0]=$Localidad->Provincia->IdProvincia;
+	    $parametros[1]=$Localidad->IdLocalidad;
+	    $parametros[2]=$Localidad->Descripcion;
+	    $this->Conexion->StoreProcedureSinRetorno('LocalidadesAlta',$parametros);	
     }
     
     public function ModificarLocalidad(Localidad $Localidad){
-    $parametros[0]=$Localidad->Provincia->IdProvincia;
-    $parametros[1]=$Localidad->IdLocalidad;
-    $parametros[2]=$Localidad->Descripcion;
-    $this->Conexion->StoreProcedureSinRetorno('LocalidadesMod',$parametros);		
+	    $parametros[0]=$Localidad->Provincia->IdProvincia;
+	    $parametros[1]=$Localidad->IdLocalidad;
+	    $parametros[2]=$Localidad->Descripcion;
+	    $this->Conexion->StoreProcedureSinRetorno('LocalidadesMod',$parametros);
     }
     
     public function BorrarLocalidad(Localidad $Localidad){
@@ -89,9 +117,22 @@ class UbicacionRepositorio
     	return $this->MapearLocalidad($datarow);
     }
     
+	public function ListarLocalidades($IdProvincia){
+		$lista = array();
+    	$i = 0;
+        $result = $this->Conexion->StoreProcedureConRetorno('LocalidadesListar', $IdProvincia);
+        if($result){
+	        while ($DataRow = mysqli_fetch_array($result)){
+	        	$lista[$i] = $this->MapearLocalidad($DataRow);
+	        	$i++;
+	        }
+        }
+        return $lista;
+	}
+    
     public function MapearLocalidad($Datarow){
-    $provincia = $this->BuscarProvincia($Datarow['IdProvincia']);
-    $localidad = new Localidad($Datarow['IdLocalidad'], $Datarow['Descripcion'], $provincia);	
+	    $provincia = $this->BuscarProvincia($Datarow['IdProvincia']);
+	    $localidad = new Localidad($Datarow['IdLocalidad'], $Datarow['Descripcion'], $provincia);	
     }
 }
 ?>
