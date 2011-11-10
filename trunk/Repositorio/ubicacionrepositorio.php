@@ -27,7 +27,7 @@ class UbicacionRepositorio
 	}
 	
 	public function Buscarpais($IdPais){
-		$tabla = $this->Conexion->StoreProcedureConRetorno('PaisesBuscar');
+		$tabla = $this->Conexion->StoreProcedureConRetorno('PaisesBuscar', $IdPais);
 		$datarow = mysql_fetch_array($tabla);
 		return $this->MapearPais($datarow);	
 	}

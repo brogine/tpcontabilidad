@@ -20,7 +20,7 @@
 	      	<label for="txtNombre">Nombre: </label>
 	      	<input type="text" id="txtNombre" name="txtNombre" class="texto" />
 	      	<label for="cboPais">Pais: </label>
-	      	<select id="cboPais" onchange="Search(this.value, this.id)">
+	      	<select id="cboPais" onchange="Search(this.value, cboProvincia)">
 	      	<?php 
 	      		include_once '../../Servicio/ubicacionservicio.php';
 	      		$ubicacionServicio = new UbicacionServicio();
@@ -33,7 +33,7 @@
 	      	?>
 	      	</select>
 	      	<label for="cboProvincia">Provincia: </label>
-	      	<select id="cboProvincia" onchange="Search(this.value, this.id)">
+	      	<select id="cboProvincia" onchange="Search(this.value, cboLocalidad)">
 	      	<?php
 	      	if(isset($listaProvincias)){
 				foreach ($listaProvincias as $Provincia){

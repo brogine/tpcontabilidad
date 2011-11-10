@@ -1,4 +1,5 @@
 <?php
+
 include_once '../../Repositorio/ubicacionrepositorio.php';
 class UbicacionServicio{
     private $ubicacionRepositorio;
@@ -54,6 +55,13 @@ class UbicacionServicio{
     public function ListarPaises(){
         return $this->ubicacionRepositorio->ListarPaises();
     }
+}
+
+if(isset($_POST['id']) || isset($_POST['src'])){
+	print("llego al servicio".$_POST['id'].$_POST['src']);
+}
+else {
+	print("nada por aquí");
 }
 
 ?>
