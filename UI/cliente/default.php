@@ -34,6 +34,8 @@
       {
       	include_once '../../Dominio/cliente.php';
       	include_once '../../Servicio/clienteservicio.php';
+      	include_once '../../Dominio/contacto.php';
+      	/* RECIBO LOS DATOS DEL FORMULARIO*/
       	
       	$nombre=$_POST['txtNombre'];
       	$apellido=$_POST['txtApellido'];
@@ -41,15 +43,15 @@
       	$email=$_POST['txtEmail'];
       	$Telefono=$_POST['txtTelefono'];
       	$Pass = $_POST['txtTelefono'];
+      	/* CREO UN OBJETO CONTACTO*/
       	
-      	$Cliente = new Cliente();
-      	
-      	$Cliente->DniCuitCuil=$dni;
-      	$Cliente->Apellido=$apellido;
-      	$Cliente->Nombre=$nombre;
-      	$Cliente->Password=$Pass;
-      	$Cliente->Contacto->Telefono=$Telefono;
-      	
+      	$Contacto = new Contacto();
+      	$Contacto->Telefono=$Telefono;
+      	$Contacto->Email=$email;
+      	/*CREO EL OBJETO CLIENTE Y LO COMPLETO*/
+         	
+      	$Cliente->__construct1($dni, $apellido, $nombre, $Pass, $Contacto);
+      	/*LO PASO POR PARAMETRO AL SERVICIO*/
       	$ClienteServ = new ClienteServicio();
       	$ClienteServ->Agregar($Cliente);
       	}
