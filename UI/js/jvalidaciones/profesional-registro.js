@@ -1,37 +1,23 @@
 function Search(str, id)
 {
-	if (str == "")
+	if (str == "" && id == "")
 	{
 		return;
 	}
-	if (window.XMLHttpRequest)
-	{// codigo para IE7+, Firefox, Chrome, Opera, Safari
+	if (window.XMLHttpRequest) {// codigo para IE7+, Firefox, Chrome, Opera, Safari
 		xmlhttp = new XMLHttpRequest();
 	}
-	else
-	{// codigo para IE6, IE5
+	else {// codigo para IE6, IE5
 		xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
 	}
-	//usamos el medoto POST
-    //archivo que realizará la operacion
-	//profesionalservicio.php
-	xmlhttp.open("POST", "../../Servicio/profesionalservicio.php", true);
+	xmlhttp.open("POST", "/megaturnos/Servicio/ubicacionservicio.php", true);
 	xmlhttp.onreadystatechange = function() {
-        if (xmlhttp.readyState == 4) {
-            //mostrar resultados en esta capa
-        	if(id == "cboPais"){
-        		document.getElementById("cboProvincia").innerHTML = xmlhttp.responseText;
-        	}else{
-        		if(id == "cboProvincia"){
-        			document.getElementById("cboLocalidad").innerHTML = xmlhttp.responseText;
-        		}
-        	}
+		if (xmlhttp.readyState == 4) {
+        	document.getElementById(id).innerHTML = xmlhttp.responseText;
         }
     }
-	xmlhttp.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
-    //enviando los valores
-	xmlhttp.send("id=" + str)
-
+	xmlhttp.setRequestHeader("Content-Type","application/x-www-form-urlencoded");
+	xmlhttp.send("str="+str+"&id="+id);
 }
 
 $(document).ready(function () {
