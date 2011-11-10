@@ -31,10 +31,10 @@
 	      	?>
 	      	</select>
 	      	<label for="cboProvincia">Provincia: </label>
-	      	<select id="cboProvincia">
+	      	<select id="cboProvincia" onchange="Search(this.value, this.id)">
 	      	</select>
 	      	<label for="cboLocalidad">Localidad: </label>
-	      	<select id="cboLocalidad">
+	      	<select id="cboLocalidad" onchange="Search(this.value, this.id)">
 	      	</select>
 	      	<label for="txtDomicilio">Domicilio: </label>
 	      	<input type="text" id="txtDomicilio" name="txtDomicilio" class="texto" />

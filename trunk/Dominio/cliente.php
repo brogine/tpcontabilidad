@@ -1,5 +1,5 @@
 <?php
-
+include_once 'persona.php';
 // Clase Cliente Hereda de Persona
 class Cliente extends Persona {
     // Variables Cliente

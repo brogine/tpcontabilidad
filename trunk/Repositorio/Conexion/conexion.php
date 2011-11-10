@@ -28,7 +28,7 @@ class Conexion
   private function LeerXml($Archivo)
   {
     $xml = new DOMDocument('1.0', 'utf-8');
-    $xml->Load("../Repositorio/Conexion/".$Archivo);
+    $xml->Load("../../Repositorio/Conexion/".$Archivo);
     $DatosRoot = $xml->getElementsByTagName("configuraciones");
     $Datos = $xml->getElementsByTagName("config");
     foreach ($Datos as $Value)

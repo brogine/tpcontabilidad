@@ -48,3 +48,31 @@ $(document).ready(function () {
 		}		
 	});*/
 });
+
+function Search(str, id)
+{
+	if (str == "")
+	{
+		document.getElementById(id).innerHTML = "";
+		return;
+	}
+	if (window.XMLHttpRequest)
+	{// codigo para IE7+, Firefox, Chrome, Opera, Safari
+		xmlhttp = new XMLHttpRequest();
+	}
+	else
+	{// codigo para IE6, IE5
+		xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
+	}
+	xmlhttp.open("POST", "datoscliente.php",true);
+	xmlhttp.onreadystatechange=function() {
+            if (xmlhttp.readyState == 4) {
+                    //mostrar resultados en esta capa
+                    divResultado.innerHTML = xmlhttp.responseText
+            }
+    }
+	xmlhttp.setRequestHeader("Content-Type","application/x-www-form-urlencoded");
+    //enviando los valores
+	xmlhttp.send("nombres="+nom)
+
+}
