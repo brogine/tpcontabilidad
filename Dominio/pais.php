@@ -5,7 +5,7 @@ class Pais{
     public $Descripcion;
     
     public function __construct(){
-    $argv = func_get_args();
+    	$argv = func_get_args();
         switch(func_num_args())
         {
             case 2:

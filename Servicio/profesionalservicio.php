@@ -1,4 +1,8 @@
 <?php
+if($_POST){
+	echo "algo";
+}
+
 include_once '../Dominio/profesional.php';
 include_once '../Repositorio/profesionalRepositorio.php';
 class ProfesionalServicio{
