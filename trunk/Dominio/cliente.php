@@ -1,9 +1,11 @@
 <?php
 include_once 'persona.php';
+include_once 'contacto.php';
 // Clase Cliente Hereda de Persona
 class Cliente extends Persona {
     // Variables Cliente
-    public $ObraSocial;
+    
+    public  $Contacto;
     
     // Constructor vacío Cliente
     public function __construct(){
@@ -19,14 +21,14 @@ class Cliente extends Persona {
     }
     
     // Constructor completo Cliente
-    public function __construct1($apellido, $nombre, $dniCuitCuil, $password, $contacto, $ubicacion, $obraSocial){
-        $this->Apellido = $apellido;
-        $this->Nombre = $nombre;
+    public function __construct1($dniCuitCuil, $apellido, $nombre, $password,Contacto $contacto){
         $this->DniCuitCuil = $dniCuitCuil;
+    	$this->Apellido = $apellido;
+        $this->Nombre = $nombre;
         $this->Password = $password;
         $this->Contacto = $contacto;
-        $this->Ubicacion = $ubicacion;
-        $this->ObraSocial = $obraSocial;
+        
+        
     }
 }
     

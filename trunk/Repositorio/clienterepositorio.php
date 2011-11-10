@@ -1,7 +1,7 @@
 <?php
 
 include_once 'Conexion/conexion.php';
-include_once '../Dominio/cliente.php';
+include_once '../../Dominio/cliente.php';
 
 class ClienteRepositorio{
 	private $Conexion;
@@ -12,11 +12,23 @@ class ClienteRepositorio{
 	}
 	
 	public function Agregar(Cliente $Cliente){
+		$Parametros[0]=$Cliente->DniCuitCuil;
+		$Parametros[1]=$Cliente->Apellido;
+		$Parametros[2]=$Cliente->Nombre;
+		$Parametros[3]=$Cliente->Password;
+		$Parametros[4]=$Cliente->Contacto->Email;
+		$Parametros[5]=$Cliente->Contacto->Telefono;
 		
-		$this->Conexion->StoreProcedureSinRetorno($StoreProcedure, $Parametros);
+		$this->Conexion->StoreProcedureSinRetorno('Prueba', $Parametros);
     }
     
     public function Modificar(Cliente $Cliente){
+    	$Parametros[0]=$Cliente->DniCuitCuil;
+		$Parametros[1]=$Cliente->Apellido;
+		$Parametros[2]=$Cliente->Nombre;
+		$Parametros[3]=$Cliente->Password;
+		$Parametros[4]=$Cliente->Contacto->Email;
+		$Parametros[5]=$Cliente->Contacto->Telefono;
         $this->Conexion->StoreProcedureSinRetorno($StoreProcedure, $Parametros);
     }
     

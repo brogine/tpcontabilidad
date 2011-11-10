@@ -1,7 +1,7 @@
 <?php
 
-include_once '../Repositorio/clienterepositorio.php';
-include_once '../Dominio/cliente.php';
+include_once '../../Repositorio/clienterepositorio.php';
+include_once '../../Dominio/cliente.php';
 
 class ClienteServicio{
     private $clienteRepositorio;
