@@ -20,21 +20,37 @@
 	      	<label for="txtNombre">Nombre: </label>
 	      	<input type="text" id="txtNombre" name="txtNombre" class="texto" />
 	      	<label for="cboPais">Pais: </label>
-	      	<select id="cboPais">
+	      	<select id="cboPais" onchange="Search(this.value, this.id)">
 	      	<?php 
 	      		include_once '../../Servicio/ubicacionservicio.php';
 	      		$ubicacionServicio = new UbicacionServicio();
 	      		$listaPaises = $ubicacionServicio->ListarPaises();
-	      		foreach ($listaPaises as $Pais){
-	      			echo "<option value='$Pais->IdPais'>$Pais->Descripcion</option>";
+	      		if(isset($listaPaises)){
+		      		foreach ($listaPaises as $Pais){
+		      			echo "<option value='$Pais->IdPais'>$Pais->Descripcion</option>";
+		      		}
 	      		}
 	      	?>
 	      	</select>
 	      	<label for="cboProvincia">Provincia: </label>
 	      	<select id="cboProvincia" onchange="Search(this.value, this.id)">
+	      	<?php
+	      	if(isset($listaProvincias)){
+				foreach ($listaProvincias as $Provincia){
+	      			echo "<option value='$Provincia->IdProvincia'>$Provincia->Descripcion</option>";
+	      		}
+	      	}
+			?>
 	      	</select>
 	      	<label for="cboLocalidad">Localidad: </label>
-	      	<select id="cboLocalidad" onchange="Search(this.value, this.id)">
+	      	<select id="cboLocalidad">
+	      	<?php
+	      	if(isset($listaLocalidades)){
+				foreach ($listaLocalidades as $Localidad){
+	      			echo "<option value='$Localidad->IdLocalidad'>$Localidad->Descripcion</option>";
+	      		}
+	      	}
+			?>
 	      	</select>
 	      	<label for="txtDomicilio">Domicilio: </label>
 	      	<input type="text" id="txtDomicilio" name="txtDomicilio" class="texto" />
