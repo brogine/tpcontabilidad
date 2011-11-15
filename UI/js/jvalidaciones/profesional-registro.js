@@ -32,15 +32,6 @@ function Search(id, control)
 	ajax.send("id="+id+"&src="+control.id);
 }
 
-$(document).ready(function(){
-    var Chrome = false;
-    if (navigator.userAgent.toLowerCase().indexOf('chrome') > -1) {
-        Chrome = true;
-        $('body').addClass('errorchrome');
-    }
-
-});
-
 $(document).ready(function () {
 	var emailreg = /^[a-zA-Z0-9_\.\-]+@[a-zA-Z0-9\-]+\.[a-zA-Z0-9\-\.]+$/;
 	$("#btnAceptar").click(function (){

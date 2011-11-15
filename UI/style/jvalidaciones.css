@@ -8,8 +8,13 @@
 	margin-top: -2.4%;
 	position: absolute;
 }
-.errorchrome{
-	margin-top: -3.5%;
+<!-- CSS Sólo para Chrome de Mierda -->
+@media screen and (-webkit-min-device-pixel-ratio:0)
+{
+	.error
+	{
+		margin-top: -3.6%;
+	}
 }
 .error:before{
 	content: '';
