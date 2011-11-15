@@ -14,21 +14,25 @@ class Conexion
   
   public function StoreProcedureConRetorno($StoreProcedure, $Parametros = '')
   {
+  	if(!$this->Conex){
+  		$this->Conex = mysqli_connect($this->Server, $this->User, $this->Pass, $this->BDD) or die(mysqli_connect_error());
+  	}
 	$Resultado = $this->Conex->query("Call $StoreProcedure($Parametros)");
-	mysqli_close($this->Conex);
 	return $Resultado;
   }
   
   public function StoreProcedureSinRetorno($StoreProcedure, $Parametros = '')
   {
+    if(!$this->Conex){
+  		$this->Conex = mysqli_connect($this->Server, $this->User, $this->Pass, $this->BDD) or die(mysqli_connect_error());
+  	}
 	$this->Conex->query("Call $StoreProcedure($Parametros)");
-	mysqli_close($this->Conex);
   }
   
   private function LeerXml($Archivo)
   {
     $xml = new DOMDocument('1.0', 'utf-8');
-    $xml->Load("../../Repositorio/Conexion/".$Archivo);
+    $xml->Load($_SERVER['DOCUMENT_ROOT']."/megaturnos/Repositorio/Conexion/".$Archivo);
     $DatosRoot = $xml->getElementsByTagName("configuraciones");
     $Datos = $xml->getElementsByTagName("config");
     foreach ($Datos as $Value)

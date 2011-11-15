@@ -1,6 +1,5 @@
 <?php
-
-include_once '../../Repositorio/ubicacionrepositorio.php';
+include_once $_SERVER['DOCUMENT_ROOT'].'/megaturnos/Repositorio/ubicacionrepositorio.php';
 class UbicacionServicio{
     private $ubicacionRepositorio;
     
@@ -56,12 +55,25 @@ class UbicacionServicio{
         return $this->ubicacionRepositorio->ListarPaises();
     }
 }
-
-if(isset($_POST['id']) || isset($_POST['src'])){
-	print("llego al servicio".$_POST['id'].$_POST['src']);
+if($_POST){
+	if(isset($_POST['id']) || isset($_POST['src'])){
+		$UbicacionServicio = new UbicacionServicio();
+		switch ($_POST['src']) { 
+			case "cboProvincia": 
+				$result = $UbicacionServicio->ListarProvincias($_POST['id']);
+				foreach($result as $provincia){
+					echo "<option value='$provincia->IdProvincia'>$provincia->Descripcion</option>";
+				}
+			break; 
+			case "cboLocalidad":
+				$result = $UbicacionServicio->ListarLocalidades($_POST['id']);
+				foreach($result as $localidad){
+					echo "<option value='$localidad->IdLocalidad'>$localidad->Descripcion</option>";
+				}
+			break;
+			default:
+				break;
+		}
+	}
 }
-else {
-	print("nada por aquí");
-}
-
 ?>

@@ -1,8 +1,8 @@
 <?php 
 include_once 'Conexion/conexion.php';
-include_once '../../Dominio/pais.php';
-include_once '../../Dominio/provincia.php';
-include_once '../../Dominio/localidad.php';
+include_once $_SERVER['DOCUMENT_ROOT'].'/megaturnos/Dominio/pais.php';
+include_once $_SERVER['DOCUMENT_ROOT'].'/megaturnos/Dominio/provincia.php';
+include_once $_SERVER['DOCUMENT_ROOT'].'/megaturnos/Dominio/localidad.php';
 
 class UbicacionRepositorio
 {
@@ -27,8 +27,11 @@ class UbicacionRepositorio
 	}
 	
 	public function Buscarpais($IdPais){
-		$tabla = $this->Conexion->StoreProcedureConRetorno('PaisesBuscar', $IdPais);
-		$datarow = mysql_fetch_array($tabla);
+		if(!$this->Conexion){
+			$this->Conexion = new Conexion();
+		}
+		$result = $this->Conexion->StoreProcedureConRetorno('PaisesBuscar', $IdPais);
+		$datarow = mysqli_fetch_array($result);
 		return $this->MapearPais($datarow);	
 	}
 	
@@ -69,8 +72,11 @@ class UbicacionRepositorio
     }
     
     public function BuscarProvincia($IdProvincia){
-    	$tabla = $this->Conexion->StoreProcedureConRetorno(ProvinciaBuscar,$IdProvincia);
-    	$datarow = mysql_fetch_array($tabla);
+    	if(!$this->Conexion){
+			$this->Conexion = new Conexion();
+		}
+    	$tabla = $this->Conexion->StoreProcedureConRetorno("ProvinciasBuscar", $IdProvincia);
+    	$datarow = mysqli_fetch_array($tabla);
     	return $this->MapearProvincia($datarow);
     }
     
@@ -89,7 +95,7 @@ class UbicacionRepositorio
     
     public function MapearProvincia($Datarow){
     	$pais = $this->Buscarpais($Datarow['idPais']);
-    	$Provincia = new Provincia($Datarow['IdProvincia'],$Datarow['Descripcion'],$pais);
+    	$Provincia = new Provincia($Datarow['idProvincia'], $Datarow['Descripcion'], $pais);
     	return $Provincia;
     }
     
@@ -113,7 +119,7 @@ class UbicacionRepositorio
     
     public function BuscarLocalidad($IdLocalidad){
     	$tabla = $this->Conexion->StoreProcedureConRetorno('LocalidadesBuscar',$IdLocalidad);
-    	$datarow = mysql_fetch_array($tabla);
+    	$datarow = mysqli_fetch_array($tabla);
     	return $this->MapearLocalidad($datarow);
     }
     
@@ -131,8 +137,8 @@ class UbicacionRepositorio
 	}
     
     public function MapearLocalidad($Datarow){
-	    $provincia = $this->BuscarProvincia($Datarow['IdProvincia']);
-	    $localidad = new Localidad($Datarow['IdLocalidad'], $Datarow['Descripcion'], $provincia);	
+	    $provincia = $this->BuscarProvincia($Datarow['idProvincia']);
+	    $localidad = new Localidad($Datarow['idLocalidad'], $Datarow['Descripcion'], $provincia);	
     }
 }
 ?>
