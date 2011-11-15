@@ -12,30 +12,37 @@ class ClienteRepositorio{
 	}
 	
 	public function Agregar(Cliente $Cliente){
-		$Parametros[0]=$Cliente->DniCuitCuil;
-		$Parametros[1]=$Cliente->Apellido;
-		$Parametros[2]=$Cliente->Nombre;
-		$Parametros[3]=$Cliente->Password;
-		$Parametros[4]=$Cliente->Contacto->Email;
-		$Parametros[5]=$Cliente->Contacto->Telefono;
+		$Parametros[0]="'".$Cliente->DniCuitCuil."'";
+		$Parametros[1]="'".$Cliente->Apellido."'";
+		$Parametros[2]="'".$Cliente->Nombre."'";
+		$Parametros[3]="'".$Cliente->Password."'";
+		$Parametros[4]="'".$Cliente->Contacto->Email."'";
+		$Parametros[5]="'".$Cliente->Contacto->Telefono."'";
 		
-		$this->Conexion->StoreProcedureSinRetorno('Prueba', $Parametros);
+		$this->Conexion->StoreProcedureSinRetorno('PersonasAlta', $Parametros[0].",".$Parametros[1].",".$Parametros[2].",".
+		$Parametros[3].",".$Parametros[4].",".$Parametros[5]);
+		
+		
     }
     
     public function Modificar(Cliente $Cliente){
-    	$Parametros[0]=$Cliente->DniCuitCuil;
-		$Parametros[1]=$Cliente->Apellido;
-		$Parametros[2]=$Cliente->Nombre;
-		$Parametros[3]=$Cliente->Password;
-		$Parametros[4]=$Cliente->Contacto->Email;
-		$Parametros[5]=$Cliente->Contacto->Telefono;
-        $this->Conexion->StoreProcedureSinRetorno($StoreProcedure, $Parametros);
+    	$Parametros[0]="'".$Cliente->DniCuitCuil."'";
+		$Parametros[1]="'".$Cliente->Apellido."'";
+		$Parametros[2]="'".$Cliente->Nombre."'";
+		$Parametros[3]="'".$Cliente->Password."'";
+		$Parametros[4]="'".$Cliente->Contacto->Email."'";
+		$Parametros[5]="'".$Cliente->Contacto->Telefono."'";
+		
+		$this->Conexion->StoreProcedureSinRetorno('PersonasMod', $Parametros[0].",".$Parametros[1].",".$Parametros[2].",".
+		$Parametros[3].",".$Parametros[4].",".$Parametros[5]);
     }
     
     public function Buscar($DniCuitCuil){
-    	$result = $this->Conexion->StoreProcedureConRetorno($StoreProcedure, $DniCuitCuil);
+    	$result = $this->Conexion->StoreProcedureConRetorno('PersonasBuscar', "'".$DniCuitCuil."'");
     	$DataRow = mysqli_fetch_array($result);
-        return $this->Mapear($DataRow);
+    	return $this->Mapear($DataRow);
+    	
+    	
     }
     
     public function Listar(){
@@ -50,14 +57,18 @@ class ClienteRepositorio{
     }
     
     private function Mapear($DataRow){
-    	$PersonaRepo = new PersonaRepositorio();
-    	$contacto = new Contacto($DataRow['Telefono'], $DataRow['Celular'], $DataRow['Email']);
-        $UbicaRepo = new UbicacionRepositorio();
-    	$Localidad = $UbicaRepo->BuscarLocalidad($DataRow['IdLocalidad']);
-    	$ubicacion = new Ubicacion($Localidad, $domicilio);
-    	$cliente = new Cliente($DataRow['Apellido'], $DataRow['Nombre'], $DataRow['DniCuitCuil'], $DataRow['Password'], $contacto, $ubicacion, $obraSocial);
-    	$PersonaRepo->CompletarDatosPersonalesBasicos($cliente, $DataRow);
-		return $cliente;
+    	$Cliente = new Cliente();
+
+    	$Cliente->DniCuitCuil=$DataRow['DniCuitCuil'];
+    	$Cliente->Apellido=$DataRow['Apellido'];
+    	$Cliente->Nombre=$DataRow['Nombre'];
+    	$Cliente->Password=$DataRow['Pass'];
+    	$Contacto = new Contacto();
+    	$Contacto->Telefono=$DataRow['Telefono'];
+    	$Contacto->Email=$DataRow['Email'];
+    	$Cliente->Contacto= $Contacto;
+		return $Cliente;
+		
     }
 }
 

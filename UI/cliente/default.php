@@ -17,7 +17,7 @@
       <div id="content">
       <fieldset id="registrousuario">
       <h3>Registro de Nuevo Cliente</h3>
-      <form action="default.php" class="form_settings" method="POST">
+      <form action="<?php $_SERVER['PHP_SELF']?>" class="form_settings" method="POST">
       <label for="txtDni">Ingrese Su Dni:</label><input type="text" id="txtDni" class="texto" name="txtDni">
       <label for="txtNombre">Ingrese Su Nombre:</label><input type="text" id="txtNombre" class="texto" name="txtNombre">
       <label for="txtApellido">Ingrese Su Apellido:</label><input type="text" id="txtApellido" class="texto" name="txtApellido">
@@ -50,12 +50,22 @@
       	$Contacto->Email=$email;
       	/*CREO EL OBJETO CLIENTE Y LO COMPLETO*/
          	
-      	$Cliente->__construct1($dni, $apellido, $nombre, $Pass, $Contacto);
+      	$Cliente = new Cliente($dni, $apellido, $nombre, $Pass, $Contacto);
       	/*LO PASO POR PARAMETRO AL SERVICIO*/
       	$ClienteServ = new ClienteServicio();
-      	$ClienteServ->Agregar($Cliente);
+        $Cli = $ClienteServ->Buscar($Cliente->DniCuitCuil);
+      	if ($Cli->DniCuitCuil!="" && $Cli->Contacto->Email!="")
+      	{
+        echo "Ese Ususario ya Existe";
+      	}
+      	else
+      	{
+      		$ClienteServ->Agregar($Cliente);
       	}
       	
+      	
+      	
+      }
       	
       
       ?>

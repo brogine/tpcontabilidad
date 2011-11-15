@@ -18,6 +18,7 @@ class PersonaRepositorio
         $parametros[1]=$Persona->Apellido;
         $parametros[2]=$Persona->Nombre;
         $parametros[3]=$Persona->Password;
+        
         return $array;
     }
     

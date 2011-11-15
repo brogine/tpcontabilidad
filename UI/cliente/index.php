@@ -53,16 +53,7 @@
           <h2>Sus turnos web.</h2>
         </div>
       </div>
-      <div id="menubar">
-        <ul id="menu">
-          <!-- put class="selected" in the li tag for the selected page - to highlight which page you're on -->
-          <li class="selected"><a href="index.php">&nbsp;&nbsp;&nbsp;Inicio&nbsp;&nbsp;&nbsp;</a></li>
-          <li><a href="sobre_nosotros.php">Sobre Nosotros</a></li>
-          <li><a href="por_que_elegirnos.php">Por qué elegirnos</a></li>
-          <li><a href="#">¿Cómo funciona?</a></li>
-          <li><a href="#">Contáctenos</a></li>
-        </ul>
-      </div>
+      
     </div>
     <div id="site_content">
     <?php include_once 'default.php';
