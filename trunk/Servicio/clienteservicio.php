@@ -19,7 +19,8 @@ class ClienteServicio{
     }
     
     public function Buscar($DniCuitCuil){
-        return $this->clienteRepositorio->Buscar($DniCuitCuil);
+       $Cliente = $this->clienteRepositorio->Buscar($DniCuitCuil);
+    return $Cliente;    
     }
     
     public function Listar(){
