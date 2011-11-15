@@ -1,23 +1,35 @@
-function Search(str, id)
+function nuevoAjax()
+{ 
+	var xmlhttp = false; 
+	try 
+	{ 
+		// Creacion del objeto AJAX para navegadores no IE
+		xmlhttp=new ActiveXObject("Msxml2.XMLHTTP"); 
+	}
+	catch(e)
+	{ 
+		try
+		{ 
+			// Creacion del objet AJAX para IE 
+			xmlhttp=new ActiveXObject("Microsoft.XMLHTTP"); 
+		} 
+		catch(E) { xmlhttp=false; }
+	}
+	if (!xmlhttp && typeof XMLHttpRequest!='undefined') { xmlhttp = new XMLHttpRequest(); } 
+	return xmlhttp; 
+}
+
+function Search(id, control)
 {
-	if (str == "" && id == "")
-	{
-		return;
+	ajax = nuevoAjax();
+	ajax.open("POST", "../../Servicio/ubicacionservicio.php", true);
+	ajax.onreadystatechange = function() {
+		if (ajax.readyState == 4) {
+			document.getElementById(control.id).innerHTML = ajax.responseText;
+		}
 	}
-	if (window.XMLHttpRequest) {// codigo para IE7+, Firefox, Chrome, Opera, Safari
-		xmlhttp = new XMLHttpRequest();
-	}
-	else {// codigo para IE6, IE5
-		xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
-	}
-	xmlhttp.open("POST", "/megaturnos/Servicio/ubicacionservicio.php", true);
-	xmlhttp.onreadystatechange = function() {
-		if (xmlhttp.readyState == 4) {
-        	document.getElementById(id).innerHTML = xmlhttp.responseText;
-        }
-    }
-	xmlhttp.setRequestHeader("Content-Type","application/x-www-form-urlencoded");
-	xmlhttp.send("str="+str+"&id="+id);
+	ajax.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+	ajax.send("id="+id+"&src="+control.id);
 }
 
 $(document).ready(function () {
