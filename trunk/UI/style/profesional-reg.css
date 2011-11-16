@@ -24,12 +24,6 @@
   border: 1px solid #958C8C; 
   color: #47433F;}
 
-.form_settings select
-{ font: 100% arial;
-	border: 1px solid #958C8C; 
-	height:30px;
-  width: 212px;}
-
 #registrousuario {
 border:medium none;
 color:#333333;
@@ -48,6 +42,14 @@ width:200px;
 font-family:arial,sans-serif;
 display:block;
 }
+
+#registrousuario select
+{
+	font-size:16px;
+	font-family: arial;
+	border: 1px solid #958C8C; 
+	height:30px;
+  	width: 212px;}
 
 #registrousuario label {
 display:block;

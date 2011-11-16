@@ -1,6 +1,6 @@
 /*
-SQLyog Enterprise - MySQL GUI v8.05 
-MySQL - 5.5.16-log : Database - megaturnos
+SQLyog Enterprise - MySQL GUI v8.12 
+MySQL - 5.5.16 : Database - megaturnos
 *********************************************************************
 */
 
@@ -23,26 +23,14 @@ CREATE TABLE `localidad` (
   `idLocalidad` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `Descripcion` varchar(50) NOT NULL,
   `idProvincia` int(10) unsigned NOT NULL,
-  PRIMARY KEY (`idLocalidad`)
+  PRIMARY KEY (`idLocalidad`),
+  KEY `FK_localidad` (`idProvincia`),
+  CONSTRAINT `FK_localidad` FOREIGN KEY (`idProvincia`) REFERENCES `provincia` (`idProvincia`)
 ) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
 
 /*Data for the table `localidad` */
 
 insert  into `localidad`(`idLocalidad`,`Descripcion`,`idProvincia`) values (1,'Neuquen',1),(2,'Plottier',1);
-
-/*Table structure for table `login` */
-
-DROP TABLE IF EXISTS `login`;
-
-CREATE TABLE `login` (
-  `DniCuitCuil` int(11) NOT NULL,
-  `Usuario` varchar(50) NOT NULL,
-  `Password` varchar(50) NOT NULL,
-  `Estado` tinyint(1) NOT NULL DEFAULT '1',
-  PRIMARY KEY (`DniCuitCuil`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
-/*Data for the table `login` */
 
 /*Table structure for table `pais` */
 
@@ -84,7 +72,9 @@ CREATE TABLE `provincia` (
   `idProvincia` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `Descripcion` varchar(50) NOT NULL,
   `idPais` int(10) unsigned NOT NULL,
-  PRIMARY KEY (`idProvincia`)
+  PRIMARY KEY (`idProvincia`),
+  KEY `FK_provincia` (`idPais`),
+  CONSTRAINT `FK_provincia` FOREIGN KEY (`idPais`) REFERENCES `pais` (`idPais`)
 ) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
 
 /*Data for the table `provincia` */
@@ -112,7 +102,7 @@ insert  into `rubros`(`id`,`descripcion`,`estado`) values (1,'Fisioterapeuta',1)
 
 DELIMITER $$
 
-/*!50003 CREATE DEFINER=``@`%` PROCEDURE `LocalidadesListar`(
+/*!50003 CREATE DEFINER=`root`@`localhost` PROCEDURE `LocalidadesListar`(
 	in p_idProvincia int
     )
 BEGIN
@@ -153,35 +143,22 @@ DELIMITER ;
 DELIMITER $$
 
 /*!50003 CREATE DEFINER=`root`@`localhost` PROCEDURE `PersonasAlta`(
-
 		in 	p_DniCuitCuil 		varchar(20),
-
 		in 	p_Apellido 		varchar(30),
-
 		in 	p_Nombre 		varchar(30),
         
     in p_Pass varchar(10),
-
     in 	p_Email			varchar(50),
-
 		in 	p_Telefono 		varchar(10)
-
 		
-
         )
 BEGIN
-
 	INSERT INTo personas 
-
 	(DniCuitCuil, Apellido, Nombre, Pass, Email, Telefono)
 	Values	
-
 	(
-
 		p_DniCuitCuil, p_Apellido, p_Nombre, p_Pass, p_Email, p_Telefono
-
 	);
-
     END */$$
 DELIMITER ;
 
@@ -192,7 +169,6 @@ DELIMITER ;
 DELIMITER $$
 
 /*!50003 CREATE DEFINER=`root`@`localhost` PROCEDURE `PersonasBuscar`(
-
     in Dni varchar(20)
     
 )
@@ -208,47 +184,28 @@ DELIMITER ;
 DELIMITER $$
 
 /*!50003 CREATE DEFINER=`root`@`localhost` PROCEDURE `PersonasMod`(
-
     in 	p_DniCuitCuil 		varchar(20),
-
 		in 	p_Apellido 		varchar(30),
-
 		in 	p_Nombre 		varchar(30),
         
     in p_Pass varchar(10),
-
     in 	p_Email			varchar(50),
-
 		in 	p_Telefono 		varchar(10)
-
-
-
     )
 BEGIN
-
 	UPdate personas 
-
 	set 
-
 		Apellido = p_Apellido, 
-
 		Nombre = p_Nombre, 
         
     Pass = p_Pass,
     
     Email = p_Email, 
-
 		Telefono = p_Telefono
-
-
 	where
-
 	(
-
 		DniCuitCuil = p_DniCuitCuil
-
 	);
-
     END */$$
 DELIMITER ;
 
@@ -276,7 +233,8 @@ DELIMITER $$
 	in p_idPais int
     )
 BEGIN
-	Select idProvincia, Descripcion, idPais From provincia;
+	Select idProvincia, Descripcion, idPais From provincia
+	Where idPais = p_idPais;
     END */$$
 DELIMITER ;
 

@@ -81,14 +81,6 @@
   padding: 0 0 4px 25px;
   line-height: 1.5em;}
 
-
-.search
-{ color: #5D5D5D; 
-  border: 1px solid #BBB; 
-  width: 134px; 
-  padding: 4px; 
-  font: 100% arial, sans-serif;}
-
 #colours
 { height: 0px;
   text-align: right;
@@ -161,9 +153,8 @@ table tr td
   color: #47433F;
   border-top: 1px solid #FFF;}
   
-  .button {
-
-  margin:10px;
+.button {
+   margin:10px;
    border-top: 1px solid #96d1f8;
    background: #65a9d7;
    background: -webkit-gradient(linear, left top, left bottom, from(#3e779d), to(#65a9d7));
