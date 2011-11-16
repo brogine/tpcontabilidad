@@ -139,6 +139,7 @@ class UbicacionRepositorio
     public function MapearLocalidad($Datarow){
 	    $provincia = $this->BuscarProvincia($Datarow['idProvincia']);
 	    $localidad = new Localidad($Datarow['idLocalidad'], $Datarow['Descripcion'], $provincia);	
+	    return $localidad;
     }
 }
 ?>
