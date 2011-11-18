@@ -8,8 +8,12 @@
     <body>
 
 <div class="Contenido">
-<p>Megaturnos</p>
-<p class="p1">Sus Turnos Gratis Y Facil</p>
+<div id="logo">
+	<div id="logo_text">
+    	<h1><a href="#"><span class="logo_colour">MegaTurnos</span></a></h1>
+    	<h2>Sus Turnos Gratis Y Facil.</h2>
+    </div>
+</div>
 </div>
     </body>
 
