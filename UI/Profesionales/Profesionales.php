@@ -29,9 +29,9 @@ include_once '../Commons/Header/Header.php';
 <?php 
 include_once '../Commons/Login/Login.php';
 ?>
-<div id="content">
+<div id="profesional">
 	<fieldset id="registrousuario">
-	<h3>Registro de Nueva Entidad</h3>
+	<h3>Registro de Nueva Clínica o Consultorio</h3>
 	<form action="" method="post" class="form_settings">
 		<label for="txtNombre">Nombre: </label>
 		<input type="text" id="txtNombre" name="txtNombre" class="texto" />
