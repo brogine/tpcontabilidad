@@ -27,19 +27,34 @@ include '../Commons/Header/Header.php';
       <input type="text" id="txtDni" class="texto" name="txtDni">
       </p>
       <p>
-      <label for="txtNombre">Ingrese Su Nombre:</label><input type="text" id="txtNombre" class="texto" name="txtNombre">
+      <label for="txtNombre">Ingrese Su Nombre:</label>
       </p>
       <p>
-      <label for="txtApellido">Ingrese Su Apellido:</label><input type="text" id="txtApellido" class="texto" name="txtApellido">
+      <input type="text" id="txtNombre" class="texto" name="txtNombre">
       </p>
       <p>
-      <label for="txtEmail">Ingrese Su E-mail:</label><input type="text" id="txtEmail" class="texto" name="txtEmail">
+      <label for="txtApellido">Ingrese Su Apellido:</label>
       </p>
       <p>
-      <label for="txtTelefono">Ingrese Un Telefono (Opcional):</label><input type="text" id="txtTelefono" class="texto" name="txtTelefono">
+      <input type="text" id="txtApellido" class="texto" name="txtApellido">
       </p>
       <p>
-      <label for="txtPassword">Ingrese Un Password:</label><input type="text" id="txtPassword" class="texto" name="txtPassword">
+      <label for="txtEmail">Ingrese Su E-mail:</label>
+      </p>
+      <p>
+      <input type="text" id="txtEmail" class="texto" name="txtEmail">
+      </p>
+      <p>
+      <label for="txtTelefono">Ingrese Un Telefono (Opcional):</label>
+      </p>
+      <p>
+      <input type="text" id="txtTelefono" class="texto" name="txtTelefono">
+      </p>
+      <p>
+      <label for="txtPassword">Ingrese Un Password:</label>
+      </p>
+      <p>
+      <input type="text" id="txtPassword" class="texto" name="txtPassword">
       </p>
       <p>
       <input type="submit" id="btnRegistrar" name="btnRegistrar" class="botonenviar" value="Registrame!" />
@@ -89,6 +104,7 @@ include '../Commons/Header/Header.php';
    
    <?php 
    include '../Commons/Login/Login.php';
+   
    ?>
     
 </div>
