@@ -7,6 +7,12 @@
 
 <script language="JavaScript" src ="Profesional.js"> </script>
 
+<link href="../Commons/Publicidad/Publicidad.css" type="text/css" rel="stylesheet" />
+<script type="text/javascript" src="../Commons/Publicidad/jquery.js"></script>
+<script type="text/javascript" src="../Commons/Publicidad/jCarouselLite.js"></script>
+<script type="text/javascript" src="../Commons/Publicidad/captify.tiny.js"></script>
+<script type="text/javascript" src="../Commons/Publicidad/Publicidad.js"></script>
+
 </head>
 
 <body id="body">
