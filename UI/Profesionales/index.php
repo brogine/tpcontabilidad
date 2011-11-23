@@ -1,7 +1,7 @@
 <html>
 <head>
 <link href="../Commons/Header/Header.css" type="text/css" rel="stylesheet"/>
-<link href="../Commons/Footer/Footer.css" type="text/css" rel="stylesheet"/>
+
 <link href="Profesional.css" type="text/css" rel="stylesheet"/>
 <link href="../Commons/Login/Login.css" type="text/css" rel="stylesheet" />
 
@@ -12,6 +12,8 @@
 <script type="text/javascript" src="../Commons/Publicidad/jCarouselLite.js"></script>
 <script type="text/javascript" src="../Commons/Publicidad/captify.tiny.js"></script>
 <script type="text/javascript" src="../Commons/Publicidad/Publicidad.js"></script>
+
+<link href="../Commons/Footer/Footer.css" type="text/css" rel="stylesheet"/>
 
 </head>
 

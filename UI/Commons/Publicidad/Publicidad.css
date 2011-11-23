@@ -20,13 +20,12 @@
 }
 
 #galeria{
-	float:left;
     overflow: hidden;
-    z-index: 2;
-    position:absolute;
-    margin-left:3%;
-    margin-right:4%;
-    width: 100%;
+    z-index: 0;
+    float:left;
+    width: 90%;
+    margin-left:1%;
+    margin-right:2%;
 }
 
 #galeria img{
