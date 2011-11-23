@@ -1,9 +1,5 @@
-<?php 
-function DibujarFoot()
-{
-echo "<div class='Contenido'>";
-echo "<p>Copyright Todos Los Derechos Reservados</p>";
-echo "</div>";
-}
-?>
+<div class='Contenido'>
+<p>Copyright Todos Los Derechos Reservados</p>
+</div>
+
 
