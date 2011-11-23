@@ -1,12 +1,9 @@
-<html>
-<head>
-<link href="Footer.css" type="text/css" rel="stylesheet" />
-</head>
+<?php 
+function DibujarFoot()
+{
+echo "<div class='Contenido'>";
+echo "<p>Copyright Todos Los Derechos Reservados</p>";
+echo "</div>";
+}
+?>
 
-<body>
-<div class="Contenido">
-<p>Copyright Todos Los Derechos Reservados</p>
-</div>
-</body>
-
-</html>

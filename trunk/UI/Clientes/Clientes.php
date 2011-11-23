@@ -14,7 +14,7 @@ include '../Commons/Header/index.php';
 DibujarHead();
 ?>
 </div>
-
+<div id="Principal">
 
       <div class="CuadroCliente">
       
@@ -92,7 +92,7 @@ DibujarHead();
    include '../Commons/Login/Login.php';
    ?>
     
-
+</div>
     </body>
 
 </html>
