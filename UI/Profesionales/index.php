@@ -3,6 +3,7 @@
 <link href="../Commons/Header/Header.css" type="text/css" rel="stylesheet"/>
 <link href="../Commons/Footer/Footer.css" type="text/css" rel="stylesheet"/>
 <link href="Profesional.css" type="text/css" rel="stylesheet"/>
+<link href="../Commons/Login/Login.css" type="text/css" rel="stylesheet" />
 
 <script language="JavaScript" src ="Profesional.js"> </script>
 
@@ -12,23 +13,15 @@
 
 <div id="Contenido">
 <div>
-<?php include_once '../Commons/Header/index.php';?>
+<?php include_once '../Commons/Header/index.php';
+DibujarHead();
+?>
+
 </div>
 
-<div class="sidebar">
-	<fieldset id="registrousuario">
-		<h3>Ingresar</h3>
-		<h5>Sólamente usuarios con cuenta</h5>
-		<form method="post" id="frmLogin" action="#" class="form_settings">
-			<label>Usuario:</label>
-			<input type="text" name="txtUsuario" id="txtUsuario" class="texto" />
-			<label>Password:</label>
-			<input type="password" name="txtContrasenia" id="txtContrasenia" class="texto" />
-			<label><input type="checkbox" name="chkRecordarme" id="chkRecordarme" /> Recordarme</label>
-			<input type="submit" id="btnIngresar" value="Aceptar" class="botonenviar" />
-		</form>
-	</fieldset>
-</div>
+<?php 
+include_once '../Commons/Login/Login.php';
+?>
 <div id="content">
 	<fieldset id="registrousuario">
 	<h3>Registro de Nueva Entidad</h3>
