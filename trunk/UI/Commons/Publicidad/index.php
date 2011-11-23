@@ -52,4 +52,3 @@ if(is_dir($dir) && is_dir($dir.'/thumbs')){
 </div>
 <div class='next'><img src='<?php $_SERVER['DOCUMENT_ROOT']?>/megaturnos/UI/Commons/Publicidad/Imagenes/next.jpg' alt='next' /></div>
 </div>
-<div class='separator'></div>

@@ -17,12 +17,12 @@
 
 <body id="body">
 
-<div id="Contenido">
 <div>
 <?php 
 include_once '../Commons/Header/Header.php'; 
 ?>
 </div>
+<div id="Contenido">
 
 <?php 
 include_once '../Commons/Login/Login.php';
@@ -62,15 +62,13 @@ include_once '../Commons/Login/Login.php';
 	</form>
 	</fieldset>
 </div>
-
-<div>
+<div class="separador"></div>
 <?php include_once '../Commons/Publicidad/index.php';?>
 </div>
-
 <div id="Pie">
 <?php include_once '../Commons/Footer/index.php';?>
 </div>
-</div>
+
 </body>
 
 </html>
