@@ -19,10 +19,9 @@
 
 <div id="Contenido">
 <div>
-<?php include_once '../Commons/Header/index.php';
-DibujarHead();
+<?php 
+include_once '../Commons/Header/Header.php'; 
 ?>
-
 </div>
 
 <?php 

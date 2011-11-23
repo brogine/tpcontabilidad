@@ -1,17 +1,17 @@
-<?php 
-echo "<div class='separator'></div>";
-echo "<div id='galeriacontainer'>";
-echo "<div class='prev'><img src=$_SERVER['DOCUMENT_ROOT']/megaturnos/UI/Commons/Publicidad/Imagenes/prev.jpg' alt='prev' /></div>";
-echo "<div id='galeria' class='gal'>";
-echo "<ul style='width=3000'>";
 
+<div class='separator'></div>
+	<div id='galeriacontainer'>
+	<div class='prev'><img src='<?php $_SERVER['DOCUMENT_ROOT']?>/megaturnos/UI/Commons/Publicidad/Imagenes/prev.jpg' alt='prev' /></div>
+		<div id='galeria' class='gal'>
+		<ul style='width=3000'>
+<?php 
 /* 
  * Este código genera los thumbnails para las imagenes
  * Tira error pero las genera igual jajaj
  * Y levanta las thumbnails para la galeria
  * 
  */
-$dir = 'carousel';
+$dir = $_SERVER['DOCUMENT_ROOT'].'/megaturnos/UI/Commons/Publicidad/carousel';
 if(is_dir($dir) && is_dir($dir.'/thumbs')){
 	if ($fotos = opendir($dir)) {
 		if($thumbs = opendir($dir.'/thumbs')) {
@@ -47,9 +47,9 @@ if(is_dir($dir) && is_dir($dir.'/thumbs')){
 		closedir($fotos);
 	}
 }
-echo "</ul>";
-echo "</div>";
-echo "<div class='next'><img src='Imagenes/next.jpg' alt='next' /></div>";
-echo "</div>";
-echo "<div class='separator'></div>";
 ?>
+</ul>
+</div>
+<div class='next'><img src='<?php $_SERVER['DOCUMENT_ROOT']?>/megaturnos/UI/Commons/Publicidad/Imagenes/next.jpg' alt='next' /></div>
+</div>
+<div class='separator'></div>
