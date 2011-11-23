@@ -12,14 +12,14 @@
 
 
 <div>
-<?php include_once '../Commons/Header/index.php';?>
+<?php include_once '../Commons/Header/Header.php';?>
 </div>
 <div id="Contenido">
 
 <table>
 <tr>
-<td id="Celda"><div id="Megabutton" onclick="Direccionar('#')"><p>Quiero Sacar Turnos!</p></div></td>
-<td id="Celda"><div id="Megabutton"><p>Quiero Dar Turnos!</p></div></td>
+<td id="Celda"><div id="Megabutton" onclick="Direccionar('../Clientes/Clientes.php')"><p>Quiero Sacar Turnos!</p></div></td>
+<td id="Celda"><div id="Megabutton" onclick="Direccionar('../Profesionales/Profesionales.php')"><p>Quiero Dar Turnos!</p></div></td>
 </tr>
 </table>
 
