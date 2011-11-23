@@ -1,12 +1,3 @@
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Frameset//EN">
-<html>
-<head>
-<link href="Login.css" type="text/css" rel="stylesheet" />
-
-<title>Login</title>
-</head>
-
-    <body>
 <div class="Cuadro">
         
         <p class="Titulo">INGRESAR</p>
@@ -33,6 +24,3 @@
         </form>
         
       </div>
-    </body>
-
-</html>

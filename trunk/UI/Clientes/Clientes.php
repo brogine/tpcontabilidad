@@ -10,8 +10,7 @@
 <body>
 <div>
 <?php 
-include '../Commons/Header/index.php';
-DibujarHead();
+include '../Commons/Header/Header.php';
 ?>
 </div>
 <div id="Principal">
