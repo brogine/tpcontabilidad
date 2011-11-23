@@ -12,7 +12,7 @@ background: #828485;
    background: -o-linear-gradient(top, #000000, #828485);	
 }
 
-#content { 
+#profesional { 
 	top:10%;
 position: absolute;
 left:10%;
@@ -94,7 +94,6 @@ padding-left: 10px;
 
 .separador{
 	width:100%;
-	display:block;
+	clear:both;
 	float:left;
-	position:absolute;
 }
