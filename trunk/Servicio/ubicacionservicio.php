@@ -1,5 +1,7 @@
 <?php
 include_once $_SERVER['DOCUMENT_ROOT'].'/megaturnos/Repositorio/ubicacionrepositorio.php';
+include_once $_SERVER['DOCUMENT_ROOT'].'/megaturnos/Dominio/localidad.php';
+
 class UbicacionServicio{
     private $ubicacionRepositorio;
     
@@ -54,6 +56,18 @@ class UbicacionServicio{
     public function ListarPaises(){
         return $this->ubicacionRepositorio->ListarPaises();
     }
+    public function ListarLocalidadesPorNombre($Nombre)
+    {
+    	$lista = $this->ubicacionRepositorio->ListarLocalidadesPorNombre($Nombre);
+    	
+    	
+    	foreach ($lista as $localidad)
+    	{
+    		echo $localidad->Provincia->Descripcion." - ";
+    		echo $localidad->Descripcion."<br>";
+    	}
+    
+    }    
 }
 if($_POST){
 	if(isset($_POST['id']) || isset($_POST['src'])){

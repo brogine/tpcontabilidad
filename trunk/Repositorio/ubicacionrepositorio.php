@@ -30,7 +30,9 @@ class UbicacionRepositorio
 		if(!$this->Conexion){
 			$this->Conexion = new Conexion();
 		}
-		$result = $this->Conexion->StoreProcedureConRetorno('PaisesBuscar', $IdPais);
+		$result = $this->Conexion->ConsultaConRetorno("Select * from Pais where IdPais = $IdPais");
+		
+	//	$result = $this->Conexion->StoreProcedureConRetorno('PaisesBuscar', $IdPais);
 		$datarow = mysqli_fetch_array($result);
 		return $this->MapearPais($datarow);	
 	}
@@ -75,7 +77,10 @@ class UbicacionRepositorio
     	if(!$this->Conexion){
 			$this->Conexion = new Conexion();
 		}
+		/*
     	$tabla = $this->Conexion->StoreProcedureConRetorno("ProvinciasBuscar", $IdProvincia);
+    	*/
+		$tabla = $this->Conexion->ConsultaConRetorno("Select * from Provincia where IdProvincia = $IdProvincia");
     	$datarow = mysqli_fetch_array($tabla);
     	return $this->MapearProvincia($datarow);
     }
@@ -140,6 +145,29 @@ class UbicacionRepositorio
 	    $provincia = $this->BuscarProvincia($Datarow['idProvincia']);
 	    $localidad = new Localidad($Datarow['idLocalidad'], $Datarow['Descripcion'], $provincia);	
 	    return $localidad;
+    }
+    
+    public function ListarLocalidadesPorNombre($Localidad)
+    {
+    	$lista = array();
+    	
+    	if($Localidad!="")
+    	{
+    	$consulta="select * from localidad where Descripcion like '%$Localidad%'";
+    	
+    	$i = 0;
+    	
+    	$result = $this->Conexion->ConsultaConRetorno($consulta);
+    	if($result)
+    	{
+	        while ($DataRow = mysqli_fetch_array($result))
+	        {
+	        	$lista[$i] = $this->MapearLocalidad($DataRow);
+	        	$i++;
+	        }
+        }
+    	}
+        return $lista;
     }
 }
 ?>
