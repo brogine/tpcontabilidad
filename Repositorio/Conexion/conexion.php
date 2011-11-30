@@ -28,6 +28,22 @@ class Conexion
   	}
 	$this->Conex->query("Call $StoreProcedure($Parametros)");
   }
+  public function ConsultaConRetorno($Consulta)
+  {
+  	if(!$this->Conex){
+  		$this->Conex = mysqli_connect($this->Server, $this->User, $this->Pass, $this->BDD) or die(mysqli_connect_error());
+  	}
+	$Resultado = $this->Conex->query($Consulta);
+	return $Resultado;
+  }
+  public function ConsultaSinRetorno($Consulta)
+  {
+  if(!$this->Conex)
+  	{
+  		$this->Conex->query($Consulta);
+  	}
+  	
+  }
   
   private function LeerXml($Archivo)
   {
