@@ -1,5 +1,5 @@
 <?php
-include_once '../Repositorio/rubrorepositorio.php';
+include_once $_SERVER['DOCUMENT_ROOT'].'/megaturnos/Repositorio/rubrorepositorio.php';
 class RubroServicio{
 	private $rubroRepositorio;
 	

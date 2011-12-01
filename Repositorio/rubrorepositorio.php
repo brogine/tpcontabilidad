@@ -1,6 +1,6 @@
 <?php
 include_once 'Conexion/conexion.php';
-include_once '../Dominio/rubro.php';
+include_once $_SERVER['DOCUMENT_ROOT'].'/megaturnos/Dominio/rubro.php';
 
 class RubroRepositorio{
 	private $Conexion;
