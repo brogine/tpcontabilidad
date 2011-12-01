@@ -9,22 +9,16 @@
 <body>
 <?php include_once '../Commons/Header/Header.php';?>
 
-<div class="MCPrincipal">
-<div id="Buscador">
-<label for="TxtLocalidad">En que cuidad desea buscar un profesional?:</label>
-<input onkeydown="Buscar()" type="text" id="TxtLocalidad">
-</div>
-<div id="Resultado" class="Lista">
-</div>
+<div id="Principal" class="MCPrincipal">
+	<div id="Buscador" class="Buscador">
+	<label for="TxtLocalidad">En que cuidad desea buscar un profesional?:</label>
+	<input class="TextBox" onkeyup="Buscar()" type="text" id="TxtLocalidad">
+	</div>
+
 <div class="TurnosPendientes">
-<p>Turnos Pendientes</p>
 
 </div>
 
 </div>
-
-
-
-
 </body>
 </html>
