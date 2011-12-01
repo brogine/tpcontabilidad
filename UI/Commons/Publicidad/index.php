@@ -38,6 +38,7 @@ if(is_dir($dir) && is_dir($dir.'/thumbs')){
 					$ext = substr($archivo, count($archivo) - 4, 3);
 					if($ext == "jpg" || $ext == "png" || $ext == "gif")	{
 						$nombre = substr($archivo, 0, count($archivo) - 5);
+						echo $nombre;
 						echo "<li><img src='$dir/thumbs/$archivo' alt'$nombre' /></li>";
 					}
 				}
