@@ -1,7 +1,7 @@
 
 <div class='separator'></div>
 	<div id='galeriacontainer'>
-	<div class='prev'><img src='<?php $_SERVER['DOCUMENT_ROOT']?>/megaturnos/UI/Commons/Publicidad/Imagenes/prev.jpg' alt='prev' /></div>
+	<div class='prev'><img src='/megaturnos/UI/Commons/Publicidad/Imagenes/prev.jpg' alt='prev' /></div>
 		<div id='galeria' class='gal'>
 		<ul style='width=3000'>
 <?php 
@@ -29,7 +29,7 @@ if(is_dir($dir) && is_dir($dir.'/thumbs')){
 							$thumb->size_auto(200); //Tamaño maximo
 							$thumb->jpeg_quality(75); //Calidad Imagen (1-100)
 							$thumb->save($dir."/thumbs/$nombre.$ext"); //Guardar Imagen
-							echo "<li><img src='$dir/thumbs/$archivo' alt'$nombre' /></li>";
+							echo "<li><img src='/megaturnos/UI/Commons/Publicidad/carousel/thumbs/$archivo' alt'$nombre' /></li>";
 						}
 					}
 				}
@@ -38,8 +38,7 @@ if(is_dir($dir) && is_dir($dir.'/thumbs')){
 					$ext = substr($archivo, count($archivo) - 4, 3);
 					if($ext == "jpg" || $ext == "png" || $ext == "gif")	{
 						$nombre = substr($archivo, 0, count($archivo) - 5);
-						echo $nombre;
-						echo "<li><img src='$dir/thumbs/$archivo' alt'$nombre' /></li>";
+						echo "<li><img src='/megaturnos/UI/Commons/Publicidad/carousel/thumbs/$archivo' alt'$nombre' /></li>";
 					}
 				}
 			}
@@ -51,5 +50,5 @@ if(is_dir($dir) && is_dir($dir.'/thumbs')){
 ?>
 </ul>
 </div>
-<div class='next'><img src='<?php $_SERVER['DOCUMENT_ROOT']?>/megaturnos/UI/Commons/Publicidad/Imagenes/next.jpg' alt='next' /></div>
+<div class='next'><img src='/megaturnos/UI/Commons/Publicidad/Imagenes/next.jpg' alt='next' /></div>
 </div>
