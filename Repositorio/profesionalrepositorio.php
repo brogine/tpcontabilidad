@@ -20,7 +20,8 @@ class ProfesionalRepositorio
 	    $parametros[5]=$Profesional->Especialidad;
 	    $parametros[6]=$Profesional->TelGuardia;
 	    $parametros[7]=$Profesional->Estado;
-	    $this->Conexion->StoreProcedureSinRetorno('ProfesionalesAlta',$parametros); 
+	    //$this->Conexion->StoreProcedureSinRetorno('ProfesionalesAlta',$parametros); 
+	    $this->conexion->ConsultaSinRetorno($Consulta);
 	}
 	
 	public function Modificar(Profesional $Profesional)
@@ -50,6 +51,21 @@ class ProfesionalRepositorio
 	{  
 		$lista = array();
 	    $result = $this->conexion->StoreProcedureConRetorno('ProfesionalesListar',$Profesional->Especialidad);
+	    while($Datarow=mysql_fetch_array($result))
+	    	{
+			$lista[i]=$this->Mapear($Datarow);
+	    	}
+	    
+	    return $lista;
+	    }
+	    
+	public function ListarPorEspecialidadYLocalidad(Profesional $Profesional)
+	{  
+		$lista = array();
+	    //$result = $this->conexion->StoreProcedureConRetorno('ProfesionalesListar',$Profesional->Especialidad);
+	    $Especialidad=$Profesional->Especialidad;
+	    $Localidad = $Profesional->Clinica->Ubicacion->Localidad;
+		//$result = $this->conexion->ConsultaConRetorno(,$Profesional);
 	    while($Datarow=mysql_fetch_array($result))
 	    	{
 			$lista[i]=$this->Mapear($Datarow);

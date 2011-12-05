@@ -12,14 +12,21 @@
 <div id="Principal" class="MCPrincipal">
 	
 	<div id="Buscador" class="Buscador">
-	<form>
+	
+	<form action="MenuClientes.php" method="POST">
+	
 	<label for="TxtLocalidad" class="Label">Escriba La Ciudad en la que busca:</label>
-	<input class="TextBox" onkeyup="Buscar()" type="text" id="TxtLocalidad">
+	
+	<input class="TextBox" onkeyup="Buscar()" type="text" id="TxtLocalidad" name="TxtLocalidad">
+	
 	<label for="CboEspecialidades" class="Label">Seleccione La Especialidad:</label>
-	<?php include '../../Servicio/rubroservicio.php';
+	
+<?php include '../../Servicio/rubroservicio.php';
 	$RubroServ = new RubroServicio();
 	$listaRubros = $RubroServ->Listar();
-	echo "<select>";
+	
+	//Lista De Especialidades
+	echo "<select id='CboEspecialidades' name='CboEspecialidades'>";
     	foreach ($listaRubros as $rubro)
     	{
     		echo "<option value=".$rubro->Id.">".$rubro->Descripcion."</option>";	
@@ -29,6 +36,14 @@
 	<input type="submit" value="Buscar!">
 	</form>
 	</div>
+	<?php 
+	if($_POST)
+	{
+		$Localidad=$_POST['TxtLocalidad'];
+		$Especialidad=$_POST['CboEspecialidades'];
+		
+	}
+	?>
  	<div class="TurnosPendientes">
 
 	</div>
