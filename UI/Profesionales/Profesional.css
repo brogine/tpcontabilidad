@@ -1,34 +1,31 @@
-#Contenido{
-left:50%;
-margin-left:-400px;
-position:absolute;
-width: 800px;
-height:100%;
-background: #828485;
-   background: -webkit-gradient(linear, left top, left bottom, from(#000000), to(#828485));
-   background: -webkit-linear-gradient(top, #000000, #828485);
-   background: -moz-linear-gradient(top, #000000, #828485);
-   background: -ms-linear-gradient(top, #000000, #828485);
-   background: -o-linear-gradient(top, #000000, #828485);	
+#Contenido {
+	margin-left:15%;
+	width:70%;
+	height:90%;
+	border:1px solid #000;
 }
 
 #profesional { 
-	top:10%;
-	left:10%;
-	width: 300px;
+	float:left;
+	margin:5% 0 0 13%;
+	width: 33%;
 	text-align:center;
 	-webkit-border-radius: 40px;
 	-moz-border-radius: 40px;
 	border-radius: 40px;
-	float:left;
-   background: #65a9d7;
-   background: -webkit-gradient(linear, left top, left bottom, from(#3e779d), to(#65a9d7));
-   background: -webkit-linear-gradient(top, #3e779d, #65a9d7);
-   background: -moz-linear-gradient(top, #3e779d, #65a9d7);
-   background: -ms-linear-gradient(top, #3e779d, #65a9d7);
-   background: -o-linear-gradient(top, #3e779d, #65a9d7);
-	padding-left: 10px;
- }
+    background: #65a9d7;
+    background: -webkit-gradient(linear, left top, left bottom, from(#3e779d), to(#65a9d7));
+    background: -webkit-linear-gradient(top, #3e779d, #65a9d7);
+    background: -moz-linear-gradient(top, #3e779d, #65a9d7);
+    background: -ms-linear-gradient(top, #3e779d, #65a9d7);
+    background: -o-linear-gradient(top, #3e779d, #65a9d7);
+	padding: 3px;
+}
+
+#login{
+	padding:5% 0 0 15%;
+	margin-left:40%;
+}
 
 .form_settings input{ 
 	padding: 5px; 
@@ -46,38 +43,36 @@ background: #828485;
 	width:80%;
 }
 
-#registrousuario input.texto {
+input.texto {
 	color:#666666;
 	font-size:16px;
-	height:18px;
+	height:30px;
 	padding-left:5px;
 	padding-top:5px;
 	width:200px;
 	font-family:arial,sans-serif;
 }
 
-#registrousuario select
+select
 {
 	font-size:16px;
 	font-family: arial;
 	border: 1px solid #958C8C; 
 	height:30px;
-  	width: 212px;
+  	width: 200px;
 }
 
-#registrousuario label {
+label {
 	display:block;
 	font-family:arial,sans-serif;
 	font-size:14px;
 	padding:10px 0 3px;
 }
 
-#registrousuario input.botonenviar {
+input.botonenviar {
 	border:medium none !important;
 	background:#666666;
 	color:#FFFFFF;
-	display:block;
-	float:left;
 	font-family:arial,sans-serif;
 	height:30px;
 	margin-top:20px;
@@ -85,14 +80,18 @@ background: #828485;
 	width:99px;
 }
 
-#registrousuario input.botonenviar:hover {
-   border-top-color: #28597a;
-   background: #000;
-   color: #ccc;
+input.botonenviar:hover {
+   	border-top-color: #28597a;
+   	background: #000;
+   	color: #ccc;
 }
 
 .separador{
 	width:100%;
 	clear:both;
-	float:left;
+	margin-bottom:3%;
+}
+
+.publicidad{
+	margin-left: 5%;	
 }
