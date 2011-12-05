@@ -5,13 +5,13 @@
 <link href="Profesional.css" type="text/css" rel="stylesheet"/>
 <link href="../Commons/Login/Login.css" type="text/css" rel="stylesheet" />
 
-<script language="JavaScript" src ="Profesional.js"> </script>
-
 <link href="../Commons/Publicidad/Publicidad.css" type="text/css" rel="stylesheet" />
 <script type="text/javascript" src="../Commons/Publicidad/jquery.js"></script>
 <script type="text/javascript" src="../Commons/Publicidad/jCarouselLite.js"></script>
 <script type="text/javascript" src="../Commons/Publicidad/captify.tiny.js"></script>
 <script type="text/javascript" src="../Commons/Publicidad/Publicidad.js"></script>
+
+<script language="JavaScript" src ="Profesional.js"> </script>
 
 <link href="../Commons/Footer/Footer.css" type="text/css" rel="stylesheet"/>
 
@@ -59,36 +59,38 @@ include_once '../Commons/Header/Header.php';
 	<?php
 	if($_POST)
     {
-      	include_once '../../Dominio/entidad.php';
-      	include_once '../../Servicio/clienteservicio.php';
-      	include_once '../../Dominio/contacto.php';
-      	/* RECIBO LOS DATOS DEL FORMULARIO*/
-      	
-      	$nombre=$_POST['txtNombre'];
-      	$apellido=$_POST['txtApellido'];
-      	$dni = $_POST['txtDni'];
-      	$email=$_POST['txtEmail'];
-      	$Telefono=$_POST['txtTelefono'];
-      	$Pass = $_POST['txtTelefono'];
-      	/* CREO UN OBJETO CONTACTO*/
-      	
-      	$Contacto = new Contacto();
-      	$Contacto->Telefono=$Telefono;
-      	$Contacto->Email=$email;
-      	/*CREO EL OBJETO CLIENTE Y LO COMPLETO*/
-         	
-      	$Cliente = new Cliente($dni, $apellido, $nombre, $Pass, $Contacto);
-      	/*LO PASO POR PARAMETRO AL SERVICIO*/
-      	$ClienteServ = new ClienteServicio();
-        $Cli = $ClienteServ->Buscar($Cliente->DniCuitCuil);
-      	if ($Cli->DniCuitCuil!="" && $Cli->Contacto->Email!="")
-      	{
-        echo "Ese Ususario ya Existe";
-      	}
-      	else
-      	{
-      		$ClienteServ->Agregar($Cliente);
-      	}
+    	if(isset($_POST["txtNombre"]) && isset($_POST["cboLocalidad"])){
+	      	include_once '../../Dominio/entidad.php';
+	      	include_once '../../Servicio/clienteservicio.php';
+	      	include_once '../../Dominio/contacto.php';
+	      	/* RECIBO LOS DATOS DEL FORMULARIO*/
+	      	
+	      	$nombre=$_POST['txtNombre'];
+	      	$apellido=$_POST['txtApellido'];
+	      	$dni = $_POST['txtDni'];
+	      	$email=$_POST['txtEmail'];
+	      	$Telefono=$_POST['txtTelefono'];
+	      	$Pass = $_POST['txtTelefono'];
+	      	/* CREO UN OBJETO CONTACTO*/
+	      	
+	      	$Contacto = new Contacto();
+	      	$Contacto->Telefono=$Telefono;
+	      	$Contacto->Email=$email;
+	      	/*CREO EL OBJETO CLIENTE Y LO COMPLETO*/
+	         	
+	      	$Cliente = new Cliente($dni, $apellido, $nombre, $Pass, $Contacto);
+	      	/*LO PASO POR PARAMETRO AL SERVICIO*/
+	      	$ClienteServ = new ClienteServicio();
+	        $Cli = $ClienteServ->Buscar($Cliente->DniCuitCuil);
+	      	if ($Cli->DniCuitCuil!="" && $Cli->Contacto->Email!="")
+	      	{
+	        echo "Ese Ususario ya Existe";
+	      	}
+	      	else
+	      	{
+	      		$ClienteServ->Agregar($Cliente);
+	      	}
+    	}
     }
     ?>
 </div>
