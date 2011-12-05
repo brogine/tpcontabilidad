@@ -1,29 +1,29 @@
-.CuadroCliente
-{
-top:10%;
-position: absolute;
-left:10%;
-width: 300px;
-text-align:center;
--webkit-border-radius: 40px;
--moz-border-radius: 40px;
-border-radius: 40px;
-
-   background: #65a9d7;
-   background: -webkit-gradient(linear, left top, left bottom, from(#3e779d), to(#65a9d7));
-   background: -webkit-linear-gradient(top, #3e779d, #65a9d7);
-   background: -moz-linear-gradient(top, #3e779d, #65a9d7);
-   background: -ms-linear-gradient(top, #3e779d, #65a9d7);
-   background: -o-linear-gradient(top, #3e779d, #65a9d7);
-padding-left: 10px;
+.CuadroCliente {
+	float:left;
+	margin:5% 0 0 13%;
+	width: 33%;
+	text-align:center;
+	-webkit-border-radius: 40px;
+	-moz-border-radius: 40px;
+	border-radius: 40px;
+   	background: #65a9d7;
+   	background: -webkit-gradient(linear, left top, left bottom, from(#3e779d), to(#65a9d7));
+   	background: -webkit-linear-gradient(top, #3e779d, #65a9d7);
+   	background: -moz-linear-gradient(top, #3e779d, #65a9d7);
+   	background: -ms-linear-gradient(top, #3e779d, #65a9d7);
+   	background: -o-linear-gradient(top, #3e779d, #65a9d7);
+	padding-left: 10px;
 }
 
-#Principal 
-{
-left:50%;
-margin-left:-400px;
-position:absolute;
-width: 800px;
-height:100%;
+#Principal {
+	left:50%;
+	margin-left:-400px;
+	position:absolute;
+	width: 800px;
+	height:100%;
+}
 
+#login{
+	padding:5% 0 0 15%;
+	margin-left:40%;
 }

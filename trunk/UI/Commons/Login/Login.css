@@ -1,8 +1,6 @@
 .Cuadro
 {
-top:10%;
-position: absolute;
-left: 50%;
+float:left;
 width: 300px;
 text-align:center;
 -webkit-border-radius: 40px;

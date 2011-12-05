@@ -19,20 +19,14 @@
 
 <body id="body">
 
-<div>
 <?php 
 include_once '../Commons/Header/Header.php'; 
 ?>
-</div>
 <div id="Contenido">
 
-<?php 
-include_once '../Commons/Login/Login.php';
-?>
 <div id="profesional">
-	<fieldset id="registrousuario">
 	<h3>Registro de Nueva Clínica o Consultorio</h3>
-	<form action="" method="post" class="form_settings">
+	<form action="<?php $_SERVER['PHP_SELF']; ?>" method="post" class="form_settings">
 		<label for="txtNombre">Nombre: </label>
 		<input type="text" id="txtNombre" name="txtNombre" class="texto" />
 		<label for="cboPais">Pais: </label>
@@ -62,13 +56,54 @@ include_once '../Commons/Login/Login.php';
       	<input type="password" id="txtPassword" name="txtPassword" class="texto" />
         <input type="submit" id="btnAceptar" name="btnAceptar" value="Registrarme!" class="botonenviar"  />
 	</form>
-	</fieldset>
+	<?php
+	if($_POST)
+    {
+      	include_once '../../Dominio/entidad.php';
+      	include_once '../../Servicio/clienteservicio.php';
+      	include_once '../../Dominio/contacto.php';
+      	/* RECIBO LOS DATOS DEL FORMULARIO*/
+      	
+      	$nombre=$_POST['txtNombre'];
+      	$apellido=$_POST['txtApellido'];
+      	$dni = $_POST['txtDni'];
+      	$email=$_POST['txtEmail'];
+      	$Telefono=$_POST['txtTelefono'];
+      	$Pass = $_POST['txtTelefono'];
+      	/* CREO UN OBJETO CONTACTO*/
+      	
+      	$Contacto = new Contacto();
+      	$Contacto->Telefono=$Telefono;
+      	$Contacto->Email=$email;
+      	/*CREO EL OBJETO CLIENTE Y LO COMPLETO*/
+         	
+      	$Cliente = new Cliente($dni, $apellido, $nombre, $Pass, $Contacto);
+      	/*LO PASO POR PARAMETRO AL SERVICIO*/
+      	$ClienteServ = new ClienteServicio();
+        $Cli = $ClienteServ->Buscar($Cliente->DniCuitCuil);
+      	if ($Cli->DniCuitCuil!="" && $Cli->Contacto->Email!="")
+      	{
+        echo "Ese Ususario ya Existe";
+      	}
+      	else
+      	{
+      		$ClienteServ->Agregar($Cliente);
+      	}
+    }
+    ?>
+</div>
+<div id="login">
+<?php 
+include_once '../Commons/Login/Login.php';
+?>
 </div>
 <div class="separador"></div>
-<?php include_once '../Commons/Publicidad/index.php';?>
+<div class="publicidad">
+<?php include_once '../Commons/Publicidad/index.php'; ?>
+</div>
 </div>
 <div id="Pie">
-<?php include_once '../Commons/Footer/index.php';?>
+<?php include_once '../Commons/Footer/index.php'; ?>
 </div>
 
 </body>

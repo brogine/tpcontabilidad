@@ -102,11 +102,12 @@ include '../Commons/Header/Header.php';
       ?>
    
    
-   
+   <div id="login">
    <?php 
    include '../Commons/Login/Login.php';
    
    ?>
+   </div>	
     
 </div>
     </body>
