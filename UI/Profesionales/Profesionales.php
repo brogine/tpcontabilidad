@@ -65,26 +65,29 @@ include_once '../Commons/Header/Header.php';
 	      	include_once '../../Dominio/contacto.php';
 	      	/* RECIBO LOS DATOS DEL FORMULARIO*/
 	      	
-	      	$nombre=$_POST['txtNombre'];
-	      	$apellido=$_POST['txtApellido'];
-	      	$dni = $_POST['txtDni'];
-	      	$email=$_POST['txtEmail'];
-	      	$Telefono=$_POST['txtTelefono'];
+	      	$nombre = $_POST['txtNombre'];
+	      	$idLocalidad = $_POST['cboLocalidad'];
+	      	$Domicilio = $_POST['txtDomicilio'];
+	      	$Telefono = $_POST['txtTelefono'];
 	      	$Pass = $_POST['txtTelefono'];
 	      	/* CREO UN OBJETO CONTACTO*/
 	      	
 	      	$Contacto = new Contacto();
-	      	$Contacto->Telefono=$Telefono;
-	      	$Contacto->Email=$email;
-	      	/*CREO EL OBJETO CLIENTE Y LO COMPLETO*/
-	         	
-	      	$Cliente = new Cliente($dni, $apellido, $nombre, $Pass, $Contacto);
+	      	$Contacto->Telefono = $Telefono;
+	      	
+	      	/* CREO UN OBJETO UBICACION */
+	      	$Ubicacion = new Ubicacion();
+	      	$Ubicacion->Localidad = new Localidad();
+	      	$Ubicacion->Domicilio = $Domicilio;
+	      	
+	      	/* CREO EL OBJETO Entidad Y LO COMPLETO*/
+	        $Entidad = new Entidad($nombre, $Ubicacion, $Contacto, $Pass);
 	      	/*LO PASO POR PARAMETRO AL SERVICIO*/
 	      	$ClienteServ = new ClienteServicio();
 	        $Cli = $ClienteServ->Buscar($Cliente->DniCuitCuil);
-	      	if ($Cli->DniCuitCuil!="" && $Cli->Contacto->Email!="")
+	      	if ($Cli->DniCuitCuil != "" && $Cli->Contacto->Email != "")
 	      	{
-	        echo "Ese Ususario ya Existe";
+	        	echo "Ese Ususario ya Existe";
 	      	}
 	      	else
 	      	{
