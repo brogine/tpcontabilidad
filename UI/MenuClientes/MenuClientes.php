@@ -35,7 +35,7 @@
 	?>
 	<input type="submit" value="Buscar!">
 	</form>
-	</div>
+</div>
 	
 	?>
  	<div class="TurnosPendientes">
@@ -53,7 +53,9 @@
 			echo $Medicos->Clinica->Nombre;
 		}
 		echo "</div>";
+		
 	}
+	?>
 	</div>
 </div>
 </body>
