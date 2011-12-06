@@ -1,5 +1,5 @@
 /*
-SQLyog Enterprise - MySQL GUI v8.12 
+SQLyog Enterprise - MySQL GUI v8.05 
 MySQL - 5.5.16 : Database - megaturnos
 *********************************************************************
 */
@@ -15,13 +15,62 @@ CREATE DATABASE /*!32312 IF NOT EXISTS*/`megaturnos` /*!40100 DEFAULT CHARACTER 
 
 USE `megaturnos`;
 
+/*Table structure for table `clinicas` */
+
+DROP TABLE IF EXISTS `clinicas`;
+
+CREATE TABLE `clinicas` (
+  `Nombre` varchar(100) NOT NULL,
+  `idLocalidad` int(10) NOT NULL,
+  `Telefono` varchar(50) DEFAULT NULL,
+  `Email` varchar(100) NOT NULL,
+  `Domicilio` varchar(100) DEFAULT NULL,
+  `Foto` varchar(200) DEFAULT NULL,
+  `idClinica` int(10) NOT NULL AUTO_INCREMENT,
+  PRIMARY KEY (`idClinica`),
+  KEY `FK_clinicas_login` (`Email`),
+  KEY `FK_clinicas` (`idLocalidad`),
+  CONSTRAINT `FK_clinicas` FOREIGN KEY (`idLocalidad`) REFERENCES `localidad` (`idLocalidad`),
+  CONSTRAINT `FK_clinicas_login` FOREIGN KEY (`Email`) REFERENCES `login` (`Email`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+/*Data for the table `clinicas` */
+
+/*Table structure for table `especialidades` */
+
+DROP TABLE IF EXISTS `especialidades`;
+
+CREATE TABLE `especialidades` (
+  `idEspecialidad` int(10) NOT NULL AUTO_INCREMENT,
+  `Nombre` varchar(100) NOT NULL,
+  PRIMARY KEY (`idEspecialidad`),
+  CONSTRAINT `FK_especialidades` FOREIGN KEY (`idEspecialidad`) REFERENCES `medicos` (`idEspecialidad`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+/*Data for the table `especialidades` */
+
+/*Table structure for table `horarios` */
+
+DROP TABLE IF EXISTS `horarios`;
+
+CREATE TABLE `horarios` (
+  `IdMedico` int(10) NOT NULL,
+  `horaInicio` time NOT NULL,
+  `horaFin` time NOT NULL,
+  `diaSemana` int(10) NOT NULL,
+  PRIMARY KEY (`IdMedico`,`horaInicio`,`horaFin`,`diaSemana`),
+  CONSTRAINT `FK_horarios` FOREIGN KEY (`IdMedico`) REFERENCES `medicos` (`IdPersona`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+/*Data for the table `horarios` */
+
 /*Table structure for table `localidad` */
 
 DROP TABLE IF EXISTS `localidad`;
 
 CREATE TABLE `localidad` (
-  `idLocalidad` int(10) unsigned NOT NULL AUTO_INCREMENT,
-  `Descripcion` varchar(50) NOT NULL,
+  `idLocalidad` int(10) NOT NULL AUTO_INCREMENT,
+  `Nombre` varchar(50) NOT NULL,
   `idProvincia` int(10) unsigned NOT NULL,
   PRIMARY KEY (`idLocalidad`),
   KEY `FK_localidad` (`idProvincia`),
@@ -30,7 +79,36 @@ CREATE TABLE `localidad` (
 
 /*Data for the table `localidad` */
 
-insert  into `localidad`(`idLocalidad`,`Descripcion`,`idProvincia`) values (1,'Neuquen',1),(2,'Plottier',1);
+insert  into `localidad`(`idLocalidad`,`Nombre`,`idProvincia`) values (1,'Neuquen',1),(2,'Plottier',1);
+
+/*Table structure for table `login` */
+
+DROP TABLE IF EXISTS `login`;
+
+CREATE TABLE `login` (
+  `Email` varchar(100) NOT NULL,
+  `Pass` varchar(15) NOT NULL,
+  PRIMARY KEY (`Email`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+/*Data for the table `login` */
+
+/*Table structure for table `medicos` */
+
+DROP TABLE IF EXISTS `medicos`;
+
+CREATE TABLE `medicos` (
+  `IdClinica` int(10) NOT NULL,
+  `idEspecialidad` int(10) DEFAULT NULL,
+  `IdPersona` int(10) NOT NULL,
+  PRIMARY KEY (`IdPersona`),
+  KEY `FK_medicos_especialidad` (`idEspecialidad`),
+  KEY `FK_medicos_clinica` (`IdClinica`),
+  CONSTRAINT `FK_medicos_clinica` FOREIGN KEY (`IdClinica`) REFERENCES `clinicas` (`idClinica`),
+  CONSTRAINT `FK_medicos` FOREIGN KEY (`IdPersona`) REFERENCES `personas` (`IdPersona`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+/*Data for the table `medicos` */
 
 /*Table structure for table `pais` */
 
@@ -38,31 +116,30 @@ DROP TABLE IF EXISTS `pais`;
 
 CREATE TABLE `pais` (
   `idPais` int(10) unsigned NOT NULL AUTO_INCREMENT,
-  `Descripcion` varchar(50) NOT NULL,
+  `Nombre` varchar(50) NOT NULL,
   PRIMARY KEY (`idPais`)
 ) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
 
 /*Data for the table `pais` */
 
-insert  into `pais`(`idPais`,`Descripcion`) values (1,'Argentina'),(2,'Peru');
+insert  into `pais`(`idPais`,`Nombre`) values (1,'Argentina'),(2,'Peru');
 
 /*Table structure for table `personas` */
 
 DROP TABLE IF EXISTS `personas`;
 
 CREATE TABLE `personas` (
-  `DniCuitCuil` varchar(20) NOT NULL,
-  `Apellido` varchar(30) CHARACTER SET utf8 NOT NULL,
-  `Nombre` varchar(30) CHARACTER SET utf8 NOT NULL,
-  `Pass` varchar(10) NOT NULL,
-  `Email` varchar(50) CHARACTER SET utf8 NOT NULL,
-  `Telefono` varchar(10) CHARACTER SET utf8 DEFAULT NULL,
-  PRIMARY KEY (`DniCuitCuil`)
+  `Apellido` varchar(30) NOT NULL,
+  `Nombre` varchar(30) NOT NULL,
+  `Email` varchar(100) NOT NULL,
+  `Telefono` varchar(10) DEFAULT NULL,
+  `IdPersona` int(10) NOT NULL AUTO_INCREMENT,
+  PRIMARY KEY (`IdPersona`),
+  KEY `FK_personas_login` (`Email`),
+  CONSTRAINT `FK_personas_login` FOREIGN KEY (`Email`) REFERENCES `login` (`Email`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 /*Data for the table `personas` */
-
-insert  into `personas`(`DniCuitCuil`,`Apellido`,`Nombre`,`Pass`,`Email`,`Telefono`) values ('31166408','Giovi','Nicolas','4474722','ngiovi@hotmail.com','4474722'),('32166408','Giovi','Nicolas','4474722','ngiovi@hotmail.com','4474722');
 
 /*Table structure for table `provincia` */
 
@@ -70,31 +147,35 @@ DROP TABLE IF EXISTS `provincia`;
 
 CREATE TABLE `provincia` (
   `idProvincia` int(10) unsigned NOT NULL AUTO_INCREMENT,
-  `Descripcion` varchar(50) NOT NULL,
+  `Nombre` varchar(50) NOT NULL,
   `idPais` int(10) unsigned NOT NULL,
   PRIMARY KEY (`idProvincia`),
   KEY `FK_provincia` (`idPais`),
   CONSTRAINT `FK_provincia` FOREIGN KEY (`idPais`) REFERENCES `pais` (`idPais`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=latin1;
 
 /*Data for the table `provincia` */
 
-insert  into `provincia`(`idProvincia`,`Descripcion`,`idPais`) values (1,'Neuquen',1),(3,'Rio Negro',1);
+insert  into `provincia`(`idProvincia`,`Nombre`,`idPais`) values (1,'Neuquen',1),(3,'Rio Negro',1),(4,'Peruka',2),(5,'Xuxa',2);
 
-/*Table structure for table `rubros` */
+/*Table structure for table `turnos` */
 
-DROP TABLE IF EXISTS `rubros`;
+DROP TABLE IF EXISTS `turnos`;
 
-CREATE TABLE `rubros` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `descripcion` varchar(100) NOT NULL,
-  `estado` tinyint(1) DEFAULT '1',
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
+CREATE TABLE `turnos` (
+  `IdTurno` int(10) NOT NULL,
+  `Fecha` datetime NOT NULL,
+  `IdMedico` int(10) NOT NULL,
+  `IdPaciente` int(10) NOT NULL,
+  `Estado` int(3) DEFAULT NULL,
+  PRIMARY KEY (`IdTurno`),
+  KEY `FK_turnos_persona` (`IdPaciente`),
+  KEY `FK_turnos_medico` (`IdMedico`),
+  CONSTRAINT `FK_turnos_medico` FOREIGN KEY (`IdMedico`) REFERENCES `personas` (`IdPersona`),
+  CONSTRAINT `FK_turnos_persona` FOREIGN KEY (`IdPaciente`) REFERENCES `personas` (`IdPersona`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
-/*Data for the table `rubros` */
-
-insert  into `rubros`(`id`,`descripcion`,`estado`) values (1,'Fisioterapeuta',1),(2,'PsicÃ³logo',1),(3,'Nutricionista',1);
+/*Data for the table `turnos` */
 
 /* Procedure structure for procedure `LocalidadesListar` */
 
