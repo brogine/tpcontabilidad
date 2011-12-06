@@ -25,10 +25,12 @@ include_once '../Commons/Header/Header.php';
 <div id="Contenido">
 
 <div id="profesional">
-	<h3>Registro de Nueva Clínica o Consultorio</h3>
+	<h2>Registro de Nueva Clínica o Consultorio</h2>
 	<form action="<?php $_SERVER['PHP_SELF']; ?>" method="post" class="form_settings">
 		<label for="txtNombre">Nombre: </label>
 		<input type="text" id="txtNombre" name="txtNombre" class="texto" />
+		<label for="txtEmail">Email: </label>
+		<input type="text" id="txtEmail" name="txtEmail" class="texto" />
 		<label for="cboPais">Pais: </label>
 		<select id="cboPais" onclick="Search(this.value, cboProvincia);">
       	<?php 
@@ -37,7 +39,7 @@ include_once '../Commons/Header/Header.php';
       	$listaPaises = $ubicacionServicio->ListarPaises();
       	if(isset($listaPaises)){
       		foreach ($listaPaises as $Pais){
-      			echo "<option value='$Pais->IdPais'>$Pais->Descripcion</option>";
+      			echo "<option value='$Pais->IdPais'>$Pais->Nombre</option>";
       		}
       	}
       	?>

@@ -5,6 +5,14 @@
 <link href="Clientes.css" rel="stylesheet" type="text/css" />
 <link href="../Commons/Header/Header.css" rel="stylesheet" type="text/css" />
 
+<link href="../Commons/Publicidad/Publicidad.css" type="text/css" rel="stylesheet" />
+<script type="text/javascript" src="../Commons/Publicidad/jquery.js"></script>
+<script type="text/javascript" src="../Commons/Publicidad/jCarouselLite.js"></script>
+<script type="text/javascript" src="../Commons/Publicidad/captify.tiny.js"></script>
+<script type="text/javascript" src="../Commons/Publicidad/Publicidad.js"></script>
+
+<link href="../Commons/Footer/Footer.css" type="text/css" rel="stylesheet"/>
+
 <title>Clientes</title>
 </head>
 
@@ -20,46 +28,19 @@ include '../Commons/Header/Header.php';
       
       <h3>Registro de Nuevo Cliente</h3>
       <form action="<?php $_SERVER['PHP_SELF']?>" class="form_settings" method="POST">
-      <p>
-      
-      <label for="txtDni">Ingrese Su Dni:</label>
-      </p>
-      <p>
-      <input type="text" id="txtDni" class="texto" name="txtDni">
-      </p>
-      <p>
-      <label for="txtNombre">Ingrese Su Nombre:</label>
-      </p>
-      <p>
-      <input type="text" id="txtNombre" class="texto" name="txtNombre">
-      </p>
-      <p>
-      <label for="txtApellido">Ingrese Su Apellido:</label>
-      </p>
-      <p>
-      <input type="text" id="txtApellido" class="texto" name="txtApellido">
-      </p>
-      <p>
-      <label for="txtEmail">Ingrese Su E-mail:</label>
-      </p>
-      <p>
-      <input type="text" id="txtEmail" class="texto" name="txtEmail">
-      </p>
-      <p>
-      <label for="txtTelefono">Ingrese Un Telefono (Opcional):</label>
-      </p>
-      <p>
-      <input type="text" id="txtTelefono" class="texto" name="txtTelefono">
-      </p>
-      <p>
-      <label for="txtPassword">Ingrese Un Password:</label>
-      </p>
-      <p>
-      <input type="text" id="txtPassword" class="texto" name="txtPassword">
-      </p>
-      <p>
-      <input type="submit" id="btnRegistrar" name="btnRegistrar" class="botonenviar" value="Registrame!" />
-	  </p>
+	      <label for="txtDni">Ingrese Su Dni:</label>
+	      <input type="text" id="txtDni" class="texto" name="txtDni">
+	      <label for="txtNombre">Ingrese Su Nombre:</label>
+	      <input type="text" id="txtNombre" class="texto" name="txtNombre">
+	      <label for="txtApellido">Ingrese Su Apellido:</label>
+	      <input type="text" id="txtApellido" class="texto" name="txtApellido">
+	      <label for="txtEmail">Ingrese Su E-mail:</label>
+	      <input type="text" id="txtEmail" class="texto" name="txtEmail">
+	      <label for="txtTelefono">Ingrese Un Telefono (Opcional):</label>
+	      <input type="text" id="txtTelefono" class="texto" name="txtTelefono">
+	      <label for="txtPassword">Ingrese Un Password:</label>
+	      <input type="text" id="txtPassword" class="texto" name="txtPassword">
+	      <input type="submit" id="btnRegistrar" name="btnRegistrar" class="botonenviar" value="Registrame!" />
 	  </form>
 	  
       </div>
@@ -107,9 +88,14 @@ include '../Commons/Header/Header.php';
    include '../Commons/Login/Login.php';
    
    ?>
-   </div>	
-    
+   </div>
+<div class="publicidad">
+<?php include_once '../Commons/Publicidad/index.php'; ?>
 </div>
-    </body>
+</div>
+<div id="Pie">
+<?php include_once '../Commons/Footer/index.php'; ?>
+</div>
+</body>
 
 </html>

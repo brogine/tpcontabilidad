@@ -69,13 +69,13 @@ if($_POST){
 			case "cboProvincia": 
 				$result = $UbicacionServicio->ListarProvincias($_POST['id']);
 				foreach($result as $provincia){
-					echo "<option value='$provincia->IdProvincia'>$provincia->Descripcion</option>";
+					echo "<option value='$provincia->IdProvincia'>$provincia->Nombre</option>";
 				}
 			break; 
 			case "cboLocalidad":
 				$result = $UbicacionServicio->ListarLocalidades($_POST['id']);
 				foreach($result as $localidad){
-					echo "<option value='$localidad->IdLocalidad'>$localidad->Descripcion</option>";
+					echo "<option value='$localidad->IdLocalidad'>$localidad->Nombre</option>";
 				}
 			break;
 			default:

@@ -31,15 +31,15 @@ function Search(id, control)
 }
 
 $(document).ready(function () {
-	//var emailreg = /^[a-zA-Z0-9_\.\-]+@[a-zA-Z0-9\-]+\.[a-zA-Z0-9\-\.]+$/;
+	var emailreg = /^[a-zA-Z0-9_\.\-]+@[a-zA-Z0-9\-]+\.[a-zA-Z0-9\-\.]+$/;
 	$("#btnAceptar").click(function (){
 		$(".error").remove();
 		if( $("#txtNombre").val() == "" ){
 			$("#txtNombre").focus().after("<span class='error'>Ingrese un Nombre.</span>");
 			return false;
-		/*}else if( $(".email").val() == "" || !emailreg.test($(".email").val()) ){
-			$(".email").focus().after("<span class='error'>Ingrese un email correcto</span>");
-			return false;*/
+		}else if( $("#txtEmail").val() == "" || !emailreg.test($("#txtEmail").val()) ){
+			$("#txtEmail").focus().after("<span class='error'>Ingrese un email correcto</span>");
+			return false;
 		}else if( $("#cboPais").attr("value") == "" ){
 			$("#cboPais").focus().after("<span class='error'>Elija un Pais.</span>");
 			return false;
