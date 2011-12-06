@@ -36,16 +36,24 @@
 	<input type="submit" value="Buscar!">
 	</form>
 	</div>
+	
+	?>
+ 	<div class="TurnosPendientes">
 	<?php 
 	if($_POST)
 	{
+		echo "<div>";
 		$Localidad=$_POST['TxtLocalidad'];
 		$Especialidad=$_POST['CboEspecialidades'];
-		
+		include_once '../Servicio/medicoservicio.php';
+		$MedicoServ = new MedicoServicio();
+		$ListaMedicos = $MedicoServ->ListarPorEspecialidadLocalidad($Especialidad, $Localidad);
+		foreach ($ListaMedicos as $Medicos)
+		{
+			echo $Medicos->Clinica->Nombre;
+		}
+		echo "</div>";
 	}
-	?>
- 	<div class="TurnosPendientes">
-
 	</div>
 </div>
 </body>
