@@ -11,19 +11,20 @@ class UbicacionRepositorio
 		$this->Conexion = new Conexion();
 	}
 	public function AgregarPais(Pais $Pais){
-		$parametros[0]=$Pais->IdPais;
-		$parametros[1]=$Pais->Descripcion;
-		$this->Conexion->StoreProcedureSinRetorno('PaisesAlta',$parametros);
+		//$parametros[0]=$Pais->IdPais;
+		//$parametros[1]=$Pais->Nombre;
+		$this->Conexion->ConsultaSinRetorno("Insert Into Pais(Nombre) values ($Pais->Nombre)" );
+		
 	}
 	
 	public function ModificarPais(Pais $Pais){
-		$parametros[0]=$Pais->IdPais;
-		$parametros[1]=$Pais->Descripcion;
-		$this->Conexion->StoreProcedureSinRetorno('PaisesMod',$parametros);	
+		//$parametros[0]=$Pais->IdPais;
+		//$parametros[1]=$Pais->Nombre;
+		$this->Conexion->ConsultaSinRetorno("Update Pais set Nombre = $Pais->Nombre where IdPais = $Pais->IdPais");
 	}
 	
 	public function BorrarPais(Pais $Pais){
-		$this->Conexion->StoreProcedureSinRetorno('PaisesBaja',$Pais->IdPais);
+		$this->Conexion->ConsultaSinRetorno("Delete From Pais where IdPais = $Pais->IdPais");
 	}
 	
 	public function Buscarpais($IdPais){
@@ -40,7 +41,8 @@ class UbicacionRepositorio
 	public function ListarPaises(){
 		$lista = array();
     	$i = 0;
-        $result = $this->Conexion->StoreProcedureConRetorno('PaisesListar');
+        $result = $this->Conexion->ConsultaConRetorno("Select * From Pais");
+        
         if($result){
 	        while ($DataRow = mysqli_fetch_array($result)){
 	        	$lista[$i] = $this->MapearPais($DataRow);
@@ -51,35 +53,34 @@ class UbicacionRepositorio
 	}
 	
 	public function MapearPais($Datarow){
-		$pais = new Pais($Datarow['idPais'], $Datarow['Descripcion']);
+		$pais = new Pais($Datarow['idPais'], $Datarow['Nombre']);
 		return $pais;
 	}
 	
 	public function AgregarProvincia(Provincia $Provincia){
-		$parametros[0]=$Provincia->Pais->IdPais;
-		$parametros[1]=$Provincia->IdProvincia;
-		$parametros[2]=$Provincia->Descripcion;
-		$this->Conexion->StoreProcedureSinRetorno('ProvinciasAlta', $parametros);
+		$IdPais=$Provincia->Pais->IdPais;
+		$Nombre=$Provincia->Nombre;
+		$Consulta ="Insert Into Provincia(IdPais,Nombre) values ($IdPais,$Nombre)";
+		$this->Conexion->ConsultaSinRetorno($Consulta);
     }
     
     public function ModificarProvincia(Provincia $Provincia){
-    	$parametros[0]=$Provincia->Pais->IdPais;
-		$parametros[1]=$Provincia->IdProvincia;
-		$parametros[2]=$Provincia->Descripcion;
-    	$this->Conexion->StoreProcedureSinRetorno('ProvinciasMod',$parametros);
+		$Nombre=$Provincia->Nombre;
+		$Consulta ="Update Provincias set Nombre = $Nombre";
+		$this->Conexion->ConsultaSinRetorno($Consulta);
     }
     
     public function BorrarProvincia(Provincia $Provincia){
     	$this->Conexion->StoreProcedureSinRetorno('ProvinciasBaja',$Provincia->IdProvincia);
+    	$Consulta = "Delete From Provincia where IdProvincia = $Provincia->IdProvincia";
+    	$this->Conexion->ConsultaSinRetorno($Consulta);
     }
     
     public function BuscarProvincia($IdProvincia){
     	if(!$this->Conexion){
 			$this->Conexion = new Conexion();
 		}
-		/*
-    	$tabla = $this->Conexion->StoreProcedureConRetorno("ProvinciasBuscar", $IdProvincia);
-    	*/
+
 		$tabla = $this->Conexion->ConsultaConRetorno("Select * from Provincia where IdProvincia = $IdProvincia");
     	$datarow = mysqli_fetch_array($tabla);
     	return $this->MapearProvincia($datarow);
@@ -88,7 +89,7 @@ class UbicacionRepositorio
 	public function ListarProvincias($IdPais){
 		$lista = array();
     	$i = 0;
-        $result = $this->Conexion->StoreProcedureConRetorno('ProvinciasListar', $IdPais);
+        $result = $this->Conexion->ConsultaConRetorno("Select * from Provincia Where IdPais = $IdPais");
         if($result){
 	        while ($DataRow = mysqli_fetch_array($result)){
 	        	$lista[$i] = $this->MapearProvincia($DataRow);
@@ -99,31 +100,31 @@ class UbicacionRepositorio
 	}
     
     public function MapearProvincia($Datarow){
-    	$pais = $this->Buscarpais($Datarow['idPais']);
-    	$Provincia = new Provincia($Datarow['idProvincia'], $Datarow['Descripcion'], $pais);
+    	$pais = $this->Buscarpais($Datarow['IdPais']);
+    	$Provincia = new Provincia($Datarow['IdProvincia'], $Datarow['Nombre'], $pais);
     	return $Provincia;
     }
     
     public function AgregarLocalidad(Localidad $Localidad){
-	    $parametros[0]=$Localidad->Provincia->IdProvincia;
-	    $parametros[1]=$Localidad->IdLocalidad;
-	    $parametros[2]=$Localidad->Descripcion;
-	    $this->Conexion->StoreProcedureSinRetorno('LocalidadesAlta',$parametros);	
+	   
+	    $this->Conexion->ConsultaSinRetorno("Insert Into Localidad(Nombre, IdProvincia) values ($Localidad->Nombre,$Localidad->Provincia->IdProvincia)" );
+	    	
     }
     
     public function ModificarLocalidad(Localidad $Localidad){
-	    $parametros[0]=$Localidad->Provincia->IdProvincia;
-	    $parametros[1]=$Localidad->IdLocalidad;
-	    $parametros[2]=$Localidad->Descripcion;
-	    $this->Conexion->StoreProcedureSinRetorno('LocalidadesMod',$parametros);
+	    
+	    $IdLocalidad= $Localidad->IdLocalidad;
+	    $Nombre=$Localidad->Descripcion;
+	    $Consulta = "Update Localidad set Nombre = $Nombre where IdLocalidad = $IdLocalidad ";
+	    $this->Conexion->ConsultaSinRetorno($Consulta);
     }
     
     public function BorrarLocalidad(Localidad $Localidad){
-    	$this->Conexion->StoreProcedureSinRetorno('LocalidadesBaja',$Localidad->IdLocalidad);
+    	$this->Conexion->ConsultaSinRetorno("Delete From Localidad Where IdLocalidad = $Localidad->IdLocalidad");
     }
     
     public function BuscarLocalidad($IdLocalidad){
-    	$tabla = $this->Conexion->StoreProcedureConRetorno('LocalidadesBuscar',$IdLocalidad);
+    	$tabla = $this->Conexion->ConsultaConRetorno("Select * from Localidad where IdLocalidad = $IdLocalidad");
     	$datarow = mysqli_fetch_array($tabla);
     	return $this->MapearLocalidad($datarow);
     }
@@ -131,7 +132,7 @@ class UbicacionRepositorio
 	public function ListarLocalidades($IdProvincia){
 		$lista = array();
     	$i = 0;
-        $result = $this->Conexion->StoreProcedureConRetorno('LocalidadesListar', $IdProvincia);
+        $result = $this->Conexion->ConsultaConRetorno("Select * from Localidad where IdProvincia = $IdProvincia");
         if($result){
 	        while ($DataRow = mysqli_fetch_array($result)){
 	        	$lista[$i] = $this->MapearLocalidad($DataRow);
@@ -142,8 +143,8 @@ class UbicacionRepositorio
 	}
     
     public function MapearLocalidad($Datarow){
-	    $provincia = $this->BuscarProvincia($Datarow['idProvincia']);
-	    $localidad = new Localidad($Datarow['idLocalidad'], $Datarow['Descripcion'], $provincia);	
+	    $provincia = $this->BuscarProvincia($Datarow['IdProvincia']);
+	    $localidad = new Localidad($Datarow['IdLocalidad'], $Datarow['Nombre'], $provincia);	
 	    return $localidad;
     }
     
@@ -153,7 +154,7 @@ class UbicacionRepositorio
     	
     	if($Localidad!="")
     	{
-    	$consulta="select * from localidad where Descripcion like '%$Localidad%'";
+    	$consulta="select * from Localidad where Nombre like '%$Localidad%'";
     	
     	$i = 0;
     	
