@@ -37,7 +37,6 @@
 	</form>
 </div>
 	
-	?>
  	<div class="TurnosPendientes">
 	<?php 
 	if($_POST)
