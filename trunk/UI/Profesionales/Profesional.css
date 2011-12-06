@@ -1,7 +1,7 @@
 #Contenido {
 	margin-left:15%;
 	width:70%;
-	height:90%;
+	height:130%;
 	border:1px solid #000;
 }
 
@@ -86,14 +86,8 @@ input.botonenviar:hover {
    	color: #ccc;
 }
 
-.separador{
-	width:100%;
-	clear:both;
-	margin-bottom:3%;
-}
-
 .publicidad{
-	margin-left: 5%;	
+	margin-left: 7%;
 }
 
 .error{

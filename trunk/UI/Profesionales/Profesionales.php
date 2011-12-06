@@ -102,7 +102,6 @@ include_once '../Commons/Header/Header.php';
 include_once '../Commons/Login/Login.php';
 ?>
 </div>
-<div class="separador"></div>
 <div class="publicidad">
 <?php include_once '../Commons/Publicidad/index.php'; ?>
 </div>

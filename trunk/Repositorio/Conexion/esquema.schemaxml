@@ -1,0 +1,156 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<schemadesigner version="6.5">
+<source>
+<database charset="latin1" collation="latin1_swedish_ci">megaturnos</database>
+</source>
+<canvas zoom="100">
+<tables>
+<table name="clinicas" view="colnames">
+<left>198</left>
+<top>198</top>
+<width>109</width>
+<height>175</height>
+<sql_create_table>CREATE TABLE `clinicas` (
+  `Nombre` varchar(100) NOT NULL,
+  `idLocalidad` int(10) NOT NULL,
+  `Telefono` varchar(50) DEFAULT NULL,
+  `Email` varchar(100) NOT NULL,
+  `Domicilio` varchar(100) DEFAULT NULL,
+  `Foto` varchar(200) DEFAULT NULL,
+  `idClinica` int(10) NOT NULL AUTO_INCREMENT,
+  PRIMARY KEY (`idClinica`),
+  KEY `FK_clinicas_login` (`Email`),
+  KEY `FK_clinicas` (`idLocalidad`),
+  CONSTRAINT `FK_clinicas` FOREIGN KEY (`idLocalidad`) REFERENCES `localidad` (`idLocalidad`),
+  CONSTRAINT `FK_clinicas_login` FOREIGN KEY (`Email`) REFERENCES `login` (`Email`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1</sql_create_table>
+</table>
+<table name="especialidades" view="colnames">
+<left>603</left>
+<top>22</top>
+<width>126</width>
+<height>107</height>
+<sql_create_table>CREATE TABLE `especialidades` (
+  `idEspecialidad` int(10) NOT NULL AUTO_INCREMENT,
+  `Nombre` varchar(100) NOT NULL,
+  PRIMARY KEY (`idEspecialidad`),
+  CONSTRAINT `FK_especialidades` FOREIGN KEY (`idEspecialidad`) REFERENCES `medicos` (`idEspecialidad`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1</sql_create_table>
+</table>
+<table name="horarios" view="colnames">
+<left>216</left>
+<top>26</top>
+<width>116</width>
+<height>141</height>
+<sql_create_table>CREATE TABLE `horarios` (
+  `IdMedico` int(10) NOT NULL,
+  `horaInicio` time NOT NULL,
+  `horaFin` time NOT NULL,
+  `diaSemana` int(10) NOT NULL,
+  PRIMARY KEY (`IdMedico`,`horaInicio`,`horaFin`,`diaSemana`),
+  CONSTRAINT `FK_horarios` FOREIGN KEY (`IdMedico`) REFERENCES `medicos` (`IdPersona`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1</sql_create_table>
+</table>
+<table name="localidad" view="colnames">
+<left>46</left>
+<top>256</top>
+<width>109</width>
+<height>124</height>
+<sql_create_table>CREATE TABLE `localidad` (
+  `idLocalidad` int(10) NOT NULL AUTO_INCREMENT,
+  `Nombre` varchar(50) NOT NULL,
+  `idProvincia` int(10) unsigned NOT NULL,
+  PRIMARY KEY (`idLocalidad`),
+  KEY `FK_localidad` (`idProvincia`),
+  CONSTRAINT `FK_localidad` FOREIGN KEY (`idProvincia`) REFERENCES `provincia` (`idProvincia`)
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1</sql_create_table>
+</table>
+<table name="login" view="colnames">
+<left>380</left>
+<top>311</top>
+<width>77</width>
+<height>107</height>
+<sql_create_table>CREATE TABLE `login` (
+  `Email` varchar(100) NOT NULL,
+  `Pass` varchar(15) NOT NULL,
+  PRIMARY KEY (`Email`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1</sql_create_table>
+</table>
+<table name="medicos" view="colnames">
+<left>368</left>
+<top>110</top>
+<width>126</width>
+<height>124</height>
+<sql_create_table>CREATE TABLE `medicos` (
+  `IdClinica` int(10) NOT NULL,
+  `idEspecialidad` int(10) DEFAULT NULL,
+  `IdPersona` int(10) NOT NULL,
+  PRIMARY KEY (`IdPersona`),
+  KEY `FK_medicos_especialidad` (`idEspecialidad`),
+  KEY `FK_medicos_clinica` (`IdClinica`),
+  CONSTRAINT `FK_medicos_clinica` FOREIGN KEY (`IdClinica`) REFERENCES `clinicas` (`idClinica`),
+  CONSTRAINT `FK_medicos` FOREIGN KEY (`IdPersona`) REFERENCES `personas` (`IdPersona`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1</sql_create_table>
+</table>
+<table name="pais" view="colnames">
+<left>203</left>
+<top>417</top>
+<width>91</width>
+<height>107</height>
+<sql_create_table>CREATE TABLE `pais` (
+  `idPais` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `Nombre` varchar(50) NOT NULL,
+  PRIMARY KEY (`idPais`)
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1</sql_create_table>
+</table>
+<table name="personas" view="colnames">
+<left>541</left>
+<top>220</top>
+<width>111</width>
+<height>141</height>
+<sql_create_table>CREATE TABLE `personas` (
+  `Apellido` varchar(30) NOT NULL,
+  `Nombre` varchar(30) NOT NULL,
+  `Email` varchar(100) NOT NULL,
+  `Telefono` varchar(10) DEFAULT NULL,
+  `IdPersona` int(10) NOT NULL AUTO_INCREMENT,
+  PRIMARY KEY (`IdPersona`),
+  KEY `FK_personas_login` (`Email`),
+  CONSTRAINT `FK_personas_login` FOREIGN KEY (`Email`) REFERENCES `login` (`Email`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1</sql_create_table>
+</table>
+<table name="provincia" view="colnames">
+<left>49</left>
+<top>410</top>
+<width>108</width>
+<height>124</height>
+<sql_create_table>CREATE TABLE `provincia` (
+  `idProvincia` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `Nombre` varchar(50) NOT NULL,
+  `idPais` int(10) unsigned NOT NULL,
+  PRIMARY KEY (`idProvincia`),
+  KEY `FK_provincia` (`idPais`),
+  CONSTRAINT `FK_provincia` FOREIGN KEY (`idPais`) REFERENCES `pais` (`idPais`)
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=latin1</sql_create_table>
+</table>
+<table name="turnos" view="colnames">
+<left>680</left>
+<top>219</top>
+<width>125</width>
+<height>158</height>
+<sql_create_table>CREATE TABLE `turnos` (
+  `IdTurno` int(10) NOT NULL,
+  `Fecha` datetime NOT NULL,
+  `IdMedico` int(10) NOT NULL,
+  `IdPaciente` int(10) NOT NULL,
+  `Estado` int(3) DEFAULT NULL,
+  PRIMARY KEY (`IdTurno`),
+  KEY `FK_turnos_persona` (`IdPaciente`),
+  KEY `FK_turnos_medico` (`IdMedico`),
+  CONSTRAINT `FK_turnos_medico` FOREIGN KEY (`IdMedico`) REFERENCES `personas` (`IdPersona`),
+  CONSTRAINT `FK_turnos_persona` FOREIGN KEY (`IdPaciente`) REFERENCES `personas` (`IdPersona`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1</sql_create_table>
+</table>
+</tables>
+</canvas>
+</schemadesigner>
