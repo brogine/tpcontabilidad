@@ -2,7 +2,7 @@
 <head>
 <link href="../Commons/Header/Header.css" type="text/css" rel="stylesheet"/>
 
-<link href="Profesional.css" type="text/css" rel="stylesheet"/>
+<link href="Clinica.css" type="text/css" rel="stylesheet"/>
 <link href="../Commons/Login/Login.css" type="text/css" rel="stylesheet" />
 
 <link href="../Commons/Publicidad/Publicidad.css" type="text/css" rel="stylesheet" />
@@ -11,7 +11,7 @@
 <script type="text/javascript" src="../Commons/Publicidad/captify.tiny.js"></script>
 <script type="text/javascript" src="../Commons/Publicidad/Publicidad.js"></script>
 
-<script language="JavaScript" src ="Profesional.js"> </script>
+<script language="JavaScript" src ="Clinica.js"> </script>
 
 <link href="../Commons/Footer/Footer.css" type="text/css" rel="stylesheet"/>
 
@@ -53,7 +53,7 @@ include_once '../Commons/Header/Header.php';
       	<label for="txtTelefono">Telefono: </label>
       	<input type="text" id="txtTelefono" name="txtTelefono" class="texto" />
       	<label for="txtPassword">Password: </label>
-      	<input type="password" id="txtPassword" name="txtPassword" class="texto" />
+      	<input type="password" id="txtPassword" name="txtPassword" class="texto" /><br />
         <input type="submit" id="btnAceptar" name="btnAceptar" value="Registrarme!" class="botonenviar"  />
 	</form>
 	<?php

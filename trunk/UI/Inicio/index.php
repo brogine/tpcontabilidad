@@ -25,7 +25,7 @@
 <table>
 <tr>
 <td id="Celda"><div id="Megabutton" onclick="Direccionar('../Clientes/Clientes.php')"><p>Quiero Sacar Turnos!</p></div></td>
-<td id="Celda"><div id="Megabutton" onclick="Direccionar('../Profesionales/Profesionales.php')"><p>Quiero Dar Turnos!</p></div></td>
+<td id="Celda"><div id="Megabutton" onclick="Direccionar('../Clinicas/Clinicas.php')"><p>Quiero Dar Turnos!</p></div></td>
 </tr>
 </table>
 <p>
