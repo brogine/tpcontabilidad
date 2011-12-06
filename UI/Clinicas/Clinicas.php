@@ -61,41 +61,29 @@ include_once '../Commons/Header/Header.php';
 	<?php
 	if($_POST)
     {
-    	if(isset($_POST["txtNombre"]) && isset($_POST["cboLocalidad"])){
-	      	include_once '../../Dominio/entidad.php';
-	      	include_once '../../Servicio/clienteservicio.php';
-	      	include_once '../../Dominio/contacto.php';
-	      	/* RECIBO LOS DATOS DEL FORMULARIO*/
-	      	
-	      	$nombre = $_POST['txtNombre'];
-	      	$idLocalidad = $_POST['cboLocalidad'];
-	      	$Domicilio = $_POST['txtDomicilio'];
-	      	$Telefono = $_POST['txtTelefono'];
-	      	$Pass = $_POST['txtTelefono'];
-	      	/* CREO UN OBJETO CONTACTO*/
-	      	
-	      	$Contacto = new Contacto();
-	      	$Contacto->Telefono = $Telefono;
-	      	
-	      	/* CREO UN OBJETO UBICACION */
-	      	$Ubicacion = new Ubicacion();
-	      	$Ubicacion->Localidad = new Localidad();
-	      	$Ubicacion->Domicilio = $Domicilio;
-	      	
-	      	/* CREO EL OBJETO Entidad Y LO COMPLETO*/
-	        $Entidad = new Entidad($nombre, $Ubicacion, $Contacto, $Pass);
-	      	/*LO PASO POR PARAMETRO AL SERVICIO*/
-	      	$ClienteServ = new ClienteServicio();
-	        $Cli = $ClienteServ->Buscar($Cliente->DniCuitCuil);
-	      	if ($Cli->DniCuitCuil != "" && $Cli->Contacto->Email != "")
-	      	{
-	        	echo "Ese Ususario ya Existe";
-	      	}
-	      	else
-	      	{
-	      		$ClienteServ->Agregar($Cliente);
-	      	}
-    	}
+      	include_once '../../Dominio/clinica.php';
+      	include_once '../../Dominio/contacto.php';
+      	include_once '../../Dominio/ubicacion.php';
+      	include_once '../../Dominio/login.php';
+      	include_once '../../Servicio/clinicaservicio.php';
+      	/* RECIBO LOS DATOS DEL FORMULARIO*/
+      	$Localidad = $ubicacionServicio->BuscarLocalidad($_POST['cboLocalidad']);
+      	$Ubicacion = new Ubicacion($Localidad, $_POST['txtDomicilio']);
+      	
+      	$Contacto = new Contacto($_POST['txtEmail'], $_POST['txtTelefono']);
+      	
+      	$Login = new Login($_POST['txtEmail'], $_POST['Pass']);
+      	
+      	$Clinica = new Clinica($_POST['txtNombre'], $Ubicacion, $Contacto, $Login);
+
+      	$clinicaServicio = new ClinicaServicio();
+        $resultado = $clinicaServicio->Agregar($Clinica);
+      	if (is_numeric($resultado)) {
+        	echo "Exito";
+      	}
+      	else {
+      		echo $resultado;
+      	}
     }
     ?>
 </div>
