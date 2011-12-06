@@ -1,8 +1,9 @@
 #Contenido {
-	margin-left:17%;
+	margin:auto;
+	top:50%;
+	left:50%;
 	width:800px;
-	height:800px;
-	top: 0;
+	height:880px;
 	-webkit-box-shadow: 3px 5px 10px 2px #000;
 	-moz-box-shadow: 3px 5px 10px 2px #000;
 	box-shadow: 3px 5px 10px 2px #000;
@@ -33,7 +34,7 @@
 
 #login{
 	float:left;
-	margin:3% 6% 20% 7%;
+	margin:3% 6% 45% 7%;
 }
 
 .form_settings input{ 
@@ -42,14 +43,6 @@
   	font: 100% arial; 
   	border: 1px solid #958C8C; 
   	color: #47433F;
-}
-
-#registrousuario {
-	border:medium none;
-	color:#333333;
-	height:500px;
-	padding-left:10%;
-	width:80%;
 }
 
 input.texto {

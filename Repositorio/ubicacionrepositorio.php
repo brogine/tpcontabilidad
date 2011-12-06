@@ -132,6 +132,7 @@ class UbicacionRepositorio
 	public function ListarLocalidades($IdProvincia){
 		$lista = array();
     	$i = 0;
+    	echo "llego $IdProvincia";
         $result = $this->Conexion->ConsultaConRetorno("Select * from Localidad where IdProvincia = $IdProvincia");
         if($result){
 	        while ($DataRow = mysqli_fetch_array($result)){
