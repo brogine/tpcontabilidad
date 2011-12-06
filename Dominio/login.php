@@ -1,7 +1,12 @@
 <?php
 class Login
 {
-public $Email;
-public $Password;		
+	public $Email;
+	public $Password;	
+
+	public function __construct($Email, $Password){
+		$this->Email = $Email;
+		$this->Password = md5($Password);
+	}
 }
 ?>
