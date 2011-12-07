@@ -5,7 +5,7 @@ class Provincia
 	public $Nombre;
 	public $Pais;
 	
-	public function __construct($IdProvincia = NULL, $Nombre, Pais $Pais){
+	public function __construct($IdProvincia, $Nombre, Pais $Pais){
 		$this->IdProvincia = $IdProvincia;
 		$this->Nombre = $Nombre;
 		$this->Pais = $Pais;
