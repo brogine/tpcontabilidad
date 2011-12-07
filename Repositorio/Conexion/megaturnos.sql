@@ -43,8 +43,7 @@ DROP TABLE IF EXISTS `especialidades`;
 CREATE TABLE `especialidades` (
   `idEspecialidad` int(10) NOT NULL AUTO_INCREMENT,
   `Nombre` varchar(100) NOT NULL,
-  PRIMARY KEY (`idEspecialidad`),
-  CONSTRAINT `FK_especialidades` FOREIGN KEY (`idEspecialidad`) REFERENCES `medicos` (`idEspecialidad`)
+  PRIMARY KEY (`idEspecialidad`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 /*Data for the table `especialidades` */
@@ -99,16 +98,29 @@ DROP TABLE IF EXISTS `medicos`;
 
 CREATE TABLE `medicos` (
   `IdClinica` int(10) NOT NULL,
-  `idEspecialidad` int(10) DEFAULT NULL,
   `IdPersona` int(10) NOT NULL,
   PRIMARY KEY (`IdPersona`),
-  KEY `FK_medicos_especialidad` (`idEspecialidad`),
   KEY `FK_medicos_clinica` (`IdClinica`),
-  CONSTRAINT `FK_medicos_clinica` FOREIGN KEY (`IdClinica`) REFERENCES `clinicas` (`idClinica`),
-  CONSTRAINT `FK_medicos` FOREIGN KEY (`IdPersona`) REFERENCES `personas` (`IdPersona`)
+  CONSTRAINT `FK_medicos` FOREIGN KEY (`IdPersona`) REFERENCES `personas` (`IdPersona`),
+  CONSTRAINT `FK_medicos_clinica` FOREIGN KEY (`IdClinica`) REFERENCES `clinicas` (`idClinica`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 /*Data for the table `medicos` */
+
+/*Table structure for table `medicos_especialidad` */
+
+DROP TABLE IF EXISTS `medicos_especialidad`;
+
+CREATE TABLE `medicos_especialidad` (
+  `IdPersona` int(10) NOT NULL,
+  `IdEspecialidad` int(10) NOT NULL,
+  PRIMARY KEY (`IdPersona`,`IdEspecialidad`),
+  KEY `FK_medicos_especialidad_2` (`IdEspecialidad`),
+  CONSTRAINT `FK_medicos_especialidad_2` FOREIGN KEY (`IdEspecialidad`) REFERENCES `especialidades` (`idEspecialidad`),
+  CONSTRAINT `FK_medicos_especialidad` FOREIGN KEY (`IdPersona`) REFERENCES `medicos` (`IdPersona`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+/*Data for the table `medicos_especialidad` */
 
 /*Table structure for table `pais` */
 

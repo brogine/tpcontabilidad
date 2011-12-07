@@ -73,7 +73,7 @@ include_once '../Commons/Header/Header.php';
       	$Contacto = new Contacto($_POST['txtEmail'], $_POST['txtTelefono']);
       	$Login = new Login($_POST['txtEmail'], $_POST['txtPassword']);
       	
-      	$Clinica = new Clinica($_POST['txtNombre'], null, $Ubicacion, $Contacto, null, $Login);
+      	$Clinica = new Clinica(null, $_POST['txtNombre'], $Ubicacion, $Contacto, null, $Login);
 
       	$clinicaServicio = new ClinicaServicio();
         $resultado = $clinicaServicio->Agregar($Clinica);

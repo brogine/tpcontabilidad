@@ -26,15 +26,14 @@
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1</sql_create_table>
 </table>
 <table name="especialidades" view="colnames">
-<left>603</left>
-<top>22</top>
+<left>694</left>
+<top>51</top>
 <width>126</width>
 <height>107</height>
 <sql_create_table>CREATE TABLE `especialidades` (
   `idEspecialidad` int(10) NOT NULL AUTO_INCREMENT,
   `Nombre` varchar(100) NOT NULL,
-  PRIMARY KEY (`idEspecialidad`),
-  CONSTRAINT `FK_especialidades` FOREIGN KEY (`idEspecialidad`) REFERENCES `medicos` (`idEspecialidad`)
+  PRIMARY KEY (`idEspecialidad`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1</sql_create_table>
 </table>
 <table name="horarios" view="colnames">
@@ -83,13 +82,11 @@
 <height>124</height>
 <sql_create_table>CREATE TABLE `medicos` (
   `IdClinica` int(10) NOT NULL,
-  `idEspecialidad` int(10) DEFAULT NULL,
   `IdPersona` int(10) NOT NULL,
   PRIMARY KEY (`IdPersona`),
-  KEY `FK_medicos_especialidad` (`idEspecialidad`),
   KEY `FK_medicos_clinica` (`IdClinica`),
-  CONSTRAINT `FK_medicos_clinica` FOREIGN KEY (`IdClinica`) REFERENCES `clinicas` (`idClinica`),
-  CONSTRAINT `FK_medicos` FOREIGN KEY (`IdPersona`) REFERENCES `personas` (`IdPersona`)
+  CONSTRAINT `FK_medicos` FOREIGN KEY (`IdPersona`) REFERENCES `personas` (`IdPersona`),
+  CONSTRAINT `FK_medicos_clinica` FOREIGN KEY (`IdClinica`) REFERENCES `clinicas` (`idClinica`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1</sql_create_table>
 </table>
 <table name="pais" view="colnames">
@@ -149,6 +146,20 @@
   KEY `FK_turnos_medico` (`IdMedico`),
   CONSTRAINT `FK_turnos_medico` FOREIGN KEY (`IdMedico`) REFERENCES `personas` (`IdPersona`),
   CONSTRAINT `FK_turnos_persona` FOREIGN KEY (`IdPaciente`) REFERENCES `personas` (`IdPersona`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1</sql_create_table>
+</table>
+<table name="medicos_especialidad" view="colnames">
+<left>528</left>
+<top>66</top>
+<width>128</width>
+<height>107</height>
+<sql_create_table>CREATE TABLE `medicos_especialidad` (
+  `IdPersona` int(10) NOT NULL,
+  `IdEspecialidad` int(10) NOT NULL,
+  PRIMARY KEY (`IdPersona`,`IdEspecialidad`),
+  KEY `FK_medicos_especialidad_2` (`IdEspecialidad`),
+  CONSTRAINT `FK_medicos_especialidad_2` FOREIGN KEY (`IdEspecialidad`) REFERENCES `especialidades` (`idEspecialidad`),
+  CONSTRAINT `FK_medicos_especialidad` FOREIGN KEY (`IdPersona`) REFERENCES `medicos` (`IdPersona`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1</sql_create_table>
 </table>
 </tables>
