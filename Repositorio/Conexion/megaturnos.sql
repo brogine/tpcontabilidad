@@ -32,9 +32,11 @@ CREATE TABLE `clinicas` (
   KEY `FK_clinicas` (`idLocalidad`),
   CONSTRAINT `FK_clinicas` FOREIGN KEY (`idLocalidad`) REFERENCES `localidad` (`idLocalidad`),
   CONSTRAINT `FK_clinicas_login` FOREIGN KEY (`Email`) REFERENCES `login` (`Email`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=latin1;
 
 /*Data for the table `clinicas` */
+
+insert  into `clinicas`(`Nombre`,`idLocalidad`,`Telefono`,`Email`,`Domicilio`,`Foto`,`idClinica`) values ('Pasteur',1,'123456','pas@algo.com','lala 123','',4),('Castro Rendon',2,'4454647','castro@rendon.com','avenida argentina 123','',5);
 
 /*Table structure for table `especialidades` */
 
@@ -86,11 +88,13 @@ DROP TABLE IF EXISTS `login`;
 
 CREATE TABLE `login` (
   `Email` varchar(100) NOT NULL,
-  `Pass` varchar(15) NOT NULL,
+  `Pass` varchar(35) NOT NULL,
   PRIMARY KEY (`Email`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 /*Data for the table `login` */
+
+insert  into `login`(`Email`,`Pass`) values ('castro@rendon.com','e10adc3949ba59abbe56e057f20f883e'),('pas@algo.com','81dc9bdb52d04dc20036dbd8313ed055');
 
 /*Table structure for table `medicos` */
 
