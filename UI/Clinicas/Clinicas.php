@@ -71,20 +71,10 @@ include_once '../Commons/Header/Header.php';
       	$Ubicacion = new Ubicacion($Localidad, $_POST['txtDomicilio']);
       	
       	$Contacto = new Contacto($_POST['txtEmail'], $_POST['txtTelefono']);
-      	
       	$Login = new Login($_POST['txtEmail'], $_POST['txtPassword']);
       	
-      	$Clinica = new Clinica($_POST['txtNombre'], $Ubicacion, $Contacto, $Login);
+      	$Clinica = new Clinica($_POST['txtNombre'], null, $Ubicacion, $Contacto, null, $Login);
 
-      	/*
-      	 * Catchable fatal error: Argument 3 passed to Clinica::__construct() 
-      	 * must be an instance of Ubicacion, instance of Contacto given, 
-      	 * called in C:\xampp\htdocs\MegaTurnos\UI\Clinicas\Clinicas.php 
-      	 * on line 77 and defined in C:\xampp\htdocs\MegaTurnos\Dominio\clinica.php 
-      	 * on line 11
-      	 * 
-      	 * */
-      	
       	$clinicaServicio = new ClinicaServicio();
         $resultado = $clinicaServicio->Agregar($Clinica);
       	if (is_numeric($resultado)) {
