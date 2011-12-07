@@ -10,13 +10,13 @@ class ClinicaRepositorio{
 	}
 	
 	public function Agregar(Clinica $Clinica){
-		$Consulta = " Insert Into Clinicas (Nombre, IdLocalidad, Telefono, Email, Domicilio, Foto) Values ('".$Clinica->Nombre."', ".$Clinica->Ubicacion->Localidad->IdLocalidad.", '".$Clinica->Contacto->Telefono."', '".$Clinica->Contacto->Email."', '".$Clinica->Ubicacion->Domicilio."', '".$Clinica->Foto."') ";
-		$Consulta .= " Insert Into Login (Email, Pass) Values ('".$Clinica->Login->Email."', '".$Clinica->Login->Pass."') ";
+		$Consulta = " Insert Into clinicas (Nombre, idLocalidad, Telefono, Email, Domicilio, Foto) Values ('".$Clinica->Nombre."', ".$Clinica->Ubicacion->Localidad->IdLocalidad.", '".$Clinica->Contacto->Telefono."', '".$Clinica->Contacto->Email."', '".$Clinica->Ubicacion->Domicilio."', '".$Clinica->Foto."') ";
+		$Consulta .= " Insert Into login (Email, Pass) Values ('".$Clinica->Login->Email."', '".$Clinica->Login->Password."') ";
 		if($this->Conexion->MultipleConsulta($Consulta)) {
 			return mysqli_insert_id();
 		}
 		else {
-			return "No se pudo agregar la clinica";
+			return $Consulta." No se pudo agregar la clinica";
 		}
     }
     
