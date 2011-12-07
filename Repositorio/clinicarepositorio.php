@@ -10,13 +10,13 @@ class ClinicaRepositorio{
 	}
 	
 	public function Agregar(Clinica $Clinica){
-		$Consulta = " Insert Into clinicas (Nombre, idLocalidad, Telefono, Email, Domicilio, Foto) Values ('".$Clinica->Nombre."', ".$Clinica->Ubicacion->Localidad->IdLocalidad.", '".$Clinica->Contacto->Telefono."', '".$Clinica->Contacto->Email."', '".$Clinica->Ubicacion->Domicilio."', '".$Clinica->Foto."') ";
-		$Consulta .= " Insert Into login (Email, Pass) Values ('".$Clinica->Login->Email."', '".$Clinica->Login->Password."') ";
+		$Consulta = " Insert Into login (Email, Pass) Values ('".$Clinica->Login->Email."', MD5('".$Clinica->Login->Password."')); ";
+		$Consulta .= " Insert Into clinicas (Nombre, idLocalidad, Telefono, Email, Domicilio, Foto) Values ('".$Clinica->Nombre."', ".$Clinica->Ubicacion->Localidad->IdLocalidad.", '".$Clinica->Contacto->Telefono."', '".$Clinica->Contacto->Email."', '".$Clinica->Ubicacion->Domicilio."', '".$Clinica->Foto."'); ";
 		if($this->Conexion->MultipleConsulta($Consulta)) {
-			return mysqli_insert_id();
+			return $this->Conexion->GetLastID();
 		}
 		else {
-			return $Consulta." No se pudo agregar la clinica";
+			return "No se pudo agregar la clinica";
 		}
     }
     
@@ -29,8 +29,13 @@ class ClinicaRepositorio{
     public function Buscar($idClinica){
         //$result = $this->Conexion->StoreProcedureConRetorno($StoreProcedure, $idRubro);
     	$result = $this->Conexion->ConsultaConRetorno(" Select C.*, L.Pass From Clinica C Inner Join Login L On C.Email = L.Email Where C.IdClinica = $idClinica ");
-    	$DataRow = mysqli_fetch_array($result);
-        return $this->Mapear($DataRow);
+    	if($result){
+    		$DataRow = mysqli_fetch_array($result);
+        	return $this->Mapear($DataRow);
+    	}
+    	else{
+    		return null;
+    	}
     }
     
     public function Listar(){

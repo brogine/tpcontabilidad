@@ -51,7 +51,15 @@ class Conexion
   		if(!$this->Conex){
   			$this->Conex = mysqli_connect($this->Server, $this->User, $this->Pass, $this->BDD) or die(mysqli_connect_error());
   		}
-  		return mysqli_multi_query($this->Conex, $Consulta);
+  		return mysqli_multi_query($this->Conex, $Consulta) or die(mysqli_error($this->Conex));
+  	}
+  	
+  	public function GetLastID()
+  	{
+  		if(!$this->Conex){
+  			$this->Conex = mysqli_connect($this->Server, $this->User, $this->Pass, $this->BDD) or die(mysqli_connect_error());
+  		}
+  		return mysqli_insert_id($this->Conex);
   	}
   
   	private function LeerXml($Archivo)

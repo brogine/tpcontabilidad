@@ -29,7 +29,7 @@ function Search(id, control)
 		}
 	}
 	ajax.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-	ajax.send("id="+id+"&src="+control.id);
+	ajax.send("id=" + id + "&src=" + control.id);
 }
 
 $(document).ready(function () {
@@ -63,9 +63,10 @@ $(document).ready(function () {
 		}
 	});
 	$("#btnIngresar").click(function(){
+		var emailreg = /^[a-zA-Z0-9_\.\-]+@[a-zA-Z0-9\-]+\.[a-zA-Z0-9\-\.]+$/;
 		$(".error").remove();
-		if( $("#txtUsuario").val() == "" ){
-			$("#txtUsuario").focus().after("<span class='error'>Ingrese un Usuario.</span>");
+		if( $("#txtEmailLogin").val() == "" || !emailreg.test($("#txtEmailLogin").val()) ){
+			$("#txtEmailLogin").focus().after("<span class='error'>Ingrese un email correcto</span>");
 			return false;
 		}else if( $("#txtContrasenia").val() == "" ){
 			$("#txtContrasenia").focus().after("<span class='error'>Ingrese un Password.</span>");
@@ -84,7 +85,7 @@ $(document).ready(function () {
 			return false;
 		}
 	});
-	$("#txtUsuario, #txtContrasenia").keyup(function(){
+	$("#txtEmailLogin, #txtContrasenia").keyup(function(){
 		if( $(this).val() != "" ){
 			$(".error").fadeOut();
 			return false;
