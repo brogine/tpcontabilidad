@@ -100,13 +100,9 @@ class UbicacionRepositorio
 	}
     
     public function MapearProvincia($Datarow){
-<<<<<<< .mine
+
     	$Pais = $this->Buscarpais($Datarow['idPais']);
     	$Provincia = new Provincia($Datarow['idProvincia'],$Datarow['Nombre'] , $Pais);
-=======
-    	$pais = $this->Buscarpais($Datarow['idPais']);
-    	$Provincia = new Provincia($Datarow['idProvincia'], $Datarow['Nombre'], $pais);
->>>>>>> .r96
     	return $Provincia;
     }
     
