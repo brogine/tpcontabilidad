@@ -28,7 +28,7 @@ class ClinicaRepositorio{
     
     public function Buscar($idClinica){
         //$result = $this->Conexion->StoreProcedureConRetorno($StoreProcedure, $idRubro);
-    	$result = $this->Conexion->ConsultaConRetorno(" Select C.*, L.Pass From Clinica C Inner Join Login L On C.Email = L.Email Where C.IdClinica = $idClinica ");
+    	$result = $this->Conexion->ConsultaConRetorno(" Select C.*, L.Pass From Clinicas C Inner Join Login L On C.Email = L.Email Where C.IdClinica = $idClinica ");
     	if($result){
     		$DataRow = mysqli_fetch_array($result);
         	return $this->Mapear($DataRow);
@@ -42,7 +42,7 @@ class ClinicaRepositorio{
     	$lista = array();
     	$i = 0;
         //$result = $this->Conexion->StoreProcedureConRetorno('RubrosList');
-        $result = $this->Conexion->ConsultaConRetorno(" Select C.*, L.Pass From Clinica C Inner Join Login L On C.Email = L.Email ");
+        $result = $this->Conexion->ConsultaConRetorno(" Select C.*, L.Pass From Clinicas C Inner Join Login L On C.Email = L.Email ");
         while ($DataRow = mysqli_fetch_array($result)){
         	$lista[$i] = $this->Mapear($DataRow);
         	$i++;
