@@ -23,7 +23,9 @@ function Search(id, control)
 	ajax.open("POST", "../../Servicio/ubicacionservicio.php", true);
 	ajax.onreadystatechange = function() {
 		if (ajax.readyState == 4) {
-			document.getElementById(control.id).innerHTML = ajax.responseText;
+			if(ajax.responseText != "undefined"){
+				document.getElementById(control.id).innerHTML = ajax.responseText;
+			}
 		}
 	}
 	ajax.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
@@ -88,10 +90,10 @@ $(document).ready(function () {
 			return false;
 		}
 	});
-	/*$(".email").keyup(function(){
+	$(".txtEmail").keyup(function(){
 		if( $(this).val() != "" && emailreg.test($(this).val())){
-			$(".error").fadeOut();			
+			$(".error").fadeOut();
 			return false;
 		}		
-	});*/
+	});
 });

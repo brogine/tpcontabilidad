@@ -100,8 +100,8 @@ class UbicacionRepositorio
 	}
     
     public function MapearProvincia($Datarow){
-    	$pais = $this->Buscarpais($Datarow['IdPais']);
-    	$Provincia = new Provincia($Datarow['IdProvincia'], $Datarow['Nombre'], $pais);
+    	$pais = $this->Buscarpais($Datarow['idPais']);
+    	$Provincia = new Provincia($Datarow['idProvincia'], $Datarow['Nombre'], $pais);
     	return $Provincia;
     }
     
@@ -132,7 +132,6 @@ class UbicacionRepositorio
 	public function ListarLocalidades($IdProvincia){
 		$lista = array();
     	$i = 0;
-    	echo "llego $IdProvincia";
         $result = $this->Conexion->ConsultaConRetorno("Select * from Localidad where IdProvincia = $IdProvincia");
         if($result){
 	        while ($DataRow = mysqli_fetch_array($result)){
@@ -144,30 +143,28 @@ class UbicacionRepositorio
 	}
     
     public function MapearLocalidad($Datarow){
-	    $provincia = $this->BuscarProvincia($Datarow['IdProvincia']);
-	    $localidad = new Localidad($Datarow['IdLocalidad'], $Datarow['Nombre'], $provincia);	
+	    $provincia = $this->BuscarProvincia($Datarow['idProvincia']);
+	    $localidad = new Localidad($Datarow['idLocalidad'], $Datarow['Nombre'], $provincia);	
 	    return $localidad;
     }
     
     public function ListarLocalidadesPorNombre($Localidad)
     {
     	$lista = array();
-    	
-    	if($Localidad!="")
+    	if($Localidad != "")
     	{
-    	$consulta="select * from Localidad where Nombre like '%$Localidad%'";
+    		$consulta = "select * from Localidad where Nombre like '%$Localidad%'";
     	
-    	$i = 0;
-    	
-    	$result = $this->Conexion->ConsultaConRetorno($consulta);
-    	if($result)
-    	{
-	        while ($DataRow = mysqli_fetch_array($result))
-	        {
-	        	$lista[$i] = $this->MapearLocalidad($DataRow);
-	        	$i++;
+    		$i = 0;
+    		$result = $this->Conexion->ConsultaConRetorno($consulta);
+	    	if($result)
+	    	{
+		        while ($DataRow = mysqli_fetch_array($result))
+		        {
+		        	$lista[$i] = $this->MapearLocalidad($DataRow);
+		        	$i++;
+		        }
 	        }
-        }
     	}
         return $lista;
     }
