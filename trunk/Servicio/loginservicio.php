@@ -1,4 +1,6 @@
 <?php
+include_once '../../Repositorio/loginrepositorio.php';
+include_once '../../Dominio/login.php';
 
 class LoginServicio{
     private $loginRepositorio;
@@ -9,13 +11,20 @@ class LoginServicio{
     
     public function Validar(Login $Login)
     {
-        //$resultado = $this->loginRepositorio->Validar(md5($Login->Usuario), md5($Login->Password));
-        //if($resultado){
-            header('Location: /UI/includes/mapage.php');
-        //}
-        
+        $resultado = $this->loginRepositorio->Validar($Login);
+    	switch ($resultado) {
+			case "Clinica":
+				header ("Location: /MenuClinicas/MenuClinicas.php");
+			break;
+			case "Paciente":
+        		header('Location: /MenuClientes/MenuClientes.php');
+			break;
+			default:
+				$resultado = "Error de Login";
+			break;
+		}
+		return $resultado;
     }
-    
 }
 
 ?>

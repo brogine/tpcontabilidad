@@ -61,28 +61,34 @@ include_once '../Commons/Header/Header.php';
 	<?php
 	if($_POST)
     {
-      	include_once '../../Dominio/clinica.php';
-      	include_once '../../Dominio/contacto.php';
-      	include_once '../../Dominio/ubicacion.php';
-      	include_once '../../Dominio/login.php';
-      	include_once '../../Servicio/clinicaservicio.php';
-      	/* RECIBO LOS DATOS DEL FORMULARIO*/
-      	$Localidad = $ubicacionServicio->BuscarLocalidad($_POST['cboLocalidad']);
-      	$Ubicacion = new Ubicacion($Localidad, $_POST['txtDomicilio']);
-      	
-      	$Contacto = new Contacto($_POST['txtEmail'], $_POST['txtTelefono']);
-      	$Login = new Login($_POST['txtEmail'], $_POST['txtPassword']);
-      	
-      	$Clinica = new Clinica(null, $_POST['txtNombre'], $Ubicacion, $Contacto, null, $Login);
-
-      	$clinicaServicio = new ClinicaServicio();
-        $resultado = $clinicaServicio->Agregar($Clinica);
-      	if (is_numeric($resultado)) {
-        	echo "Exito";
-      	}
-      	else {
-      		echo $resultado;
-      	}
+    	if(isset($_POST['btnAceptar'])){
+	    	if(isset($_POST['cboLocalidad']) && isset($_POST['txtDomicilio']) && isset($_POST['txtEmail']) &&
+	    		isset($_POST['txtTelefono']) && isset($_POST['txtPassword']) && isset($_POST['txtNombre']))
+	    	{
+		      	include_once '../../Dominio/clinica.php';
+		      	include_once '../../Dominio/contacto.php';
+		      	include_once '../../Dominio/ubicacion.php';
+		      	include_once '../../Dominio/login.php';
+		      	include_once '../../Servicio/clinicaservicio.php';
+		      	/* RECIBO LOS DATOS DEL FORMULARIO*/
+		      	$Localidad = $ubicacionServicio->BuscarLocalidad($_POST['cboLocalidad']);
+		      	$Ubicacion = new Ubicacion($Localidad, $_POST['txtDomicilio']);
+		      	
+		      	$Contacto = new Contacto($_POST['txtEmail'], $_POST['txtTelefono']);
+		      	$Login = new Login($_POST['txtEmail'], $_POST['txtPassword']);
+		      	
+		      	$Clinica = new Clinica(null, $_POST['txtNombre'], $Ubicacion, $Contacto, null, $Login);
+		
+		      	$clinicaServicio = new ClinicaServicio();
+		        $resultado = $clinicaServicio->Agregar($Clinica);
+		      	if (is_numeric($resultado)) {
+		        	echo "Exito";
+		      	}
+		      	else {
+		      		echo $resultado;
+		      	}
+	    	}
+    	}
     }
     ?>
 </div>
