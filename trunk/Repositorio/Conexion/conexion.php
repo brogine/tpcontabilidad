@@ -6,7 +6,7 @@ class Conexion
 	private $User;
 	private $Pass;
 	private $BDD;
-	public $Conex;
+	private $Conex;
 	
 	public function __construct(){
 		$this->LeerXml("Configuracion.xml");
@@ -41,22 +41,17 @@ class Conexion
   	
   	public function ConsultaSinRetorno($Consulta)
   	{
-	  	if(!$this->Conex)
-  		{
-  			$this->Conex->query($Consulta);
+  		if(!$this->Conex){
+  			$this->Conex = mysqli_connect($this->Server, $this->User, $this->Pass, $this->BDD) or die(mysqli_connect_error());
   		}
+  		$this->Conex->query($Consulta);
   	}
   	
-  	public function BeginTransaction($db){
-  		mysqli_autocommit($db, FALSE);
-  	}
-  	
-  	public function CommitTransaction(){
-  		mysqli_commit();
-  	}
-  	
-  	public function RollBack(){
-  		mysqli_rollback();
+  	public function MultipleConsulta($Consulta){
+  		if(!$this->Conex){
+  			$this->Conex = mysqli_connect($this->Server, $this->User, $this->Pass, $this->BDD) or die(mysqli_connect_error());
+  		}
+  		return mysqli_multi_query($this->Conex, $Consulta);
   	}
   
   	private function LeerXml($Archivo)

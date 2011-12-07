@@ -10,20 +10,20 @@ class ClinicaRepositorio{
 	}
 	
 	public function Agregar(Clinica $Clinica){
-		try {
-			$this->Conexion->BeginTransaction($this->Conexion->Conex);
-			$this->Conexion->ConsultaConRetorno(" Insert Into Clinicas (Nombre, IdLocalidad, Telefono, Email, Domicilio, Foto) Values ('$Clinica->Nombre', $Clinica->Ubicacion->Localidad->IdLocalidad, '$Clinica->Contacto->Telefono', '$Clinica->Contacto->Email', '$Clinica->Ubicacion->Domicilio', '$Clinica->Foto') ");
-			$Id = mysqli_insert_id();
-			$this->Conexion->ConsultaSinRetorno(" Insert Into Login (Email, Pass) Values ('$Clinica->Login->Email', '$Clinica->Login->Pass') ");
-			$this->Conexion->CommitTransaction();
-		} catch (Exception $e) {
-			$this->Conexion->RollBack();
+		$Consulta = " Insert Into Clinicas (Nombre, IdLocalidad, Telefono, Email, Domicilio, Foto) Values ('".$Clinica->Nombre."', ".$Clinica->Ubicacion->Localidad->IdLocalidad.", '".$Clinica->Contacto->Telefono."', '".$Clinica->Contacto->Email."', '".$Clinica->Ubicacion->Domicilio."', '".$Clinica->Foto."') ";
+		$Consulta .= " Insert Into Login (Email, Pass) Values ('".$Clinica->Login->Email."', '".$Clinica->Login->Pass."') ";
+		if($this->Conexion->MultipleConsulta($Consulta)) {
+			return mysqli_insert_id();
+		}
+		else {
+			return "No se pudo agregar la clinica";
 		}
     }
     
     public function Modificar(Clinica $Clinica){
-        $this->Conexion->ConsultaSinRetorno(" Update Clinicas Set Nombre = '$Clinica->Nombre', IdLocalidad = $Clinica->Ubicacion->Localidad->IdLocalidad, Telefono = '$Clinica->Contacto->Telefono', Domicilio = '$Clinica->Ubicacion->Domicilio', Foto = '$Clinica->Foto' Where IdClinica = $Clinica->IdClinica ");
-        $this->Conexion->ConsultaSinRetorno(" Update Login Set Pass = '$Clinica->Login->Pass' Where IdClinica = $Clinica->IdClinica ");
+    	$Consulta = " Update Clinicas Set Nombre = '$Clinica->Nombre', IdLocalidad = $Clinica->Ubicacion->Localidad->IdLocalidad, Telefono = '$Clinica->Contacto->Telefono', Domicilio = '$Clinica->Ubicacion->Domicilio', Foto = '$Clinica->Foto' Where IdClinica = $Clinica->IdClinica ";
+    	$Consulta .= " Update Login Set Pass = '$Clinica->Login->Pass' Where IdClinica = $Clinica->IdClinica ";
+    	$this->Conexion->MultipleConsulta($Consulta);
     }
     
     public function Buscar($idClinica){
