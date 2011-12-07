@@ -48,14 +48,14 @@ include_once '../Commons/Header/Header.php';
       	<select id="cboProvincia" onclick="Search(this.value, cboLocalidad);">
       	</select>
       	<label for="cboLocalidad">Localidad: </label>
-      	<select id="cboLocalidad">
+      	<select id="cboLocalidad" name="cboLocalidad">
       	</select>
       	<label for="txtDomicilio">Domicilio: </label>
       	<input type="text" id="txtDomicilio" name="txtDomicilio" class="texto" />
       	<label for="txtTelefono">Telefono: </label>
       	<input type="text" id="txtTelefono" name="txtTelefono" class="texto" />
       	<label for="txtPassword">Password: </label>
-      	<input type="password" id="txtPassword" name="txtPassword" class="texto" /><br />
+      	<input type="password" id="txtPassword" name="txtPassword" class="texto" autocomplete="off" /><br />
         <input type="submit" id="btnAceptar" name="btnAceptar" value="Registrarme!" class="botonenviar"  />
 	</form>
 	<?php
@@ -72,10 +72,19 @@ include_once '../Commons/Header/Header.php';
       	
       	$Contacto = new Contacto($_POST['txtEmail'], $_POST['txtTelefono']);
       	
-      	$Login = new Login($_POST['txtEmail'], $_POST['Pass']);
+      	$Login = new Login($_POST['txtEmail'], $_POST['txtPassword']);
       	
       	$Clinica = new Clinica($_POST['txtNombre'], $Ubicacion, $Contacto, $Login);
 
+      	/*
+      	 * Catchable fatal error: Argument 3 passed to Clinica::__construct() 
+      	 * must be an instance of Ubicacion, instance of Contacto given, 
+      	 * called in C:\xampp\htdocs\MegaTurnos\UI\Clinicas\Clinicas.php 
+      	 * on line 77 and defined in C:\xampp\htdocs\MegaTurnos\Dominio\clinica.php 
+      	 * on line 11
+      	 * 
+      	 * */
+      	
       	$clinicaServicio = new ClinicaServicio();
         $resultado = $clinicaServicio->Agregar($Clinica);
       	if (is_numeric($resultado)) {

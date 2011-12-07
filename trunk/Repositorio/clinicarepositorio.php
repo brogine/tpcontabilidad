@@ -10,8 +10,15 @@ class ClinicaRepositorio{
 	}
 	
 	public function Agregar(Clinica $Clinica){
-		$this->Conexion->ConsultaSinRetorno(" Insert Into Clinicas (Nombre, IdLocalidad, Telefono, Email, Domicilio, Foto) Values ('$Clinica->Nombre', $Clinica->Ubicacion->Localidad->IdLocalidad, '$Clinica->Contacto->Telefono', '$Clinica->Contacto->Email', '$Clinica->Ubicacion->Domicilio', '$Clinica->Foto') ");
-		$this->Conexion->ConsultaSinRetorno(" Insert Into Login (Email, Pass) Values ('$Clinica->Login->Email', '$Clinica->Login->Pass') ");
+		try {
+			$this->Conexion->BeginTransaction($this->Conexion->Conex);
+			$this->Conexion->ConsultaConRetorno(" Insert Into Clinicas (Nombre, IdLocalidad, Telefono, Email, Domicilio, Foto) Values ('$Clinica->Nombre', $Clinica->Ubicacion->Localidad->IdLocalidad, '$Clinica->Contacto->Telefono', '$Clinica->Contacto->Email', '$Clinica->Ubicacion->Domicilio', '$Clinica->Foto') ");
+			$Id = mysqli_insert_id();
+			$this->Conexion->ConsultaSinRetorno(" Insert Into Login (Email, Pass) Values ('$Clinica->Login->Email', '$Clinica->Login->Pass') ");
+			$this->Conexion->CommitTransaction();
+		} catch (Exception $e) {
+			$this->Conexion->RollBack();
+		}
     }
     
     public function Modificar(Clinica $Clinica){
