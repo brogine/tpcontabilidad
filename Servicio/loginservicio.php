@@ -14,10 +14,10 @@ class LoginServicio{
         $resultado = $this->loginRepositorio->Validar($Login);
     	switch ($resultado) {
 			case "Clinica":
-				header ("Location: /MenuClinicas/MenuClinicas.php");
+				echo '<script>location.href="/megaturnos/UI/MenuClinicas/MenuClinicas.php";</script>';
 			break;
 			case "Paciente":
-        		header('Location: /MenuClientes/MenuClientes.php');
+				echo '<script>location.href="/megaturnos/UI/MenuClinicas/MenuClientes.php";</script>';
 			break;
 			default:
 				$resultado = "Error de Login";
