@@ -26,7 +26,7 @@ class EspecialidadRepositorio{
     public function Listar(){
     	$lista = array();
     	$i = 0;
-        $result = $this->Conexion->ConsultaConRetorno(" Select * From Especialidades ");
+        $result = $this->Conexion->ConsultaConRetorno(" Select * From Especialidades");
         while ($DataRow = mysqli_fetch_array($result)){
         	$lista[$i] = $this->Mapear($DataRow);
         	$i++;
@@ -35,7 +35,7 @@ class EspecialidadRepositorio{
     }
     
     private function Mapear($DataRow){
-    	$Especialidad = new Especialidad($DataRow['IdEspecialidad'], $DataRow['Nombre']);
+    	$Especialidad = new Especialidad($DataRow['idEspecialidad'], $DataRow['Nombre']);
 		return $Especialidad;
     }
 }
