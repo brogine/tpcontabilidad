@@ -1,16 +1,15 @@
 <?php
 if($_POST){
-	echo "algo";
 }
 
-include_once '../Dominio/medico.php';
-include_once '../Repositorio/medicoRepositorio.php';
+include_once '../../Dominio/medico.php';
+include_once '../../Repositorio/medicoRepositorio.php';
 class MedicoServicio{
-    private $profesionalRepo;
+    private $MedicoRepo;
     
     public function __construct()
     {
-        $this->profesionalRepo = new ProfesionalRepositorio();
+        $this->MedicoRepo = new MedicoRepositorio();
     }
     
     public function Agregar(Profesional $Profesional){
@@ -28,9 +27,11 @@ class MedicoServicio{
     public function Listar(){
         return $this->profesionalRepositorio->Listar();
     }
+    
     public function ListarPorEspecialidadLocalidad($Especialidad,$Localidad)
     {
-    	return $this->ListarPorEspecialidadLocalidad($Especialidad, $Localidad);
+    	
+    	return $this->MedicoRepo->ListarPorEspecialidadYLocalidad($Localidad, $Especialidad);
     }
 }
 

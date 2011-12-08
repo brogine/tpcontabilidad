@@ -51,15 +51,19 @@ class ClinicaRepositorio{
     }
     
     private function Mapear($DataRow){
+    	include_once 'ubicacionrepositorio.php';
+    	include_once '../../Dominio/ubicacion.php';
+    	include_once '../../Dominio/contacto.php';
+    	include_once '../../Dominio/login.php';
     	$repoUbicacion = new UbicacionRepositorio();
-    	$Localidad = $repoUbicacion->BuscarLocalidad($DataRow['IdLocalidad']);
+    	$Localidad = $repoUbicacion->BuscarLocalidad($DataRow['idLocalidad']);
     	$Ubicacion = new Ubicacion($Localidad, $DataRow['Domicilio']);
     	
     	$Contacto = new Contacto($DataRow['Email'], $DataRow['Telefono']);
     	
-    	$Login = new Login($DataRow['Email'], $DataRow['Password']);
+    	$Login = new Login($DataRow['Email'], $DataRow['Pass']);
     	
-		$Clinica = new Clinica($DataRow['IdClinica'], $DataRow['Nombre'], $Ubicacion, $Contacto, $DataRow['Foto'], $Login);
+		$Clinica = new Clinica($DataRow['idClinica'], $DataRow['Nombre'], $Ubicacion, $Contacto, $DataRow['Foto'], $Login);
 		return $Clinica;
     }
 }

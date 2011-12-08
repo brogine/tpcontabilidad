@@ -1,6 +1,6 @@
 <?PHP
 include_once 'Conexion/conexion.php';
-include_once '../Dominio/persona.php';
+include_once '../../Dominio/persona.php';
 class PersonaRepositorio
 
 {

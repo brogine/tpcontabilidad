@@ -21,15 +21,14 @@
 	
 	<label for="CboEspecialidades" class="Label">Seleccione La Especialidad:</label>
 	
-<?php include '../../Servicio/rubroservicio.php';
-	$RubroServ = new RubroServicio();
-	$listaRubros = $RubroServ->Listar();
-	
+<?php include '../../Servicio/especialidadservicio.php';
+	$EspServ = new EspecialidadServicio();
+	$listaEsp = $EspServ->Listar();
 	//Lista De Especialidades
 	echo "<select id='CboEspecialidades' name='CboEspecialidades'>";
-    	foreach ($listaRubros as $rubro)
+    	foreach ($listaEsp as $esp)
     	{
-    		echo "<option value=".$rubro->Id.">".$rubro->Descripcion."</option>";	
+    		echo "<option value=".$esp->IdEspecialidad.">".$esp->Nombre."</option>";	
     	}
     	echo "</select>";
 	?>
@@ -43,14 +42,42 @@
 	{
 		echo "<div>";
 		$Localidad=$_POST['TxtLocalidad'];
+		$trozos = explode(" - ", $Localidad);
+
+		$Localidad = $trozos[1];
 		$Especialidad=$_POST['CboEspecialidades'];
-		include_once '../Servicio/medicoservicio.php';
+		include '../../Servicio/medicoservicio.php';
+	
 		$MedicoServ = new MedicoServicio();
 		$ListaMedicos = $MedicoServ->ListarPorEspecialidadLocalidad($Especialidad, $Localidad);
+		echo "<table>";
+		echo "<tr>";
+		echo "<th>Nombre De La Clinica</th>";
+		echo "<th>Direccion De La Clinica</th>";
+		echo "<th>Nombre Del Medico</th>";
+		echo "<th>Especialidad Del Medico</th>";
+		echo "</tr>";
 		foreach ($ListaMedicos as $Medicos)
 		{
+			echo "<tr>";
+			echo "<td>";
 			echo $Medicos->Clinica->Nombre;
+			echo "</td>";
+			echo "<td>";
+			echo $Medicos->Clinica->Ubicacion->Domicilio;
+			echo "</td>";
+			echo "<td>";
+			echo $Medicos->Nombre;
+			echo "</td>";
+			echo "<td>";
+			echo $Medicos->Especialidad->Nombre;
+			echo "</td>";
+			echo "<td>";
+			echo "<a href=''>Solicitar Turno!</a>";
+			echo "</td>";
+			echo "</tr>";
 		}
+		echo "</table>";
 		echo "</div>";
 		
 	}

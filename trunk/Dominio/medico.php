@@ -1,4 +1,5 @@
 <?php
+include 'persona.php';
 class Medico extends Persona
 {
 	public $Clinica;
