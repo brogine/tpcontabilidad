@@ -18,9 +18,7 @@
 
 <body>
 <div>
-<?php 
-include '../Commons/Header/Header.php';
-?>
+<?php include '../Commons/Header/Header.php';?>
 </div>
 <div id="Principal">
 
@@ -28,8 +26,6 @@ include '../Commons/Header/Header.php';
       
       <h3>Registro de Nuevo Cliente</h3>
       <form action="<?php $_SERVER['PHP_SELF']?>" class="form_settings" method="POST">
-	      <label for="txtDni">Ingrese Su Dni:</label>
-	      <input type="text" id="txtDni" class="texto" name="txtDni">
 	      <label for="txtNombre">Ingrese Su Nombre:</label>
 	      <input type="text" id="txtNombre" class="texto" name="txtNombre">
 	      <label for="txtApellido">Ingrese Su Apellido:</label>
@@ -39,7 +35,7 @@ include '../Commons/Header/Header.php';
 	      <label for="txtTelefono">Ingrese Un Telefono (Opcional):</label>
 	      <input type="text" id="txtTelefono" class="texto" name="txtTelefono">
 	      <label for="txtPassword">Ingrese Un Password:</label>
-	      <input type="text" id="txtPassword" class="texto" name="txtPassword">
+	      <input type="password" id="txtPass" class="texto" name="txtPass">
 	      <input type="submit" id="btnRegistrar" name="btnRegistrar" class="botonenviar" value="Registrame!" />
 	  </form>
 	  
@@ -49,53 +45,41 @@ include '../Commons/Header/Header.php';
       
       if($_POST)
       {
-      	include_once '../../Dominio/cliente.php';
-      	include_once '../../Servicio/clienteservicio.php';
-      	include_once '../../Dominio/contacto.php';
+      	include_once $_SERVER['DOCUMENT_ROOT'].'/megaturnos/Dominio/paciente.php';
+      	include_once $_SERVER['DOCUMENT_ROOT'].'/megaturnos/Servicio/pacienteservicio.php';
+      	include_once $_SERVER['DOCUMENT_ROOT'].'/megaturnos/Dominio/contacto.php';
+      	include_once $_SERVER['DOCUMENT_ROOT'].'/megaturnos/Dominio/login.php';
       	/* RECIBO LOS DATOS DEL FORMULARIO*/
       	
-      	$nombre=$_POST['txtNombre'];
-      	$apellido=$_POST['txtApellido'];
-      	$dni = $_POST['txtDni'];
-      	$email=$_POST['txtEmail'];
+      	$Nombre=$_POST['txtNombre'];
+      	$Apellido=$_POST['txtApellido'];
+      	$Email=$_POST['txtEmail'];
       	$Telefono=$_POST['txtTelefono'];
-      	$Pass = $_POST['txtTelefono'];
+      	$Pass = $_POST['txtPass'];
+      	
       	/* CREO UN OBJETO CONTACTO*/
       	
-      	$Contacto = new Contacto();
-      	$Contacto->Telefono=$Telefono;
-      	$Contacto->Email=$email;
+      	$Contacto = new Contacto($Email, $Telefono);
+        $Login = new Login($Email, $Pass);
       	/*CREO EL OBJETO CLIENTE Y LO COMPLETO*/
          	
-      	$Cliente = new Cliente($dni, $apellido, $nombre, $Pass, $Contacto);
+      	$Paciente = new Paciente(null,$Apellido, $Nombre, $Contacto, $Login);
       	/*LO PASO POR PARAMETRO AL SERVICIO*/
-      	$ClienteServ = new ClienteServicio();
-        $Cli = $ClienteServ->Buscar($Cliente->DniCuitCuil);
-      	if ($Cli->DniCuitCuil!="" && $Cli->Contacto->Email!="")
-      	{
-        echo "Ese Ususario ya Existe";
-      	}
-      	else
-      	{
-      		$ClienteServ->Agregar($Cliente);
-      	}
+      	$PacienteServ = new PacienteServicio();
+        $PacienteServ->Agregar($Paciente);
       }
       ?>
    
    
    <div id="login">
-   <?php 
-   include '../Commons/Login/Login.php';
-   
-   ?>
+   <?php include '../Commons/Login/Login.php';?>
    </div>
-<div class="publicidad">
-<?php include_once '../Commons/Publicidad/index.php'; ?>
-</div>
+	<div class="publicidad">
+	<?php include '../Commons/Publicidad/index.php'; ?>
+	</div>
 </div>
 <div id="Pie">
-<?php include_once '../Commons/Footer/index.php'; ?>
+<?php include '../Commons/Footer/index.php'; ?>
 </div>
 </body>
-
 </html>

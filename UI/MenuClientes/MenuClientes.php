@@ -28,7 +28,7 @@
 	echo "<select id='CboEspecialidades' name='CboEspecialidades'>";
     	foreach ($listaEsp as $esp)
     	{
-    		echo "<option value=".$esp->IdEspecialidad.">".$esp->Nombre."</option>";	
+    		echo "<option value=".$esp->IdEspecialidad."-".$esp->Nombre.">".$esp->Nombre."</option>";	
     	}
     	echo "</select>";
 	?>
@@ -42,19 +42,23 @@
 	{
 		echo "<div>";
 		$Localidad=$_POST['TxtLocalidad'];
+		if($Localidad!="")
+		{
 		$trozos = explode(" - ", $Localidad);
 
 		$Localidad = $trozos[1];
+		}
 		$Especialidad=$_POST['CboEspecialidades'];
+		$Espec = explode("-",$Especialidad);
 		include '../../Servicio/medicoservicio.php';
 	
 		$MedicoServ = new MedicoServicio();
-		$ListaMedicos = $MedicoServ->ListarPorEspecialidadLocalidad($Especialidad, $Localidad);
+		$ListaMedicos = $MedicoServ->ListarPorEspecialidadLocalidad($Espec[0], $Localidad);
 		if($ListaMedicos)
 		{
 		echo "<table class='Tabla'>";
 		echo "<tr>";
-		echo "Resultados Para ".$Localidad;
+		echo "Resultados Para ".$Espec[1]." en ".$Localidad;
 		echo "</tr>";
 		echo "<tr>";
 		echo "<th class='Bordeado'>Nombre De La Clinica</th>";

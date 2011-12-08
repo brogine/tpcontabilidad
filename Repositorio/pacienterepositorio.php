@@ -1,7 +1,7 @@
 <?php
 
 include_once 'Conexion/conexion.php';
-include_once '../../Dominio/cliente.php';
+include_once $_SERVER['DOCUMENT_ROOT'].'/megaturnos/Dominio/paciente.php';
 
 class PacienteRepositorio{
 	private $Conexion;
@@ -12,39 +12,27 @@ class PacienteRepositorio{
 	}
 	
 	public function Agregar(Paciente $Paciente){
-		/*
-		$Parametros[0]="'".$Cliente->DniCuitCuil."'";
-		$Parametros[1]="'".$Cliente->Apellido."'";
-		$Parametros[2]="'".$Cliente->Nombre."'";
-		$Parametros[3]="'".$Cliente->Password."'";
-		$Parametros[4]="'".$Cliente->Contacto->Email."'";
-		$Parametros[5]="'".$Cliente->Contacto->Telefono."'";
-		
-		$this->Conexion->StoreProcedureSinRetorno('PersonasAlta', $Parametros[0].",".$Parametros[1].",".$Parametros[2].",".
-		$Parametros[3].",".$Parametros[4].",".$Parametros[5]);
-		*/
-		$this->Conexion->ConsultaSinRetorno(" Insert Into Personas (Apellido, Nombre, Email, Telefono) Values ('$Paciente->Apellido','$Paciente->Nombre','$Paciente->Contacto->Email','$Paciente->Contacto->Telefono') ");
-		$this->Conexion->ConsultaSinRetorno(" Insert Into Login (Email, Pass) Values ('$Paciente->Login->Email', '$Paciente->Login->Pass') ");
-    }
+		$Email =(string)$Paciente->Contacto->Email;
+		$Telefono=(string)$Paciente->Contacto->Telefono;
+		$Pass = (string)$Paciente->Login->Password;
+		$Consulta =" Insert Into Login (Email, Pass) Values ('$Email', '$Pass'); ";
+		$Consulta .= "Insert Into Personas (Apellido, Nombre, Email, Telefono) Values ('$Paciente->Apellido','$Paciente->Nombre','$Email','$Telefono');";
+		if($this->Conexion->MultipleConsulta($Consulta)) {
+			echo "Agregado Con Exito";
+		}
+		else {
+			return "No se pudo agregar la clinica";
+		}
+	}
     
     public function Modificar(Paciente $Paciente){
-    	/*
-    	$Parametros[0]="'".$Cliente->DniCuitCuil."'";
-		$Parametros[1]="'".$Cliente->Apellido."'";
-		$Parametros[2]="'".$Cliente->Nombre."'";
-		$Parametros[3]="'".$Cliente->Password."'";
-		$Parametros[4]="'".$Cliente->Contacto->Email."'";
-		$Parametros[5]="'".$Cliente->Contacto->Telefono."'";
-		
-		$this->Conexion->StoreProcedureSinRetorno('PersonasMod', $Parametros[0].",".$Parametros[1].",".$Parametros[2].",".
-		$Parametros[3].",".$Parametros[4].",".$Parametros[5]);
-		*/
+
     	
     	$this->Conexion->ConsultaSinRetorno(" Update Personas Set Apellido = '$Paciente->Apellido', Nombre = '$Paciente->Nombre', Telefono = '$Paciente->Contacto->Telefono' Where IdPersona = $Paciente->IdPersona ");
     	$this->Conexion->ConsultaSinRetorno(" Update Login Set Pass = '$Paciente->Login->Pass' Where Email = '$Paciente->Login->Email' ");
     }
     
-    public function Buscar($DniCuitCuil){
+    public function Buscar($IdPaciente){
     	//$result = $this->Conexion->StoreProcedureConRetorno('PersonasBuscar', "'".$DniCuitCuil."'");
     	$this->Conexion->ConsultaConRetorno(" Select P.*, L.Pass From Persona P Inner Join Login L On P.Email = L.Email Where ");
     	
