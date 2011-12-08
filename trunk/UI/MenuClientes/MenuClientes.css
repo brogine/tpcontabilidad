@@ -87,9 +87,6 @@ height: 280px;
 width: 100%;
 background-color: blue;
 text-align: center;
--webkit-border-radius: 40px;
--moz-border-radius: 40px;
-border-radius: 40px;
 
 background: #64FE2E;
 background: -webkit-gradient(linear, left top, left bottom, from(#64FE2E), to(#0040FF));
@@ -101,4 +98,12 @@ background: -o-linear-gradient(top, #64FE2E, #0040FF);
 z-index: 0;
 }
 
- 
+ .Tabla
+ {
+ width: 100%;
+border:1px solid #000;
+ }
+.Bordeado
+{
+border:1px solid #000;
+}

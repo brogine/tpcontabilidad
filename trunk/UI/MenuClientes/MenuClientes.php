@@ -50,16 +50,21 @@
 	
 		$MedicoServ = new MedicoServicio();
 		$ListaMedicos = $MedicoServ->ListarPorEspecialidadLocalidad($Especialidad, $Localidad);
-		echo "<table>";
+		if($ListaMedicos)
+		{
+		echo "<table class='Tabla'>";
 		echo "<tr>";
-		echo "<th>Nombre De La Clinica</th>";
-		echo "<th>Direccion De La Clinica</th>";
-		echo "<th>Nombre Del Medico</th>";
-		echo "<th>Especialidad Del Medico</th>";
+		echo "Resultados Para ".$Localidad;
+		echo "</tr>";
+		echo "<tr>";
+		echo "<th class='Bordeado'>Nombre De La Clinica</th>";
+		echo "<th class='Bordeado'>Direccion De La Clinica</th>";
+		echo "<th class='Bordeado''>Nombre Del Medico</th>";
+		echo "<th class='Bordeado'>Especialidad Del Medico</th>";
 		echo "</tr>";
 		foreach ($ListaMedicos as $Medicos)
 		{
-			echo "<tr>";
+			echo "<tr class='Bordeado'>";
 			echo "<td>";
 			echo $Medicos->Clinica->Nombre;
 			echo "</td>";
@@ -67,7 +72,7 @@
 			echo $Medicos->Clinica->Ubicacion->Domicilio;
 			echo "</td>";
 			echo "<td>";
-			echo $Medicos->Nombre;
+			echo $Medicos->Nombre." ".$Medicos->Apellido;
 			echo "</td>";
 			echo "<td>";
 			echo $Medicos->Especialidad->Nombre;
@@ -78,6 +83,11 @@
 			echo "</tr>";
 		}
 		echo "</table>";
+		}
+		else 
+		{
+			echo "No Se Encontraron Resultados";
+		}
 		echo "</div>";
 		
 	}
