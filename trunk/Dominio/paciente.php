@@ -1,4 +1,7 @@
 <?php
+include_once $_SERVER['DOCUMENT_ROOT'].'/megaturnos/Dominio/persona.php';
+include_once $_SERVER['DOCUMENT_ROOT'].'/megaturnos/Dominio/contacto.php';
+include_once $_SERVER['DOCUMENT_ROOT'].'/megaturnos/Dominio/login.php';
 class Paciente extends Persona
 {
 	public $Login;
