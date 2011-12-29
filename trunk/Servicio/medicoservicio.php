@@ -30,8 +30,11 @@ class MedicoServicio{
     
     public function ListarPorEspecialidadLocalidad($Especialidad,$Localidad)
     {
-    	
     	return $this->MedicoRepo->ListarPorEspecialidadYLocalidad($Localidad, $Especialidad);
+    }
+    
+	public function ListarPorClinica($idClinica){
+    	return $this->MedicoRepo->ListarPorClinica($idClinica);
     }
 }
 
