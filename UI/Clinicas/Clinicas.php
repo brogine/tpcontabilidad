@@ -59,7 +59,7 @@ include_once '../Commons/Header/Header.php';
         <input type="submit" id="btnAceptar" name="btnAceptar" value="Registrarme!" class="botonenviar"  />
 	</form>
 	<?php
-	if($_POST)
+	if($_POST && count($_POST) > 0)
     {
     	if(isset($_POST['btnAceptar'])){
 	    	if(isset($_POST['cboLocalidad']) && isset($_POST['txtDomicilio']) && isset($_POST['txtEmail']) &&

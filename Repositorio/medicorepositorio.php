@@ -79,7 +79,27 @@ class MedicoRepositorio
 	    	}
         }
 	    return $lista;
-	    }
+	}
+	
+	public function ListarPorClinica($idClinica){
+    	$lista = array();
+	    //$result = $this->conexion->StoreProcedureConRetorno('ProfesionalesListar',$Profesional->Especialidad)
+        $Consulta = "select c.IdClinica, p.Nombre,p.Apellido,p.Telefono,p.Email, e.idEspecialidad as Especialidad from medicos m inner join personas p on p.IdPersona = m.IdPersona
+		inner join clinicas c on m.IdClinica = c.IdClinica inner join medicos_especialidad me
+		on me.IdPersona = m.IdPersona inner join especialidades e on me.IdEspecialidad = e.IdEspecialidad inner join Localidad l on c.idLocalidad = l.Idlocalidad
+		where l.Nombre = '".$Localidad."'  and  e.IdEspecialidad = $IdEspecialidad order by c.IdClinica; ";
+        $i=0;
+        $result = $this->conexion->ConsultaConRetorno($Consulta);
+        if($result)
+        {
+	    	while($Datarow = mysqli_fetch_array($result))
+	    	{
+				$lista[$i]=$this->Mapear($Datarow);
+				$i++;
+	    	}
+        }
+	    return $lista;
+    }
 	
 	public function Mapear($Datarow)
 	{
