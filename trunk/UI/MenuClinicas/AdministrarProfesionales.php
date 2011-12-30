@@ -21,6 +21,7 @@ include_once '../Commons/Header/Header.php';
 ?>
 <div id="Contenido">
 <?php 
+$profesionales = true;
 include_once '../Commons/Menu/Clinicas.php'; 
 include_once '../../Servicio/medicoservicio.php';
 include_once '../../Dominio/medico.php';

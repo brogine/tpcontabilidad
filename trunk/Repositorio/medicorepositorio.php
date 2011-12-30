@@ -13,8 +13,9 @@ class MedicoRepositorio
 		$this->PersonaRepo = new PersonaRepositorio();
 	}
 	
-	public function Agregar(Profesional $Profesional)
+	public function Agregar(Medico $Medico)
 	{
+		/*
 		$parametros = array();
 		$parametros = $this->PersonaRepo->CompletarDatosPersonalesBasicos($Profesional, $parametros);
 	    $parametros[4]=$Profesional->Titulo;
@@ -22,10 +23,18 @@ class MedicoRepositorio
 	    $parametros[6]=$Profesional->TelGuardia;
 	    $parametros[7]=$Profesional->Estado;
 	    //$this->Conexion->StoreProcedureSinRetorno('ProfesionalesAlta',$parametros); 
-	    $this->conexion->ConsultaSinRetorno($Consulta);
+	    */
+		$Consulta = " INSERT INTO personas (Apellido, Nombre, Email, Telefono) VALUES 
+		('" . $Medico->Apellido . "', '" . $Medico->Nombre . "', '" . $Medico->Contacto->Email . "', '" . $Medico->Contacto->Telefono . "'); ";
+		$result = $this->conexion->ConsultaConRetorno($Consulta);
+		$DataRow = mysqli_fetch_array($result);
+		$IdPersona = $DataRow[0];
+		$Consulta = " INSERT INTO medicos (IdClinica, IdPersona) VALUES (" . $Medico->Clinica->IdClinica . ", " . $IdPersona .  "); ";
+		$Consulta .= " INSERT INTO medicos_especialidad (IdPersona, IdEspecialidad) VALUES (" . $IdPersona . ", " . $Medico->Especialidad->IdEspecialidad . "); ";
+		$this->conexion->MultipleConsulta($Consulta);
 	}
 	
-	public function Modificar(Profesional $Profesional)
+	public function Modificar(Medico $Medico)
 	{
 	    $parametros = array();
 		$parametros = $this->PersonaRepo->CompletarDatosPersonalesBasicos($Profesional, $parametros);
@@ -36,29 +45,29 @@ class MedicoRepositorio
 	    $this->Conexion->StoreProcedureSinRetorno('ProfesionalesMod',$parametros); 
 	}
 	
-	public function Buscar(Profesional $Profesional)
+	public function Buscar(Medico $Medico)
 	{
 		$tabla = $this->conexion->StoreProcedureConRetorno('ProfesionalesBuscar',$Profesional->DniCuitCuil);
 		$datarow = mysqli_fetch_array($tabla);
 		return $this->Mapear($datarow);
 	}
 	
-	public function Borrar(Profesional $Profesional)
+	public function Borrar(Medico $Medico)
 	{
 	    $this->conexion->StoreProcedureSinRetorno('ProfesionalesBorrar',$Profesional->DniCuitCuil);
 	}
 	
-	public function ListarPorEspecialidad(Profesional $Profesional)
+	public function ListarPorEspecialidad(Medico $Medico)
 	{  
 		$lista = array();
 	    $result = $this->conexion->StoreProcedureConRetorno('ProfesionalesListar',$Profesional->Especialidad);
 	    while($Datarow=mysql_fetch_array($result))
-	    	{
+	    {
 			$lista[i]=$this->Mapear($Datarow);
-	    	}
+	    }
 	    
 	    return $lista;
-	    }
+	}
 	    
 	public function ListarPorEspecialidadYLocalidad($Localidad,$IdEspecialidad)
 	{  
@@ -72,10 +81,10 @@ class MedicoRepositorio
         $result = $this->conexion->ConsultaConRetorno($Consulta);
         if($result)
         {
-	    while($Datarow=mysqli_fetch_array($result))
+	    	while($Datarow=mysqli_fetch_array($result))
 	    	{
-			$lista[$i]=$this->Mapear($Datarow);
-			$i++;
+				$lista[$i]=$this->Mapear($Datarow);
+				$i++;
 	    	}
         }
 	    return $lista;
