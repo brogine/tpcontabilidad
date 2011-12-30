@@ -17,14 +17,11 @@
 </head>
 <body id="body">
 <?php 
+$inicio = true;
 include_once '../Commons/Header/Header.php'; 
 ?>
 <div id="Contenido">
-<?php 
-include_once '../Commons/Menu/Clinicas.php'; 
-include_once '../../Servicio/medicoservicio.php';
-include_once '../../Dominio/medico.php';
-?>
+<?php include_once '../Commons/Menu/Clinicas.php'; ?>
 
 <div class="publicidad">
 <?php include_once '../Commons/Publicidad/index.php'; ?>

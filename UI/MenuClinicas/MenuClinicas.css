@@ -80,3 +80,9 @@ tr:last-child td.last {
 	-moz-border-radius-bottomright:5px;
 	-webkit-border-bottom-right-radius:5px; /* Saf3-4 */
 }
+fieldset {
+border: 2px solid #00F;
+border-radius: 8px;
+-webkit-border-radius: 8px;
+-moz-border-radius: 8px;
+}
