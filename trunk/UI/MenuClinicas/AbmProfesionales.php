@@ -14,29 +14,54 @@
 
 <link href="../Commons/Footer/Footer.css" type="text/css" rel="stylesheet"/>
 <script type="text/javascript">
-var numero = 1;
 function agregarHorarios(){
 	var table = document.getElementById("tablaTurnos");
 	 
     var rowCount = table.rows.length;
     var row = table.insertRow(rowCount);
 
-    var cell1 = row.insertCell(0);
-    var element1 = document.createElement("input");
-    element1.type = "checkbox";
-    cell1.appendChild(element1);
+	var selectedDays = "";
+	if(document.frmProfesional.chkLunes.checked){
+		selectedDays = "Lunes, ";
+	}
+	if(document.frmProfesional.chkMartes.checked){
+		selectedDays = selectedDays + " Martes, ";	
+	}
+	if(document.frmProfesional.chkMiercoles.checked){
+		selectedDays = selectedDays + " Miércoles, ";	
+	}
+	if(document.frmProfesional.chkJueves.checked){
+		selectedDays = selectedDays + " Jueves, ";	
+	}
+	if(document.frmProfesional.chkViernes.checked){
+		selectedDays = selectedDays + " Viernes, ";	
+	}
+	if(document.frmProfesional.chkSabado.checked){
+		selectedDays = selectedDays + " Sábado, ";	
+	}
+	if(document.frmProfesional.chkDomingo.checked){
+		selectedDays = selectedDays + " Domingo, ";	
+	}
+    var celdaDias = row.insertCell(0);
+    celdaDias.innerHTML = selectedDays;
 
-    var cell2 = row.insertCell(1);
-    cell2.innerHTML = rowCount + 1;
+    var celdaDesde = row.insertCell(1);
+    celdaDesde.innerHTML = document.frmProfesional.cboDesde.value;
 
-    var cell3 = row.insertCell(2);
-    var element2 = document.createElement("input");
-    element2.type = "text";
-    cell3.appendChild(element2);
+    var celdaHasta = row.insertCell(2);
+    celdaHasta.innerHTML = document.frmProfesional.cboHasta.value;
+
+    var celdaQuitar = row.insertCell(3);
+    var link = document.createElement("input");
+    link.type = "button";
+    link.setAttribute('onclick', "quitarHorarios(" + rowCount + ");");
+    link.value = "Quitar";
+    celdaQuitar.appendChild(link);
 }
 
-function quitarHorarios(idFila){
-	var Tabla = document.getElementById("tabla");
+function quitarHorarios(filaClickeada){
+	var Tabla = document.getElementById("tablaTurnos");
+	Tabla.deleteRow(filaClickeada);
 }
 </script>
 
@@ -59,6 +84,7 @@ include_once '../Commons/Header/Header.php';
 
 </select>
 </label>
+<form method="post" action="" name="frmProfesional">
 <fieldset>
 <legend>Horarios de Trabajo:</legend>
 <label for="diasSemana"> Seleccione los días: <br />
@@ -71,7 +97,7 @@ include_once '../Commons/Header/Header.php';
 <input type="checkbox" name="chkDomingo" value="Dom"> Domingo<br>
 </label>
 <label for="cboDesde">Hora desde:
-<select>
+<select name="cboDesde">
 	<?php 
 	for ($i = 0; $i <= 23; $i++) {
 	    echo "<option>" . $i . ":00</option>";
@@ -83,7 +109,7 @@ include_once '../Commons/Header/Header.php';
 </select>
 </label>
 <label for="cboHasta">Hora hasta:
-<select>
+<select name="cboHasta">
 	<?php 
 	for ($i = 0; $i <= 23; $i++) {
 	    echo "<option>" . $i . ":00</option>";
@@ -105,6 +131,9 @@ include_once '../Commons/Header/Header.php';
 		<th>Quitar</th>
 	</tr>
 </table>
+
+<input type="submit" value="Guardar" id="btnGuardar" name="btnGuardar" />
+</form>
 
 <div class="publicidad">
 <?php include_once '../Commons/Publicidad/index.php'; ?>
