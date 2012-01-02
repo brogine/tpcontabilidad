@@ -22,9 +22,7 @@
 		      	/* RECIBO LOS DATOS DEL FORMULARIO*/
 		      	$Login = new Login($_POST['txtEmailLogin'], $_POST['txtContrasenia']);
 		      	$loginServicio = new LoginServicio();
-		      	if (!$loginServicio->Validar($Login)) {
-		      		echo "Datos de Login incorrectos.";
-		      	}
+		      	echo $loginServicio->Validar($Login);
 	    	}
     	}
     }

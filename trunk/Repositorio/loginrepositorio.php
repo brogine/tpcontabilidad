@@ -11,7 +11,7 @@ class LoginRepositorio{
     
     public function Validar(Login $Login)
     {
-    	$Consulta = "SELECT
+    	$Consulta = "SELECT c.idClinica, p.IdPersona,
 			CASE 
 				WHEN c.Nombre IS NULL THEN 'Paciente' 
 				WHEN p.Nombre IS NULL THEN 'Clinica'
@@ -25,6 +25,20 @@ class LoginRepositorio{
     	$result = $this->Conexion->ConsultaConRetorno($Consulta);
     	if(mysqli_num_rows($result) == 1){
     		$DataRow = mysqli_fetch_array($result);
+    		
+    		session_set_cookie_params(3600);
+    		//session_set_cookie_params(3600, '/', 'www.megaturnos.com.ar', false, true);
+			session_start();
+			switch ($DataRow['Tipo']) {
+				case 'Paciente':
+					$_SESSION['mtID'] = $DataRow['IdPersona'];
+				break;
+				case 'Clinica':
+					$_SESSION['mtID'] = $DataRow['idClinica'];
+				break;
+				
+			}
+			$_SESSION['mtTipo'] = $DataRow['Tipo'];
     		return $DataRow['Tipo'];
     	}
     }

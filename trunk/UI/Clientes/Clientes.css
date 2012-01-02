@@ -19,16 +19,8 @@
 #login{
 	float:left;
 	top: 0;
-	margin:12% 0% 5% 23%;
+	margin:24% 0% 5% 23%;
 	position:absolute;
-}
-
-.form_settings input{ 
-	padding: 5px; 
-  	width: 50%; 
-  	font: 100% arial; 
-  	border: 1px solid #958C8C; 
-  	color: #47433F;
 }
 
 input.texto {

@@ -5,6 +5,8 @@
 <link href="Clinica.css" type="text/css" rel="stylesheet"/>
 <link href="../Commons/Login/Login.css" type="text/css" rel="stylesheet" />
 
+<link href="../Commons/Footer/Footer.css" type="text/css" rel="stylesheet"/>
+
 <link href="../Commons/Publicidad/Publicidad.css" type="text/css" rel="stylesheet" />
 <script type="text/javascript" src="../Commons/Publicidad/jquery.js"></script>
 <script type="text/javascript" src="../Commons/Publicidad/jCarouselLite.js"></script>
@@ -12,8 +14,6 @@
 <script type="text/javascript" src="../Commons/Publicidad/Publicidad.js"></script>
 
 <script language="JavaScript" src ="Clinica.js"> </script>
-
-<link href="../Commons/Footer/Footer.css" type="text/css" rel="stylesheet"/>
 
 </head>
 
