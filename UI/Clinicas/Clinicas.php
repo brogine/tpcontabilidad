@@ -17,7 +17,7 @@
 
 </head>
 
-<body id="body">
+<body>
 
 <?php 
 include_once '../Commons/Header/Header.php'; 

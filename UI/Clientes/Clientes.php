@@ -20,7 +20,7 @@
 <div>
 <?php include '../Commons/Header/Header.php';?>
 </div>
-<div id="Principal">
+<div id="Contenido">
 
       <div class="CuadroCliente">
       
