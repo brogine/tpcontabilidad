@@ -28,9 +28,9 @@
 <td id="Celda"><div id="Megabutton" onclick="Direccionar('../Clinicas/Clinicas.php')"><p>Quiero Dar Turnos!</p></div></td>
 </tr>
 </table>
-<p>
+<div class="publicidad">
 <?php include_once '../Commons/Publicidad/index.php';?>
-</p>
+</div>	
 </div>
 <div id="Pie">
 <?php include_once '../Commons/Footer/index.php';?>
