@@ -16,6 +16,6 @@
 	</li>
 	<li <?php if(isset($datos)) echo 'class="current"'; ?> id="datos"><a href="" title="Mis Datos">Mis Datos</a></li>
 	<li <?php if(isset($tutoriales)) echo 'class="current"'; ?> id="tutoriales"><a href="" title="Tutoriales">Tutoriales</a></li>
-	<li><a href="" title="Desconectarme">Desconectarme</a></li>
+	<li><a href="../Commons/Menu/CerrarSesion.php?logout=1" title="Desconectarme">Desconectarme</a></li>
 </ul>
 </div>

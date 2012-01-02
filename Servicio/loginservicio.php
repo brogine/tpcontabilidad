@@ -12,17 +12,22 @@ class LoginServicio{
     public function Validar(Login $Login)
     {
         $resultado = $this->loginRepositorio->Validar($Login);
-    	switch ($resultado) {
-			case "Clinica":
-				echo '<script>location.href="/megaturnos/UI/MenuClinicas/MenuClinicas.php";</script>';
-			break;
-			case "Paciente":
-				echo '<script>location.href="/megaturnos/UI/MenuClinicas/MenuClientes.php";</script>';
-			break;
-			default:
-				$resultado = "Error de Login";
-			break;
-		}
+        if(isset($resultado))
+        {
+	    	switch ($resultado) {
+				case "Clinica":
+					$resultado = '<script>location.href="/megaturnos/UI/MenuClinicas/MenuClinicas.php";</script>';
+				break;
+				case "Paciente":
+					$resultado = '<script>location.href="/megaturnos/UI/MenuClinicas/MenuClientes.php";</script>';
+				break;
+				default:
+					$resultado = "Datos de Login incorrectos.";
+				break;
+			}
+        } else {
+        	$resultado = "Datos de Login incorrectos.";
+        }
 		return $resultado;
     }
 }
