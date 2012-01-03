@@ -1,3 +1,39 @@
+<?php
+	if($_POST && count($_POST) > 0)
+    {
+    	if(isset($_POST['btnAceptar'])){
+	    	if(isset($_POST['cboLocalidad']) && isset($_POST['txtDomicilio']) && isset($_POST['txtEmail']) &&
+	    		isset($_POST['txtTelefono']) && isset($_POST['txtPassword']) && isset($_POST['txtNombre']))
+	    	{
+		      	include_once '../../Dominio/clinica.php';
+		      	include_once '../../Dominio/contacto.php';
+		      	include_once '../../Dominio/ubicacion.php';
+		      	include_once '../../Dominio/login.php';
+		      	include_once '../../Servicio/clinicaservicio.php';
+		      	/* RECIBO LOS DATOS DEL FORMULARIO*/
+		      	$Localidad = $ubicacionServicio->BuscarLocalidad($_POST['cboLocalidad']);
+		      	$Ubicacion = new Ubicacion($Localidad, $_POST['txtDomicilio']);
+		      	
+		      	$Contacto = new Contacto($_POST['txtEmail'], $_POST['txtTelefono']);
+		      	$Login = new Login($_POST['txtEmail'], $_POST['txtPassword']);
+		      	
+		      	$Clinica = new Clinica(null, $_POST['txtNombre'], $Ubicacion, $Contacto, null, $Login);
+		
+		      	$clinicaServicio = new ClinicaServicio();
+		        $resultado = $clinicaServicio->Agregar($Clinica);
+		      	if (is_numeric($resultado)) {
+		        	echo "Exito";
+		      	}
+		      	else {
+		      		echo $resultado;
+		      	}
+	    	} else {
+	    		// Mostrar mensaje de error
+	    	}
+    	}
+    }
+?>
+
 <html>
 <head>
 <link href="../Commons/Header/Header.css" type="text/css" rel="stylesheet"/>
@@ -58,39 +94,6 @@ include_once '../Commons/Header/Header.php';
       	<input type="password" id="txtPassword" name="txtPassword" class="texto" autocomplete="off" /><br />
         <input type="submit" id="btnAceptar" name="btnAceptar" value="Registrarme!" class="botonenviar"  />
 	</form>
-	<?php
-	if($_POST && count($_POST) > 0)
-    {
-    	if(isset($_POST['btnAceptar'])){
-	    	if(isset($_POST['cboLocalidad']) && isset($_POST['txtDomicilio']) && isset($_POST['txtEmail']) &&
-	    		isset($_POST['txtTelefono']) && isset($_POST['txtPassword']) && isset($_POST['txtNombre']))
-	    	{
-		      	include_once '../../Dominio/clinica.php';
-		      	include_once '../../Dominio/contacto.php';
-		      	include_once '../../Dominio/ubicacion.php';
-		      	include_once '../../Dominio/login.php';
-		      	include_once '../../Servicio/clinicaservicio.php';
-		      	/* RECIBO LOS DATOS DEL FORMULARIO*/
-		      	$Localidad = $ubicacionServicio->BuscarLocalidad($_POST['cboLocalidad']);
-		      	$Ubicacion = new Ubicacion($Localidad, $_POST['txtDomicilio']);
-		      	
-		      	$Contacto = new Contacto($_POST['txtEmail'], $_POST['txtTelefono']);
-		      	$Login = new Login($_POST['txtEmail'], $_POST['txtPassword']);
-		      	
-		      	$Clinica = new Clinica(null, $_POST['txtNombre'], $Ubicacion, $Contacto, null, $Login);
-		
-		      	$clinicaServicio = new ClinicaServicio();
-		        $resultado = $clinicaServicio->Agregar($Clinica);
-		      	if (is_numeric($resultado)) {
-		        	echo "Exito";
-		      	}
-		      	else {
-		      		echo $resultado;
-		      	}
-	    	}
-    	}
-    }
-    ?>
 </div>
 <div id="login">
 <?php 

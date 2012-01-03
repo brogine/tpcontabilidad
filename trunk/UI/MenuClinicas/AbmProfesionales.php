@@ -1,3 +1,32 @@
+<?php 
+
+if($_POST && count($_POST) > 0){
+	if($_POST['btnGuardar']){
+		//Variables recibidas por POST
+		$Apellido = $_POST['txtApellido'];
+		$Nombre = $_POST['txtNombre'];
+		$Email = $_POST['txtEmail'];
+		$Telefono = $_POST['txtTelefono'];
+		$IdEspecialidad = $_POST['cboEspecialidades'];
+		
+		//Value Objects
+		$Contacto = new Contacto($Email, $Telefono);
+		$ClinicaServ = new ClinicaServicio();
+		$Clinica = $ClinicaServ->Buscar($_SESSION['mtID']);
+		$EspServ = new EspecialidadServicio();
+		$Especialidad = $EspServ->Buscar($IdEspecialidad);
+		
+		//Objeto Completo
+		$nMedico = new Medico($Apellido, $Nombre, $Contacto, $Clinica, $Especialidad);
+		
+		//Instancia del servicio y guardado del objeto
+		$MedicoServ = new MedicoServicio();
+		$MedicoServ->Agregar($nMedico);
+	}
+}
+
+?>
+
 <html>
 <head>
 
@@ -28,6 +57,7 @@ include_once '../Commons/Header/Header.php';
 	<form method="post" action="" name="frmProfesional">
 		<fieldset class="form">
 		<legend>Datos del Profesional</legend>
+		<div class="left">
 		<ol>
 		    <li><label for="txtNombre"> Nombre: <input type="text" id="txtNombre" name="txtNombre" /> </label></li>
 		    <li><label for="txtApellido"> Apellido: <input type="text" id="txtApellido" name="txtApellido" /> </label></li>
@@ -44,6 +74,13 @@ include_once '../Commons/Header/Header.php';
 				?>
 			</select></label></li>    
 		</ol>
+		</div>
+		<div class="right">
+			<ol>
+		    	<li><label for="txtEmail"> Email: <input type="text" id="txtEmail" name="txtEmail" /> </label></li>
+		    	<li><label for="txtTelefono"> Telefono: <input type="text" id="txtTelefono" name="txtTelefono" /> </label></li>
+		    </ol>
+		</div>
 		</fieldset>
 		<fieldset class="form">
 		<legend>Horarios de Trabajo</legend>
@@ -59,8 +96,7 @@ include_once '../Commons/Header/Header.php';
 		</label>
 		</div>
 		<div class="right">
-		<ol>
-		<li><label for="cboDesde">Hora desde:
+		<label for="cboDesde">Hora desde:
 		<select name="cboDesde">
 			<?php 
 			for ($i = 0; $i <= 23; $i++) {
@@ -71,8 +107,7 @@ include_once '../Commons/Header/Header.php';
 			} 
 			?>
 		</select>
-		</label></li>
-		<li><label for="cboHasta">Hora hasta:
+		</label><label for="cboHasta">Hora hasta:
 		<select name="cboHasta">
 			<?php 
 			for ($i = 0; $i <= 23; $i++) {
@@ -83,8 +118,9 @@ include_once '../Commons/Header/Header.php';
 			}
 			?>
 		</select>
-		</label></li>
-		</ol>
+		</label><label for="txtDuracion">Duración promedio del turno:
+		<input type="text" name="txtDuracion" id="txtDuracion" style="width:30px" /> en minutos.
+		</label>
 		<input type="button" onclick="agregarHorarios();" id="btnAgregar" name="btnAgregar" value="Agregar" class="botonenviar" />
 		</div>
 		</fieldset>
@@ -93,6 +129,7 @@ include_once '../Commons/Header/Header.php';
 					<th>Días</th>
 					<th>Hora Desde</th>
 					<th>Hora Hasta</th>
+					<th>Duración (Min)</th>
 					<th>Quitar</th>
 				</tr>
 			</table>

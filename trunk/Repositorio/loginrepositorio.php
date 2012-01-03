@@ -15,7 +15,11 @@ class LoginRepositorio{
 			CASE 
 				WHEN c.Nombre IS NULL THEN 'Paciente' 
 				WHEN p.Nombre IS NULL THEN 'Clinica'
-				END AS Tipo
+				END AS Tipo,
+			CASE 
+				WHEN c.Nombre IS NOT NULL THEN c.Nombre
+				WHEN p.Nombre IS NOT NULL THEN p.Apellido + ', ' + p.Nombre
+				END AS Nombre
 			FROM login l
 			LEFT JOIN clinicas c
 			ON l.Email = c.Email
@@ -39,6 +43,7 @@ class LoginRepositorio{
 				
 			}
 			$_SESSION['mtTipo'] = $DataRow['Tipo'];
+			$_SESSION['mtNombre'] = $DataRow['Nombre'];
     		return $DataRow['Tipo'];
     	}
     }

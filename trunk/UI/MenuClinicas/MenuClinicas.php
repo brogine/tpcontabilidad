@@ -23,6 +23,7 @@ include_once '../Commons/Header/Header.php';
 <div id="Contenido">
 <?php include_once '../Commons/Menu/Clinicas.php'; ?>
 
+<div class="right"><p>Bienvenido <?php (isset($_SESSION['mtNombre']) ? $_SESSION['mtNombre']: '');?></p></div>
 <div class="publicidad">
 <?php include_once '../Commons/Publicidad/index.php'; ?>
 </div>
