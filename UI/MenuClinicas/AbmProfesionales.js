@@ -38,8 +38,11 @@ function agregarHorarios(){
 
     var celdaHasta = row.insertCell(2);
     celdaHasta.innerHTML = document.frmProfesional.cboHasta.value;
+    
+    var celdaDuracion = row.insertCell(3);
+    celdaDuracion.innerHTML = document.frmProfesional.txtDuracion.value;
 
-    var celdaQuitar = row.insertCell(3);
+    var celdaQuitar = row.insertCell(4);
     var link = document.createElement("input");
     link.type = "button";
     link.setAttribute('id', "tt" + rowCount);

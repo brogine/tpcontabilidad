@@ -69,7 +69,7 @@ tr:last-child td.last {
     list-style:none;
 }
 .form ol li label{
-    width:120px;
+    width:150px;
     text-align:left;
 }
 .form input[type=text] {
@@ -79,10 +79,10 @@ tr:last-child td.last {
 
 .left {
 	float:left;	
-	margin-left: 5%;
+	margin-left: 10%;
 }
 
 .right {
 	float:right;
-	margin-right: 15%;	
+	margin-right: 10%;
 }

@@ -1,6 +1,4 @@
 <?php
-if($_POST){
-}
 
 include_once '../../Dominio/medico.php';
 include_once '../../Repositorio/medicoRepositorio.php';
@@ -12,20 +10,20 @@ class MedicoServicio{
         $this->MedicoRepo = new MedicoRepositorio();
     }
     
-    public function Agregar(Profesional $Profesional){
-        $this->profesionalRepositorio->Agregar($Profesional);
+    public function Agregar(Medico $Medico){
+        $this->MedicoRepo->Agregar($Medico);
     }
     
-    public function Modificar(Profesional $Profesional){
-        $this->profesionalRepositorio->Modificar($Profesional);
+    public function Modificar(MEdico $Medico){
+        $this->MedicoRepo->Modificar($Medico);
     }
     
     public function Buscar($DniCuitCuil){
-        return $this->profesionalRepositorio->Buscar($DniCuitCuil);
+        return $this->MedicoRepo->Buscar($DniCuitCuil);
     }
     
     public function Listar(){
-        return $this->profesionalRepositorio->Listar();
+        return $this->MedicoRepo->Listar();
     }
     
     public function ListarPorEspecialidadLocalidad($Especialidad,$Localidad)
