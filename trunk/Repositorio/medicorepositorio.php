@@ -32,6 +32,7 @@ class MedicoRepositorio
 		$Consulta = " INSERT INTO medicos (IdClinica, IdPersona) VALUES (" . $Medico->Clinica->IdClinica . ", " . $IdPersona .  "); ";
 		$Consulta .= " INSERT INTO medicos_especialidad (IdPersona, IdEspecialidad) VALUES (" . $IdPersona . ", " . $Medico->Especialidad->IdEspecialidad . "); ";
 		$this->conexion->MultipleConsulta($Consulta);
+		return $IdPersona;
 	}
 	
 	public function Modificar(Medico $Medico)

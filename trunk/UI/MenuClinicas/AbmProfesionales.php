@@ -2,6 +2,7 @@
 
 if($_POST && count($_POST) > 0){
 	if($_POST['btnGuardar']){
+		/*
 		//Variables recibidas por POST
 		$Apellido = $_POST['txtApellido'];
 		$Nombre = $_POST['txtNombre'];
@@ -21,7 +22,20 @@ if($_POST && count($_POST) > 0){
 		
 		//Instancia del servicio y guardado del objeto
 		$MedicoServ = new MedicoServicio();
-		$MedicoServ->Agregar($nMedico);
+		$resultado = $MedicoServ->Agregar($nMedico);
+		
+		*/
+		//Proceso los datos de la Table
+		foreach($_POST['dias'] as $Dias){
+			echo $Dias;
+		}		
+		/*
+		if (is_numeric($resultado)) {
+        	$succ_msg = "Profesional agregado con éxito.";
+      	} else {
+      		$err_msg = $resultado;
+      	}
+		*/
 	}
 }
 
@@ -52,15 +66,18 @@ $profesionales = true;
 include_once '../Commons/Header/Header.php'; 
 ?>
 <div id="Contenido">
-	<?php include_once '../Commons/Menu/Clinicas.php'; ?>
+	<?php include_once '../Commons/Menu/Clinicas.php'; 
+		if(isset($error_msg)) echo "<div class='error-msg'>$error_msg</div>";
+		if(isset($succ_msg)) echo "<div class='succ-msg'>$succ_msg</div>";
+	?>
 	
 	<form method="post" action="" name="frmProfesional">
 		<fieldset class="form">
 		<legend>Datos del Profesional</legend>
 		<div class="left">
 		<ol>
-		    <li><label for="txtNombre"> Nombre: <input type="text" id="txtNombre" name="txtNombre" /> </label></li>
-		    <li><label for="txtApellido"> Apellido: <input type="text" id="txtApellido" name="txtApellido" /> </label></li>
+		    <li><label for="txtNombre"> Nombre: <input class="texto" type="text" id="txtNombre" name="txtNombre" /> </label></li>
+		    <li><label for="txtApellido"> Apellido: <input class="texto" type="text" id="txtApellido" name="txtApellido" /> </label></li>
 		    <li><label for="cboEspecialidades"> Especialidad: <select id="cboEspecialidades" name="cboEspecialidades">
 				<?php 
 					include_once '../../Servicio/especialidadservicio.php';
@@ -77,8 +94,8 @@ include_once '../Commons/Header/Header.php';
 		</div>
 		<div class="right">
 			<ol>
-		    	<li><label for="txtEmail"> Email: <input type="text" id="txtEmail" name="txtEmail" /> </label></li>
-		    	<li><label for="txtTelefono"> Telefono: <input type="text" id="txtTelefono" name="txtTelefono" /> </label></li>
+		    	<li><label for="txtEmail"> Email: <input class="texto" type="text" id="txtEmail" name="txtEmail" /> </label></li>
+		    	<li><label for="txtTelefono"> Telefono: <input class="texto" type="text" id="txtTelefono" name="txtTelefono" /> </label></li>
 		    </ol>
 		</div>
 		</fieldset>
@@ -97,7 +114,7 @@ include_once '../Commons/Header/Header.php';
 		</div>
 		<div class="right">
 		<label for="cboDesde">Hora desde:
-		<select name="cboDesde">
+		<select name="cboDesde" style="width:100px">
 			<?php 
 			for ($i = 0; $i <= 23; $i++) {
 			    echo "<option>" . $i . ":00</option>";
@@ -108,7 +125,7 @@ include_once '../Commons/Header/Header.php';
 			?>
 		</select>
 		</label><label for="cboHasta">Hora hasta:
-		<select name="cboHasta">
+		<select name="cboHasta" style="width:100px">
 			<?php 
 			for ($i = 0; $i <= 23; $i++) {
 			    echo "<option>" . $i . ":00</option>";
@@ -119,7 +136,7 @@ include_once '../Commons/Header/Header.php';
 			?>
 		</select>
 		</label><label for="txtDuracion">Duración promedio del turno:
-		<input type="text" name="txtDuracion" id="txtDuracion" style="width:30px" /> en minutos.
+		<input type="text" class="texto" name="txtDuracion" id="txtDuracion" style="width:40px" /> en minutos.
 		</label>
 		<input type="button" onclick="agregarHorarios();" id="btnAgregar" name="btnAgregar" value="Agregar" class="botonenviar" />
 		</div>
