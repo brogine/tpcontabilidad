@@ -130,3 +130,19 @@ input.botonenviar:hover {
 	height:20%;
 	margin-top:5%;
 }
+
+.error-msg{
+	border:solid 1px #CC0000;
+	background:#ff9999;
+	color:#CC0000;
+	padding:4px;
+	text-align:center;
+}
+
+.succ-msg{
+	border:solid 1px #009900;
+	background:#99ff99;
+	color:#009900;
+	padding:4px;
+	text-align:center;
+}

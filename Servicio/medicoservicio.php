@@ -11,7 +11,7 @@ class MedicoServicio{
     }
     
     public function Agregar(Medico $Medico){
-        $this->MedicoRepo->Agregar($Medico);
+        return $this->MedicoRepo->Agregar($Medico);
     }
     
     public function Modificar(MEdico $Medico){

@@ -22,13 +22,12 @@
 		      	$clinicaServicio = new ClinicaServicio();
 		        $resultado = $clinicaServicio->Agregar($Clinica);
 		      	if (is_numeric($resultado)) {
-		        	echo "Exito";
-		      	}
-		      	else {
-		      		echo $resultado;
+		        	$succ_msg = "Clínica o Consultorio agregado con éxito.";
+		      	} else {
+		      		$err_msg = $resultado;
 		      	}
 	    	} else {
-	    		// Mostrar mensaje de error
+	    		$err_msg = "Complete todos los campos antes de continuar.";
 	    	}
     	}
     }
@@ -61,6 +60,11 @@ include_once '../Commons/Header/Header.php';
 <div id="Contenido">
 
 <div id="profesional">
+	<?php
+		if(isset($error_msg)) echo "<div class='error-msg'>$error_msg</div>";
+		if(isset($succ_msg)) echo "<div class='succ-msg'>$succ_msg</div>";
+	?>
+
 	<h2>Registro de Nueva Clínica o Consultorio</h2>
 	<form action="<?php $_SERVER['PHP_SELF']; ?>" method="post" class="form_settings">
 		<label for="txtNombre">Nombre: </label>
