@@ -2,7 +2,7 @@
 
 if($_POST && count($_POST) > 0){
 	if($_POST['btnGuardar']){
-		/*
+		
 		//Variables recibidas por POST
 		$Apellido = $_POST['txtApellido'];
 		$Nombre = $_POST['txtNombre'];
@@ -24,18 +24,27 @@ if($_POST && count($_POST) > 0){
 		$MedicoServ = new MedicoServicio();
 		$resultado = $MedicoServ->Agregar($nMedico);
 		
-		*/
-		//Proceso los datos de la Table
-		foreach($_POST['dias'] as $Dias){
-			echo $Dias;
-		}		
-		/*
 		if (is_numeric($resultado)) {
+			$nMedico->IdPersona = $resultado;
+			
+			//Proceso los datos de la Table	
+			$rowsTabla = explode("/", $_POST['tablaArgs']);
+			$horarioServ = new HorarioServicio();
+			foreach ($rowsTabla as $tmpHorario) {
+				$camposHorario = explode('-', $tmpHorario);
+				/*
+				 * $camposHorario[0] = Dia Semana
+				 * $camposHorario[1] = Hora Desde
+				 * $camposHorario[2] = Hora Hasta
+				 * $camposHorario[3] = Duración (Min)
+				 */
+				$nHorario = new Horario($nMedico, $camposHorario[1], $camposHorario[2], $camposHorario[0], $camposHorario[3]);
+				$horarioServ->Agregar($nHorario);
+			}
         	$succ_msg = "Profesional agregado con éxito.";
       	} else {
       		$err_msg = $resultado;
       	}
-		*/
 	}
 }
 
@@ -142,15 +151,16 @@ include_once '../Commons/Header/Header.php';
 		</div>
 		</fieldset>
 		<table id="tablaTurnos">
-				<tr>
-					<th>Días</th>
-					<th>Hora Desde</th>
-					<th>Hora Hasta</th>
-					<th>Duración (Min)</th>
-					<th>Quitar</th>
-				</tr>
-			</table>
-		<p align="center"><input type="submit" value="Guardar" id="btnGuardar" name="btnGuardar" class="botonenviar" /></p>
+			<tr>
+				<th>Días</th>
+				<th>Hora Desde</th>
+				<th>Hora Hasta</th>
+				<th>Duración (Min)</th>
+				<th>Quitar</th>
+			</tr>
+		</table>
+		<input type="hidden" name="tablaArgs" id="tablaArgs" />
+		<p align="center"><input type="submit" value="Guardar" id="btnGuardar" name="btnGuardar" class="botonenviar" onclick="getDatosTabla();" /></p>
 	</form>
 	
 	<div class="publicidad">
