@@ -10,33 +10,28 @@ function agregarHorarios(){
 
 	var selectedDays = "";
 	if(document.frmProfesional.chkLunes.checked){
-		selectedDays = "Lunes, ";
+		selectedDays = "Lun, ";
 	}
 	if(document.frmProfesional.chkMartes.checked){
-		selectedDays = selectedDays + " Martes, ";	
+		selectedDays = selectedDays + " Mar, ";	
 	}
 	if(document.frmProfesional.chkMiercoles.checked){
-		selectedDays = selectedDays + " Miércoles, ";	
+		selectedDays = selectedDays + " Mie, ";	
 	}
 	if(document.frmProfesional.chkJueves.checked){
-		selectedDays = selectedDays + " Jueves, ";	
+		selectedDays = selectedDays + " Jue, ";	
 	}
 	if(document.frmProfesional.chkViernes.checked){
-		selectedDays = selectedDays + " Viernes, ";	
+		selectedDays = selectedDays + " Vie, ";	
 	}
 	if(document.frmProfesional.chkSabado.checked){
-		selectedDays = selectedDays + " Sábado, ";	
+		selectedDays = selectedDays + " Sab, ";	
 	}
 	if(document.frmProfesional.chkDomingo.checked){
-		selectedDays = selectedDays + " Domingo, ";	
+		selectedDays = selectedDays + " Dom, ";	
 	}
     var celdaDias = row.insertCell(0);
-    var elementDias = document.createElement("input");
-    elementDias.type = "text";
-    elementDias.disabled = "disabled";
-    elementDias.name = "dias[]";
-    elementDias.value = selectedDays;
-    celdaDias.appendChild(elementDias);
+    celdaDias.innerHTML = selectedDays;
 
     var celdaDesde = row.insertCell(1);
     celdaDesde.innerHTML = document.frmProfesional.cboDesde.value;
@@ -64,6 +59,22 @@ function quitarHorarios(filaClickeada){
 		elemento.setAttribute('onclick', "quitarHorarios(" + (i - 1) + ");");
 	}
 	Tabla.deleteRow(filaClickeada);
+}
+
+function getDatosTabla() {
+	var contenido = "";
+	for(var i = 1; i < document.getElementById('tablaTurnos').rows.lenght; i++){
+		for(var j = 0; j < 4; j++){
+			if(j != 3){
+				contenido = contenido + document.getElementById('tablaTurnos').rows[i].celss[j].innerHTML + '-';
+			} else {
+				contenido = contenido + document.getElementById('tablaTurnos').rows[i].celss[j].innerHTML;
+			}
+		}
+		// EOL
+		contenido = contenido + '/';
+	}
+	document.getElementById('tablaArgs').value = contenido;
 }
 
 /*

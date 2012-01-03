@@ -1,6 +1,6 @@
 /*
 SQLyog Enterprise - MySQL GUI v8.05 
-MySQL - 5.5.16 : Database - megaturnos
+MySQL - 5.5.8 : Database - megaturnos
 *********************************************************************
 */
 
@@ -46,9 +46,11 @@ CREATE TABLE `especialidades` (
   `idEspecialidad` int(10) NOT NULL AUTO_INCREMENT,
   `Nombre` varchar(100) NOT NULL,
   PRIMARY KEY (`idEspecialidad`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
 
 /*Data for the table `especialidades` */
+
+insert  into `especialidades`(`idEspecialidad`,`Nombre`) values (1,'Pediatra'),(2,'Psicólogo'),(3,'Dermatólogo');
 
 /*Table structure for table `horarios` */
 
@@ -59,6 +61,7 @@ CREATE TABLE `horarios` (
   `horaInicio` time NOT NULL,
   `horaFin` time NOT NULL,
   `diaSemana` int(10) NOT NULL,
+  `duracion` int(4) NOT NULL,
   PRIMARY KEY (`IdMedico`,`horaInicio`,`horaFin`,`diaSemana`),
   CONSTRAINT `FK_horarios` FOREIGN KEY (`IdMedico`) REFERENCES `medicos` (`IdPersona`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
@@ -94,7 +97,7 @@ CREATE TABLE `login` (
 
 /*Data for the table `login` */
 
-insert  into `login`(`Email`,`Pass`) values ('castro@rendon.com','e10adc3949ba59abbe56e057f20f883e'),('pas@algo.com','81dc9bdb52d04dc20036dbd8313ed055');
+insert  into `login`(`Email`,`Pass`) values ('castro@rendon.com','e10adc3949ba59abbe56e057f20f883e'),('pas@algo.com','1a1dc91c907325c69271ddf0c944bc72');
 
 /*Table structure for table `medicos` */
 
@@ -120,8 +123,8 @@ CREATE TABLE `medicos_especialidad` (
   `IdEspecialidad` int(10) NOT NULL,
   PRIMARY KEY (`IdPersona`,`IdEspecialidad`),
   KEY `FK_medicos_especialidad_2` (`IdEspecialidad`),
-  CONSTRAINT `FK_medicos_especialidad_2` FOREIGN KEY (`IdEspecialidad`) REFERENCES `especialidades` (`idEspecialidad`),
-  CONSTRAINT `FK_medicos_especialidad` FOREIGN KEY (`IdPersona`) REFERENCES `medicos` (`IdPersona`)
+  CONSTRAINT `FK_medicos_especialidad` FOREIGN KEY (`IdPersona`) REFERENCES `medicos` (`IdPersona`),
+  CONSTRAINT `FK_medicos_especialidad_2` FOREIGN KEY (`IdEspecialidad`) REFERENCES `especialidades` (`idEspecialidad`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 /*Data for the table `medicos_especialidad` */
