@@ -39,6 +39,7 @@ if($_POST && count($_POST) > 0){
 				 * $camposHorario[3] = Duración (Min)
 				 */
 				$nHorario = new Horario($nMedico, $camposHorario[1], $camposHorario[2], $camposHorario[0], $camposHorario[3]);
+				$nHorario->DiaSemana = $nHorario->DiaSemanaToSql($nHorario->DiaSemana);
 				$horarioServ->Agregar($nHorario);
 			}
         	$succ_msg = "Profesional agregado con éxito.";
