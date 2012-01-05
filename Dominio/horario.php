@@ -16,13 +16,7 @@ class Horario
 	}
 	
 	public function DiaSemanaToForm($valor) {
-		$resultado = "";
-		for($i = 0;$i < 7; $i++){
-			$resto = $valor % 2;
-			$valor = $valor / 2;
-			$resultado = $resto . $resultado;
-		}
-		return $resultado;
+		return decbin($valor);
 	}
 	
 	public function DiaSemanaToSql($valor){
@@ -69,11 +63,6 @@ class Horario
 		else {
 			$binarios .= "0";
 		}
-		$resultado = 0;
-		for($i = 0;$i < 7; $i++){
-			$factor = (2 ^ $i) * $resultado[$i];
-			$resultado += $factor;
-		}
-		return $resultado;
+		return bindec($binarios);
 	}
 }

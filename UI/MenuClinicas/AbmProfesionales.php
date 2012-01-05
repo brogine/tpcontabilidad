@@ -3,6 +3,16 @@
 if($_POST && count($_POST) > 0){
 	if($_POST['btnGuardar']){
 		
+		include_once '../../Dominio/contacto.php';
+		include_once '../../Servicio/clinicaservicio.php';
+		include_once '../../Dominio/clinica.php';
+		include_once '../../Servicio/especialidadservicio.php';
+		include_once '../../Dominio/especialidad.php';
+		include_once '../../Dominio/medico.php';
+		include_once '../../Servicio/medicoservicio.php';
+		include_once '../../Dominio/horario.php';
+		include_once '../../Servicio/horarioservicio.php';
+		
 		//Variables recibidas por POST
 		$Apellido = $_POST['txtApellido'];
 		$Nombre = $_POST['txtNombre'];
@@ -26,10 +36,14 @@ if($_POST && count($_POST) > 0){
 		
 		if (is_numeric($resultado)) {
 			$nMedico->IdPersona = $resultado;
-			
-			//Proceso los datos de la Table	
+			/*
+			 * Proceso los datos de la Tabla
+			 * Formato: ddd, ddd -hh:mm-hh:mm-dur/...
+			 */
+			echo var_dump($_POST['tablaArgs']);
 			$rowsTabla = explode("/", $_POST['tablaArgs']);
 			$horarioServ = new HorarioServicio();
+			
 			foreach ($rowsTabla as $tmpHorario) {
 				$camposHorario = explode('-', $tmpHorario);
 				/*
@@ -38,9 +52,11 @@ if($_POST && count($_POST) > 0){
 				 * $camposHorario[2] = Hora Hasta
 				 * $camposHorario[3] = Duración (Min)
 				 */
-				$nHorario = new Horario($nMedico, $camposHorario[1], $camposHorario[2], $camposHorario[0], $camposHorario[3]);
-				$nHorario->DiaSemana = $nHorario->DiaSemanaToSql($nHorario->DiaSemana);
-				$horarioServ->Agregar($nHorario);
+				if(isset($camposHorario[0]) && isset($camposHorario[1]) && isset($camposHorario[2]) && isset($camposHorario[3])){
+					$nHorario = new Horario($nMedico, $camposHorario[1], $camposHorario[2], $camposHorario[0], $camposHorario[3]);
+					$nHorario->DiaSemana = $nHorario->DiaSemanaToSql($nHorario->DiaSemana);
+					$horarioServ->Agregar($nHorario); 
+				}
 			}
         	$succ_msg = "Profesional agregado con éxito.";
       	} else {
