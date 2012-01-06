@@ -1,6 +1,6 @@
 <?php
 include_once 'Conexion/conexion.php';
-include_once '../Dominio/horario.php';
+include_once '../../Dominio/horario.php';
 class HorarioRepositorio{
 	
 	private $Conexion;

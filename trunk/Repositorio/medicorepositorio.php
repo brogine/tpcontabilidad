@@ -26,9 +26,8 @@ class MedicoRepositorio
 	    */
 		$Consulta = " INSERT INTO personas (Apellido, Nombre, Email, Telefono) VALUES 
 		('" . $Medico->Apellido . "', '" . $Medico->Nombre . "', '" . $Medico->Contacto->Email . "', '" . $Medico->Contacto->Telefono . "'); ";
-		$result = $this->conexion->ConsultaConRetorno($Consulta);
-		$DataRow = mysqli_fetch_array($result);
-		$IdPersona = $DataRow[0];
+		$result = $this->conexion->ConsultaSinRetorno($Consulta);
+		$IdPersona = $this->conexion->GetLastID();
 		$Consulta = " INSERT INTO medicos (IdClinica, IdPersona) VALUES (" . $Medico->Clinica->IdClinica . ", " . $IdPersona .  "); ";
 		$Consulta .= " INSERT INTO medicos_especialidad (IdPersona, IdEspecialidad) VALUES (" . $IdPersona . ", " . $Medico->Especialidad->IdEspecialidad . "); ";
 		$this->conexion->MultipleConsulta($Consulta);

@@ -12,7 +12,6 @@ class EspecialidadServicio
 	
 	public function Agregar(Especialidad $Especialidad)
 	{
-		
 		$this->EspRep->Agregar($Especialidad);
 	}
 	public function Modificar(Especialidad $Especialidad)
@@ -22,7 +21,7 @@ class EspecialidadServicio
 	
 	public function Buscar($IdEspecialidad)
 	{
-		$this->EspRep->Buscar($idEspecialidad);
+		return $this->EspRep->Buscar($IdEspecialidad);
 	}
 	
 	public function Listar()
