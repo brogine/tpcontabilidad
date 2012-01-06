@@ -23,24 +23,23 @@ if($_POST && count($_POST) > 0){
 		//Value Objects
 		$Contacto = new Contacto($Email, $Telefono);
 		$ClinicaServ = new ClinicaServicio();
-		$Clinica = $ClinicaServ->Buscar($_SESSION['mtID']);
+		$Clinica = $ClinicaServ->Buscar(4);//$_SESSION['mtID']);
 		$EspServ = new EspecialidadServicio();
 		$Especialidad = $EspServ->Buscar($IdEspecialidad);
 		
 		//Objeto Completo
-		$nMedico = new Medico($Apellido, $Nombre, $Contacto, $Clinica, $Especialidad);
+		$nMedico = new Medico(null, $Apellido, $Nombre, $Contacto, $Clinica, $Especialidad);
 		
 		//Instancia del servicio y guardado del objeto
 		$MedicoServ = new MedicoServicio();
 		$resultado = $MedicoServ->Agregar($nMedico);
 		
-		if (is_numeric($resultado)) {
+		if (is_int($resultado)) {
 			$nMedico->IdPersona = $resultado;
 			/*
 			 * Proceso los datos de la Tabla
 			 * Formato: ddd, ddd -hh:mm-hh:mm-dur/...
 			 */
-			echo var_dump($_POST['tablaArgs']);
 			$rowsTabla = explode("/", $_POST['tablaArgs']);
 			$horarioServ = new HorarioServicio();
 			
@@ -52,9 +51,18 @@ if($_POST && count($_POST) > 0){
 				 * $camposHorario[2] = Hora Hasta
 				 * $camposHorario[3] = Duración (Min)
 				 */
-				if(isset($camposHorario[0]) && isset($camposHorario[1]) && isset($camposHorario[2]) && isset($camposHorario[3])){
-					$nHorario = new Horario($nMedico, $camposHorario[1], $camposHorario[2], $camposHorario[0], $camposHorario[3]);
-					$nHorario->DiaSemana = $nHorario->DiaSemanaToSql($nHorario->DiaSemana);
+				if(isset($camposHorario[0]) && isset($camposHorario[1]) && 
+						isset($camposHorario[2]) && isset($camposHorario[3])) {
+					$nHorario = new Horario($nMedico, 
+							strptime($camposHorario[1], "%H:%M"), 
+							strptime($camposHorario[2], "%H:%M"),
+							null, $camposHorario[3]);
+					$nHorario->DiaSemana = $nHorario->DiaSemanaToSql($camposHorario[0]);
+					
+					echo "Hora Desde: " . $nHorario->HoraInicio;
+					echo "Hora Hasta: " . $nHorario->HoraFin;
+					echo "Dia Semana: " . $nHorario->DiaSemana;
+					
 					$horarioServ->Agregar($nHorario); 
 				}
 			}

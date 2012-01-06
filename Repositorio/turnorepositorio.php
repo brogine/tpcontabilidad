@@ -1,6 +1,6 @@
 <?php
 include_once 'Conexion/conexion.php';
-include_once '../Dominio/turno.php';
+include_once '../../Dominio/turno.php';
 class TurnoRepositorio{
 	
 	private $Conexion;
