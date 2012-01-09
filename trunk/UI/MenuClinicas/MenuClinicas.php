@@ -24,6 +24,7 @@ include_once '../Commons/Header/Header.php';
 <?php include_once '../Commons/Menu/Clinicas.php'; ?>
 
 <div class="right"><p>Bienvenido <?php (isset($_SESSION['mtNombre']) ? $_SESSION['mtNombre']: '');?></p></div>
+<iframe src="../Commons/Turnos/index.php" frameborder="0" height="500px" width="500px"></iframe>
 <div class="publicidad">
 <?php include_once '../Commons/Publicidad/index.php'; ?>
 </div>

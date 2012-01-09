@@ -45,10 +45,10 @@ class MedicoRepositorio
 	    $this->Conexion->StoreProcedureSinRetorno('ProfesionalesMod',$parametros); 
 	}
 	
-	public function Buscar(Medico $Medico)
+	public function Buscar($IdPersona)
 	{
-		$tabla = $this->conexion->StoreProcedureConRetorno('ProfesionalesBuscar',$Profesional->DniCuitCuil);
-		$datarow = mysqli_fetch_array($tabla);
+		$result = $this->conexion->ConsultaConRetorno(" SELECT * FROM medicos m INNER JOIN personas p ON m.IdPersona = p.IdPersona ");
+		$datarow = mysqli_fetch_array($result);
 		return $this->Mapear($datarow);
 	}
 	
