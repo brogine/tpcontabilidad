@@ -17,32 +17,28 @@ class HorarioRepositorio{
 	
 	public function ListarPorMedico($IdPersona){
         $lista = array();
-	    $result = $this->conexion->StoreProcedureConRetorno('TurnosListarProfesional', $IdPersona);
-	    while($Datarow=mysql_fetch_array($result))
-    	{
-			$lista[i]=$this->Mapear($Datarow);
-    	}
-	    
-	    return $lista;
+	    $result = $this->Conexion->ConsultaConRetorno(" SELECT IdMedico, horaInicio, horaFin, 
+	    					diaSemana, duracion FROM horarios WHERE IdMedico = " . $IdPersona);
+        while ($DataRow = mysqli_fetch_array($result)){
+        	$lista[$i] = $this->Mapear($DataRow);
+        	$i++;
+        }
+        return $lista;
     }
 	
 	private function Mapear($Datarow)
 	{
-		$turno = new Turno();
-		$turno->idTurno = $Datarow['idTurno'];
+		include_once 'medicorepositorio.php';
+		$MedRepo = new MedicoRepositorio();
+		$Medico = $MedRepo->Buscar($Datarow['IdMedico']);
 		
-		$clienteRepo = new ClienteRepositorio();
-		$turno->Cliente = $clienteRepo->Buscar($Datarow['DniCliente']);
-
-		$profesionalRepo = new ProfesionalRepositorio();
-		$turno->Profesional = $profesionalRepo->Buscar($Datarow['DniProfesional']);
+		$HoraInicio = $Datarow['horaInicio'];
+		$HoraFin = $Datarow['horaFin'];
+		$DiaSemana = $Datarow['diaSemana'];
+		$Duracion = $Datarow['duracion'];
 		
-		$diaHorarios = new DiasHorarios();
-		$diaHorarios->__construct1($Datarow['DiaSemana'], 
-			$Datarow['horaDesde'], $Datarow['horaHasta'], $Datarow['Duracion']);
-		
-	    $profesional->Estado = $Datarow['Estado'];
-	    return $profesional;
+		$horario = new Horario($Medico, $HoraInicio, $HoraFin, $DiaSemana, $Duracion);
+	    return $horario;
 	}
 }
 

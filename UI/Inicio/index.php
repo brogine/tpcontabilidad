@@ -1,8 +1,8 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN""http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html>
 <head>
 <link href="../Commons/Header/Header.css" type="text/css" rel="stylesheet"/>
 <link href="../Commons/Footer/Footer.css" type="text/css" rel="stylesheet"/>
-
 
 <link href="Inicio.css" type="text/css" rel="stylesheet"/>
 <script type="text/javascript" src="Inicio.js"></script>

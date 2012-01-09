@@ -58,11 +58,6 @@ if($_POST && count($_POST) > 0){
 							strptime($camposHorario[2], "%H:%M"),
 							null, $camposHorario[3]);
 					$nHorario->DiaSemana = $nHorario->DiaSemanaToSql($camposHorario[0]);
-					
-					echo "Hora Desde: " . $nHorario->HoraInicio;
-					echo "Hora Hasta: " . $nHorario->HoraFin;
-					echo "Dia Semana: " . $nHorario->DiaSemana;
-					
 					$horarioServ->Agregar($nHorario); 
 				}
 			}
