@@ -18,10 +18,10 @@ class PacienteRepositorio{
 		$Consulta =" Insert Into Login (Email, Pass) Values ('$Email', '$Pass'); ";
 		$Consulta .= "Insert Into Personas (Apellido, Nombre, Email, Telefono) Values ('$Paciente->Apellido','$Paciente->Nombre','$Email','$Telefono');";
 		if($this->Conexion->MultipleConsulta($Consulta)) {
-			echo "Agregado Con Exito";
+			return true;
 		}
 		else {
-			return "No se pudo agregar la clinica";
+			return false;
 		}
 	}
     

@@ -7,11 +7,10 @@ class PacienteServicio{
     
     public function __construct(){
         $this->PacienteRepo = new PacienteRepositorio();
-       
     }
     
     public function Agregar(Paciente $Paciente){
-       $this->PacienteRepo->Agregar($Paciente);
+       return $this->PacienteRepo->Agregar($Paciente);
     }
     
     public function Modificar(Paciente $Paciente){

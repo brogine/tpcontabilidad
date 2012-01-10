@@ -1,8 +1,8 @@
 <div class="Cuadro">
-	<h2>INGRESAR</h2>
+	<h2>Ingresar</h2>
 	<h4>Sólamente usuarios con cuenta</h4>
         
-	<form method="post" id="frmLogin" action="<?php $_SERVER['PHP_SELF']; ?>" class="form_settings">
+	<form method="post" id="frmLogin" action="<?=$_SERVER['PHP_SELF'];?>">
 		<label class="Texto" for="txtEmailLogin">Email:</label>
 		<input type="text" name="txtEmailLogin" id="txtEmailLogin" class="texto" />
 		<label class="Texto" for="TxtContrasenia">Password:</label>
