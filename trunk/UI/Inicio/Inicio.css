@@ -1,21 +1,7 @@
-#Pie
+.Megabutton
 {
-	height: inherit;
-	width:100%;
-	top: 80%;
-	position: absolute;
-}
-
-#Celda
-{
-	height: 100px;
-	width: 400px;
-	text-align: center;
-}
-
-#Megabutton
-{
-	border-top: 1px solid #96d1f8;
+   text-align: center;
+   border-top: 1px solid #96d1f8;
    background: #65a9d7;
    background: -webkit-gradient(linear, left top, left bottom, from(#3e779d), to(#65a9d7));
    background: -webkit-linear-gradient(top, #3e779d, #65a9d7);
@@ -37,13 +23,13 @@
    vertical-align: middle;
    display: block;
    cursor:pointer;
-   }
-#Megabutton:hover {
+}
+.Megabutton:hover {
    border-top-color: #28597a;
    background: #28597a;
    color: #ccc;
 }
-#Megabutton:active {
+.Megabutton:active {
    border-top-color: #1b435e;
    background: #1b435e;
 }

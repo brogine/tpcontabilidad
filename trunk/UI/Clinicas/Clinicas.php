@@ -32,15 +32,18 @@
     	}
     }
 ?>
-
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN""http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html>
 <head>
-<link href="../Commons/Header/Header.css" type="text/css" rel="stylesheet"/>
+<link href="../Commons/Header/Header.css" type="text/css" rel="stylesheet" />
+<link href="../Commons/Footer/Footer.css" type="text/css" rel="stylesheet" />
 
-<link href="Clinica.css" type="text/css" rel="stylesheet"/>
+<link rel="stylesheet" type="text/css" media="all" href="../Commons/reset.css" />
+<link rel="stylesheet" type="text/css" media="all" href="../Commons/text.css" />
+<link rel="stylesheet" type="text/css" media="all" href="../Commons/960.css" />
+
+<link href="Clinica.css" type="text/css" rel="stylesheet" />
 <link href="../Commons/Login/Login.css" type="text/css" rel="stylesheet" />
-
-<link href="../Commons/Footer/Footer.css" type="text/css" rel="stylesheet"/>
 
 <link href="../Commons/Publicidad/Publicidad.css" type="text/css" rel="stylesheet" />
 <script type="text/javascript" src="../Commons/Publicidad/jquery.js"></script>
@@ -48,25 +51,24 @@
 <script type="text/javascript" src="../Commons/Publicidad/captify.tiny.js"></script>
 <script type="text/javascript" src="../Commons/Publicidad/Publicidad.js"></script>
 
-<script language="JavaScript" src ="Clinica.js"> </script>
+<script type="text/javascript" src ="Clinica.js"> </script>
 
 </head>
 
 <body>
 
-<?php 
-include_once '../Commons/Header/Header.php'; 
-?>
-<div id="Contenido">
+<?php include_once '../Commons/Header/Header.php'; ?>
+<div class="container_12" id="Contenido">
 
-<div id="profesional">
+<div class="prefix_1 grid_5">
+	<div id="profesional">
 	<?php
 		if(isset($error_msg)) echo "<div class='error-msg'>$error_msg</div>";
 		if(isset($succ_msg)) echo "<div class='succ-msg'>$succ_msg</div>";
 	?>
 
 	<h2>Registro de Nueva Clínica o Consultorio</h2>
-	<form action="<?php $_SERVER['PHP_SELF']; ?>" method="post" class="form_settings">
+	<form action="<?=$_SERVER['PHP_SELF'];?>" method="post">
 		<label for="txtNombre">Nombre: </label>
 		<input type="text" id="txtNombre" name="txtNombre" class="texto" />
 		<label for="txtEmail">Email: </label>
@@ -96,21 +98,18 @@ include_once '../Commons/Header/Header.php';
       	<input type="text" id="txtTelefono" name="txtTelefono" class="texto" />
       	<label for="txtPassword">Password: </label>
       	<input type="password" id="txtPassword" name="txtPassword" class="texto" autocomplete="off" /><br />
-        <input type="submit" id="btnAceptar" name="btnAceptar" value="Registrarme!" class="botonenviar"  />
+        <input type="submit" id="btnAceptar" name="btnAceptar" value="Registrarme!" class="botonenviar" />
 	</form>
+	</div>
 </div>
-<div id="login">
-<?php 
-include_once '../Commons/Login/Login.php';
-?>
+<div class="grid_5 prefix_1">
+	<?php include_once '../Commons/Login/Login.php'; ?>
 </div>
-<div class="publicidad">
-<?php include_once '../Commons/Publicidad/index.php'; ?>
+<div class="grid_12 prefix_1 publicidad">
+	<?php include_once '../Commons/Publicidad/index.php'; ?>
 </div>
 </div>
-<div id="Pie">
 <?php include_once '../Commons/Footer/index.php'; ?>
-</div>
 
 </body>
 
