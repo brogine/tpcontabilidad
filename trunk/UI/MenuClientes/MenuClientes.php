@@ -13,25 +13,33 @@
 	<div id="Buscador" class="Buscador">
 	
 	<form action="MenuClientes.php" method="POST">
-	
+	<table class="Menu">
+	<tr>
+	<td>
 	<label for="TxtLocalidad" class="Label">Escriba La Ciudad en la que busca:</label>
-	
-	<input class="TextBox" onkeyup="Buscar()" type="text" id="TxtLocalidad" name="TxtLocalidad">
-	
+	<input autocomplete="off" class="TextBox" onkeyup="Buscar()" type="text" id="TxtLocalidad" name="TxtLocalidad">
+	</td>
+	<td>
 	<label for="CboEspecialidades" class="Label">Seleccione La Especialidad:</label>
 	
 <?php include '../../Servicio/especialidadservicio.php';
 	$EspServ = new EspecialidadServicio();
 	$listaEsp = $EspServ->Listar();
 	//Lista De Especialidades
-	echo "<select id='CboEspecialidades' name='CboEspecialidades'>";
+	echo "<select class='Combo' id='CboEspecialidades' name='CboEspecialidades'>";
     	foreach ($listaEsp as $esp)
     	{
     		echo "<option value=".$esp->IdEspecialidad."-".$esp->Nombre.">".$esp->Nombre."</option>";	
     	}
     	echo "</select>";
 	?>
-	<input type="submit" value="Buscar!">
+	</td>
+	
+	<td>
+	<input class="Buscar" type="submit" value="Buscar!">
+	</td>
+	</tr>
+	</table>
 	</form>
 </div>
 	
