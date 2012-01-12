@@ -11,7 +11,7 @@
 		<ul>
 			<li><a href="" title="Nuevo">Nuevo</a></li>
 			<li><a href="" title="Pendientes">Pendientes</a></li>
-			<li><a href="" title="Aprobados">Aprobados</a></li>
+			<li><a href="TurnosAprobados.php" title="Aprobados">Aprobados</a></li>
 		</ul>
 	</li>
 	<li <?php if(isset($datos)) echo 'class="current"'; ?> id="datos"><a href="" title="Mis Datos">Mis Datos</a></li>

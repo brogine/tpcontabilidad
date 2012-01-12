@@ -1,7 +1,13 @@
 <html>
 <head>
 
-<link href="../Commons/Header/Header.css" type="text/css" rel="stylesheet"/>
+<link href="../Commons/Footer/Footer.css" type="text/css" rel="stylesheet" />
+
+<link rel="stylesheet" type="text/css" media="all" href="../Commons/reset.css" />
+<link rel="stylesheet" type="text/css" media="all" href="../Commons/text.css" />
+<link rel="stylesheet" type="text/css" media="all" href="../Commons/960.css" />
+
+<link href="../Commons/Header/Header.css" type="text/css" rel="stylesheet" />
 <link href="MenuClinicas.css" type="text/css" rel="stylesheet"/>
 
 <link href="../Commons/Menu/Menu.css" type="text/css" rel="stylesheet"/>
@@ -12,50 +18,46 @@
 <script type="text/javascript" src="../Commons/Publicidad/captify.tiny.js"></script>
 <script type="text/javascript" src="../Commons/Publicidad/Publicidad.js"></script>
 
-<link href="../Commons/Footer/Footer.css" type="text/css" rel="stylesheet"/>
-
 </head>
-<body id="body">
+<body>
+<?php include_once '../Commons/Header/Header.php'; ?>
+<div class="container_12" id="Contenido">
 <?php 
-include_once '../Commons/Header/Header.php'; 
-?>
-<div id="Contenido">
-<?php 
-$profesionales = true;
+$turnos = true;
 include_once '../Commons/Menu/Clinicas.php'; 
-include_once '../../Servicio/medicoservicio.php';
-include_once '../../Dominio/medico.php';
 ?>
 
-<div>
+<div class="grid_10 prefix_2">
 <h3>Turnos Aprobados</h3>
 <table>
 	<tr>
-		<th>Nombre y Apellido</th>
-		<th>Especialidad</th>
-		<th>Editar</th>
+		<th>Profesional</th>
+		<th>Paciente</th>
+		<th>Fecha</th>
+		<th>Estado</th>
+		<th>Eliminar</th>
 	</tr>
 	<?php 
-		$mediServ = new MedicoServicio();
-		$listaMedicos = $mediServ->ListarPorClinica(1);
-		foreach($listaMedicos as $Medico){
+//	include_once '../../Servicio/turnoservicio.php';
+	include_once '../../Dominio/turno.php';
+		$turnoServicio = new TurnoServicio();
+		$listaTurnos = $turnoServicio->ListarProfesional(1);
+		foreach($listaTurnos as $Turno){
 			echo "<tr>";
-			echo "<td>" . $Medico->Apellido . ", " . $Medico->Nombre . "</td>";
-			echo "<td>" . $Medico->Especialidad . "</td>";
-			echo '<td><a href="editar.php?id=' . $Medico->IdPersona .'" >Editar</a></td>';
+			echo "<td>" . $Turno->Medico->Apellido . ", " . $Turno->Medico->Nombre . "</td>";
+			echo "<td>" . $Turno->Paciente->Apellido . ", " . $Turno->Paciente->Nombre . "</td>";
+			echo "<td>" . $Turno->Fecha . "</td>";
+			echo "<td>" . $Turno->Estado . "</td>";
+			echo '<td><a href="eliminar.php?id=' . $Turno->IdTurno .'" >Eliminar</a></td>';
 			echo "</tr>";
 		}
 	?>
 </table>
 </div>
-<div class="publicidad">
+<div class="grid_12 prefix_1 publicidad">
 <?php include_once '../Commons/Publicidad/index.php'; ?>
 </div>
 </div>
-<div id="Pie">
 <?php include_once '../Commons/Footer/index.php'; ?>
-</div>
-
 </body>
-
 </html>

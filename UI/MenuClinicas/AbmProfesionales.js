@@ -45,6 +45,7 @@ function agregarHorarios(){
     var celdaQuitar = row.insertCell(4);
     var link = document.createElement("input");
     link.type = "button";
+    link.style = "width:40px;";
     link.setAttribute('id', "tt" + rowCount);
     link.setAttribute('onclick', "quitarHorarios(" + rowCount + ");");
     link.value = "Quitar";

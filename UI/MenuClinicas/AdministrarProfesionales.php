@@ -1,7 +1,13 @@
 <html>
 <head>
 
-<link href="../Commons/Header/Header.css" type="text/css" rel="stylesheet"/>
+<link href="../Commons/Footer/Footer.css" type="text/css" rel="stylesheet" />
+
+<link rel="stylesheet" type="text/css" media="all" href="../Commons/reset.css" />
+<link rel="stylesheet" type="text/css" media="all" href="../Commons/text.css" />
+<link rel="stylesheet" type="text/css" media="all" href="../Commons/960.css" />
+
+<link href="../Commons/Header/Header.css" type="text/css" rel="stylesheet" />
 <link href="MenuClinicas.css" type="text/css" rel="stylesheet"/>
 
 <link href="../Commons/Menu/Menu.css" type="text/css" rel="stylesheet"/>
@@ -12,22 +18,15 @@
 <script type="text/javascript" src="../Commons/Publicidad/captify.tiny.js"></script>
 <script type="text/javascript" src="../Commons/Publicidad/Publicidad.js"></script>
 
-<link href="../Commons/Footer/Footer.css" type="text/css" rel="stylesheet"/>
-
 </head>
-<body id="body">
-<?php 
-include_once '../Commons/Header/Header.php'; 
-?>
-<div id="Contenido">
+<body>
+<?php include_once '../Commons/Header/Header.php'; ?>
+<div class="container_12 prefix_1" id="Contenido">
 <?php 
 $profesionales = true;
 include_once '../Commons/Menu/Clinicas.php'; 
-include_once '../../Servicio/medicoservicio.php';
-include_once '../../Dominio/medico.php';
 ?>
-
-<div>
+<div class="grid_10 prefix_2">
 <h3>Profesionales</h3>
 <table>
 	<tr>
@@ -35,7 +34,9 @@ include_once '../../Dominio/medico.php';
 		<th>Especialidad</th>
 		<th>Editar</th>
 	</tr>
-	<?php 
+	<?php
+		include_once '../../Servicio/medicoservicio.php';
+		include_once '../../Dominio/medico.php';
 		$mediServ = new MedicoServicio();
 		$listaMedicos = $mediServ->ListarPorClinica(1);
 		foreach($listaMedicos as $Medico){
@@ -48,14 +49,10 @@ include_once '../../Dominio/medico.php';
 	?>
 </table>
 </div>
-<div class="publicidad">
+<div class="grid_12 prefix_1 publicidad">
 <?php include_once '../Commons/Publicidad/index.php'; ?>
 </div>
 </div>
-<div id="Pie">
 <?php include_once '../Commons/Footer/index.php'; ?>
-</div>
-
 </body>
-
 </html>
