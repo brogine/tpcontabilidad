@@ -1,9 +1,15 @@
+#Contenido { padding-top:0; }
+
+#tablaTurnos{
+	margin-top:2%;	
+}
+
 table {
 	overflow:hidden;
 	border:1px solid #d3d3d3;
 	background:#fefefe;
-	width:70%;
-	margin:3% auto 0;
+	width:80%;
+	margin:auto 0;
 	-moz-border-radius:5px; /* FF1+ */
 	-webkit-border-radius:5px; /* Saf3-4 */
 	border-radius:5px;
@@ -11,7 +17,7 @@ table {
 	-webkit-box-shadow: 0 0 4px rgba(0, 0, 0, 0.2);
 }
 	
-th, td {padding:18px 28px 18px; text-align:center; }
+th, td {padding:18px 18px 18px; text-align:center; }
 
 th {padding-top:22px; text-shadow: 1px 1px 1px #fff; background:#e8eaeb;}
 
@@ -57,32 +63,6 @@ tr:last-child td.last {
 	-moz-border-radius-bottomright:5px;
 	-webkit-border-bottom-right-radius:5px; /* Saf3-4 */
 }
-.form {
-    border:1px solid #990000;
-    margin:5%;
-}
-.form legend{
-    font-weight:bold;
-    font-size:12px;
-}
-.form ol{
+ol{
     list-style:none;
-}
-.form ol li label{
-    width:150px;
-    text-align:left;
-}
-.form input[type=text] {
-    border:1px solid #CCCCCC;
-    height:30px;
-}
-
-.left {
-	float:left;	
-	margin-left: 10%;
-}
-
-.right {
-	float:right;
-	margin-right: 10%;
 }
