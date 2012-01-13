@@ -12,7 +12,7 @@
 	</form>
     
     <?php 
-    if($_POST)
+    if($_POST && count($_POST) > 0)
     {
     	if(isset($_POST['btnIngresar'])){
 	    	if(isset($_POST['txtEmailLogin']) && isset($_POST['txtContrasenia']))
@@ -22,7 +22,13 @@
 		      	/* RECIBO LOS DATOS DEL FORMULARIO*/
 		      	$Login = new Login($_POST['txtEmailLogin'], $_POST['txtContrasenia']);
 		      	$loginServicio = new LoginServicio();
-		      	echo $loginServicio->Validar($Login);
+		      	$loginServicio->Validar($Login);
+		      	if($loginServicio->succ_msg != ""){
+		      		echo "<div class='succ-msg'>$loginServicio->succ_msg</div>";
+		      	}
+		      	if($loginServicio->err_msg != ""){
+		      		echo "<div class='error-msg'>$loginServicio->err_msg</div>";
+		      	}
 	    	}
     	}
     }

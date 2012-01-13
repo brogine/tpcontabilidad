@@ -56,12 +56,8 @@
 <div class="container_12" id="Contenido">
       <div class="grid_5 prefix_1">
       <div class="CuadroCliente">
-      <?php
-		if(isset($error_msg)) echo "<div class='error-msg'>$error_msg</div>";
-		if(isset($succ_msg)) echo "<div class='succ-msg'>$succ_msg</div>";
-	  ?>
       <h3>Registro de Nuevo Cliente</h3>
-      <form action="<?=$_SERVER['PHP_SELF'];?>" class="form_settings" method="POST">
+      <form action="<?=$_SERVER['PHP_SELF'];?>" method="POST">
 	      <label for="txtNombre">Ingrese Su Nombre:</label>
 	      <input type="text" id="txtNombre" class="texto" name="txtNombre">
 	      <label for="txtApellido">Ingrese Su Apellido:</label>
@@ -74,6 +70,10 @@
 	      <input type="password" id="txtPass" class="texto" name="txtPass"><br />
 	      <input type="submit" id="btnRegistrar" name="btnRegistrar" class="botonenviar" value="Registrame!" />
 	  </form>
+	  <?php
+		if(isset($error_msg)) echo "<div class='error-msg'>$error_msg</div>";
+		if(isset($succ_msg)) echo "<div class='succ-msg'>$succ_msg</div>";
+	  ?>
 	  </div>
       </div>
   	<div class="grid_5 prefix_1">
