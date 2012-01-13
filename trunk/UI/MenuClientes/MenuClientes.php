@@ -30,7 +30,7 @@
 				echo "<select class='Combo' id='CboEspecialidades' name='CboEspecialidades'>";
 			    	foreach ($listaEsp as $esp)
 			    	{
-			    		echo "<option value=".$esp->IdEspecialidad.">".$esp->Nombre."</option>";	
+			    		echo "<option value='".$esp->IdEspecialidad."'>".$esp->Nombre."</option>";	
 			    	}
 			    	echo "</select>";
 				?>

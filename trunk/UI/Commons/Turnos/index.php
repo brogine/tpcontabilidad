@@ -20,12 +20,11 @@
 	<script type='text/javascript' src='jquery.weekcalendar.js'></script>
 	<script type='text/javascript' src='config.php'></script>
 </head>
-<body> 
-	<h1>jQuery Week Calendar (full demo)</h1>
+<body>
 	<div id='calendar'></div>
 	<div id="event_edit_container">
+	<input type="hidden" />
 		<form>
-			<input type="hidden" />
 			<ul>
 				<li>
 					<span>Fecha: </span><span class="date_holder"></span> 

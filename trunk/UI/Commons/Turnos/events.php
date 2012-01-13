@@ -1,7 +1,5 @@
 <?php
 
-echo "events : [";
-
 echo '{
                "id":1,
                "start": new Date(year, month, day, 12),
@@ -45,7 +43,4 @@ echo '{
                "end": new Date(year, month, day + 3, 9),
                "title":"Multiday"
             }';
-
-echo "]";
-
 ?>

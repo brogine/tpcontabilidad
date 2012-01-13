@@ -1,11 +1,11 @@
 <?php
-include_once 'Conexion/conexion.php';
-include_once '../../Dominio/turno.php';
+include_once $_SERVER['DOCUMENT_ROOT'].'/megaturnos/Repositorio/Conexion/conexion.php';
+include_once $_SERVER['DOCUMENT_ROOT'].'/megaturnos/Dominio/turno.php';
 class TurnoRepositorio{
-	
 	private $Conexion;
-	function __construct(){
-		$Conexion = new Conexion();
+	
+	public function __construct(){
+		$this->Conexion = new Conexion();
 	}
 	
 	public function Agregar(Turno $Turno)
@@ -32,15 +32,16 @@ class TurnoRepositorio{
 	    $this->conexion->StoreProcedureSinRetorno('TurnosBorrar', $idTurno);
 	}
 	
-	public function ListarProfesional($DniCuitCuil){
+	public function ListarMedico($IdMedico){
         $lista = array();
-	    $result = $this->conexion->StoreProcedureConRetorno('TurnosListarProfesional', $DniCuitCuil);
-	    while($Datarow=mysql_fetch_array($result))
-    	{
-			$lista[i]=$this->Mapear($Datarow);
-    	}
-	    
-	    return $lista;
+	    $result = $this->Conexion->ConsultaConRetorno(" SELECT IdTurno, Fecha, IdMedico, IdPaciente, 
+	    												Estado, horaInicio, horaFin FROM turnos
+	    												WHERE IdMedico = " . $IdMedico);
+        while ($DataRow = mysqli_fetch_array($result)){
+        	$lista[$i] = $this->Mapear($DataRow);
+        	$i++;
+        }
+        return $lista;
     }
     
     public function ListarCliente($DniCuitCuil){
@@ -57,20 +58,20 @@ class TurnoRepositorio{
 	public function Mapear($Datarow)
 	{
 		$turno = new Turno();
-		$turno->idTurno = $Datarow['idTurno'];
+		$turno->idTurno = $Datarow['IdTurno'];
 		
-		$clienteRepo = new ClienteRepositorio();
-		$turno->Cliente = $clienteRepo->Buscar($Datarow['DniCliente']);
-
-		$profesionalRepo = new ProfesionalRepositorio();
-		$turno->Profesional = $profesionalRepo->Buscar($Datarow['DniProfesional']);
+		$pacienteRepo = new PacienteRepositorio();
+		$turno->Paciente = $pacienteRepo->Buscar($Datarow['IdPaciente']);
 		
-		$diaHorarios = new DiasHorarios();
-		$diaHorarios->__construct1($Datarow['DiaSemana'], 
-			$Datarow['horaDesde'], $Datarow['horaHasta'], $Datarow['Duracion']);
+		$medicoRepo = new MedicoRepositorio();
+		$turno->Medico = $medicoRepo->Buscar($Datarow['IdMedico']);
 		
-	    $profesional->Estado = $Datarow['Estado'];
-	    return $profesional;
+		$turno->Fecha = $Datarow['Fecha'];
+		$turno->horaFin = $Datarow['horaFin'];
+		$turno->horaInicio = $Datarow['horaInicio'];
+		
+	    $turno->Estado = $Datarow['Estado'];
+	    return $turno;
 	}
 }
 
