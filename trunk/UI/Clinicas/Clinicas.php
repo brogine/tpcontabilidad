@@ -62,11 +62,6 @@
 
 <div class="prefix_1 grid_5">
 	<div id="profesional">
-	<?php
-		if(isset($error_msg)) echo "<div class='error-msg'>$error_msg</div>";
-		if(isset($succ_msg)) echo "<div class='succ-msg'>$succ_msg</div>";
-	?>
-
 	<h2>Registro de Nueva Clínica o Consultorio</h2>
 	<form action="<?=$_SERVER['PHP_SELF'];?>" method="post">
 		<label for="txtNombre">Nombre: </label>
@@ -100,6 +95,10 @@
       	<input type="password" id="txtPassword" name="txtPassword" class="texto" autocomplete="off" /><br />
         <input type="submit" id="btnAceptar" name="btnAceptar" value="Registrarme!" class="botonenviar" />
 	</form>
+	<?php
+		if(isset($error_msg)) echo "<div class='error-msg'>$error_msg</div>";
+		if(isset($succ_msg)) echo "<div class='succ-msg'>$succ_msg</div>";
+	?>
 	</div>
 </div>
 <div class="grid_5 prefix_1">

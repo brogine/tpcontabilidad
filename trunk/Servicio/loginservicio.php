@@ -4,6 +4,8 @@ include_once '../../Dominio/login.php';
 
 class LoginServicio{
     private $loginRepositorio;
+    public $succ_msg = "";
+    public $err_msg = "";
     
     public function __construct(){
         $this->loginRepositorio = new LoginRepositorio();
@@ -16,19 +18,18 @@ class LoginServicio{
         {
 	    	switch ($resultado) {
 				case "Clinica":
-					$resultado = '<script>location.href="/megaturnos/UI/MenuClinicas/MenuClinicas.php";</script>';
+					$this->succ_msg = '<script>location.href="/megaturnos/UI/MenuClinicas/MenuClinicas.php";</script>';
 				break;
 				case "Paciente":
-					$resultado = '<script>location.href="/megaturnos/UI/MenuClinicas/MenuClientes.php";</script>';
+					$this->succ_msg = '<script>location.href="/megaturnos/UI/MenuClinicas/MenuClientes.php";</script>';
 				break;
 				default:
-					$resultado = "Datos de Login incorrectos.";
+					$this->err_msg = "Datos de Login incorrectos.";
 				break;
 			}
         } else {
-        	$resultado = "Datos de Login incorrectos.";
+        	$this->err_msg = "Datos de Login incorrectos.";
         }
-		return $resultado;
     }
 }
 
