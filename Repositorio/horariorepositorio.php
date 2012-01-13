@@ -1,11 +1,11 @@
 <?php
-include_once 'Conexion/conexion.php';
-include_once '../../Dominio/horario.php';
+include_once $_SERVER['DOCUMENT_ROOT'].'/megaturnos/Repositorio/Conexion/conexion.php';
+include_once $_SERVER['DOCUMENT_ROOT'].'/megaturnos/Dominio/horario.php';
 class HorarioRepositorio{
-	
 	private $Conexion;
-	function __construct(){
-		$Conexion = new Conexion();
+	
+	public function __construct(){
+		$this->Conexion = new Conexion();
 	}
 	
 	public function Agregar(Horario $Horario)
@@ -28,7 +28,7 @@ class HorarioRepositorio{
 	
 	private function Mapear($Datarow)
 	{
-		include_once 'medicorepositorio.php';
+		include_once $_SERVER['DOCUMENT_ROOT'].'/megaturnos/Repositorio/medicorepositorio.php';
 		$MedRepo = new MedicoRepositorio();
 		$Medico = $MedRepo->Buscar($Datarow['IdMedico']);
 		

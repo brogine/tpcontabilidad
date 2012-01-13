@@ -1,4 +1,6 @@
 <?php
+include_once $_SERVER['DOCUMENT_ROOT'].'/megaturnos/Repositorio/turnorepositorio.php';
+include_once $_SERVER['DOCUMENT_ROOT'].'/megaturnos/Dominio/turno.php';
 
 class TurnoServicio{
     private $turnoRepositorio;
@@ -19,8 +21,8 @@ class TurnoServicio{
         return $this->turnoRepositorio->Buscar($idTurno);
     }
     
-    public function ListarProfesional($DniCuitCuil){
-        return $this->turnoRepositorio->ListarProfesional($DniCuitCuil);
+    public function ListarMedico($IdMedico){
+        return $this->turnoRepositorio->ListarMedico($IdMedico);
     }
     
     public function ListarCliente($DniCuitCuil){

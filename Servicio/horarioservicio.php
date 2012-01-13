@@ -1,6 +1,6 @@
 <?php
-include_once '../../Repositorio/horariorepositorio.php';
-include_once '../../Dominio/horario.php';
+include_once $_SERVER['DOCUMENT_ROOT'].'/megaturnos/Repositorio/horariorepositorio.php';
+include_once $_SERVER['DOCUMENT_ROOT'].'/megaturnos/Dominio/horario.php';
 
 class HorarioServicio
 {

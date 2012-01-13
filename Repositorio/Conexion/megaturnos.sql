@@ -1,6 +1,6 @@
 /*
-SQLyog Enterprise - MySQL GUI v8.05 
-MySQL - 5.5.8 : Database - megaturnos
+SQLyog Enterprise - MySQL GUI v8.12 
+MySQL - 5.5.16 : Database - megaturnos
 *********************************************************************
 */
 
@@ -97,7 +97,7 @@ CREATE TABLE `login` (
 
 /*Data for the table `login` */
 
-insert  into `login`(`Email`,`Pass`) values ('castro@rendon.com','e10adc3949ba59abbe56e057f20f883e'),('pas@algo.com','1a1dc91c907325c69271ddf0c944bc72');
+insert  into `login`(`Email`,`Pass`) values ('castro@rendon.com','e10adc3949ba59abbe56e057f20f883e'),('pas@algo.com','1a1dc91c907325c69271ddf0c944bc72'),('sdfgsdfg','sdg');
 
 /*Table structure for table `medicos` */
 
@@ -108,11 +108,12 @@ CREATE TABLE `medicos` (
   `IdPersona` int(10) NOT NULL,
   PRIMARY KEY (`IdPersona`),
   KEY `FK_medicos_clinica` (`IdClinica`),
-  CONSTRAINT `FK_medicos` FOREIGN KEY (`IdPersona`) REFERENCES `personas` (`IdPersona`),
   CONSTRAINT `FK_medicos_clinica` FOREIGN KEY (`IdClinica`) REFERENCES `clinicas` (`idClinica`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 /*Data for the table `medicos` */
+
+insert  into `medicos`(`IdClinica`,`IdPersona`) values (4,0);
 
 /*Table structure for table `medicos_especialidad` */
 
@@ -128,6 +129,8 @@ CREATE TABLE `medicos_especialidad` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 /*Data for the table `medicos_especialidad` */
+
+insert  into `medicos_especialidad`(`IdPersona`,`IdEspecialidad`) values (0,3);
 
 /*Table structure for table `pais` */
 
@@ -155,6 +158,7 @@ CREATE TABLE `personas` (
   `IdPersona` int(10) NOT NULL AUTO_INCREMENT,
   PRIMARY KEY (`IdPersona`),
   KEY `FK_personas_login` (`Email`),
+  CONSTRAINT `FK_personas` FOREIGN KEY (`IdPersona`) REFERENCES `medicos` (`IdPersona`),
   CONSTRAINT `FK_personas_login` FOREIGN KEY (`Email`) REFERENCES `login` (`Email`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
@@ -186,7 +190,9 @@ CREATE TABLE `turnos` (
   `Fecha` datetime NOT NULL,
   `IdMedico` int(10) NOT NULL,
   `IdPaciente` int(10) NOT NULL,
-  `Estado` int(3) DEFAULT NULL,
+  `Estado` int(3) DEFAULT '0',
+  `horaInicio` varchar(5) NOT NULL,
+  `horaFin` varchar(5) NOT NULL,
   PRIMARY KEY (`IdTurno`),
   KEY `FK_turnos_persona` (`IdPaciente`),
   KEY `FK_turnos_medico` (`IdMedico`),

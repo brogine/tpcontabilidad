@@ -1,20 +1,39 @@
 <?php 
+include_once $_SERVER['DOCUMENT_ROOT'].'/megaturnos/Servicio/horarioservicio.php';
+include_once $_SERVER['DOCUMENT_ROOT'].'/megaturnos/Servicio/turnoservicio.php';
 
+//recibo el médico
 //$IdMedico = $_POST['IdMedico'];
-//$horarioServicio = new HorarioServicio();
-//$listaHorarios = $horarioServicio->ListarPorMedico($IdMedico);
+$IdMedico = 1;
+$horarioServicio = new HorarioServicio();
+// cargo sus horarios
+$listaHorarios = $horarioServicio->ListarPorMedico($IdMedico);
 
-//Ver que días hay en la lista de horarios, para filtrar y que no se muestren
-//ver que hora min y hora max entre los días.
+// verifico cual es el horario mínimo y el máximo de trabajo
+foreach ($listaHorarios as $horario){
+	if(!isset($min)){
+		$min = $horario->HoraInicio;
+	} else {
+		if($min > $horario->HoraInicio){
+			$min = $horario->HoraInicio;
+		}
+	}
+	if(!isset($max)){
+		$max = $horario->HoraFin;
+	} else {
+		if($max < $horario->HoraFin){
+			$max = $horario->HoraFin;
+		}
+	}
+}
 
-//obtener los eventos ya cargados.
-//como array y después trabajarlo donde van los eventos
-
+$turnoServicio = new TurnoServicio();
+// obtengo los turnos del medico
+$listaTMedicos = $turnoServicio->ListarMedico($IdMedico);
 
 ?>
 
 $(document).ready(function() {
-
 
    var $calendar = $('#calendar');
    var id = 10;
@@ -25,6 +44,7 @@ $(document).ready(function() {
       allowCalEventOverlap : true,
       overlapEventsSeparate: true,
       firstDayOfWeek : 1,
+      <!-- businessHours :{start: <?//=$min?>, end: <?//=$max?>, limitDisplay: true },  -->
       businessHours :{start: 8, end: 18, limitDisplay: true },
       daysToShow : 7,
       title: function(daysToShow) {
@@ -163,7 +183,25 @@ $(document).ready(function() {
       var day = new Date().getDate();
 
       return {
-      <?php include 'events.php';?>
+      	events : [
+      	<?php include 'events.php';
+      		foreach ($listaTMedicos as $turno){
+      			$separar = explode(':', $turnos->horaInicio);
+      			$hInicio = $separar[0];
+      			$mInicio = $separar[1];
+      			$separar = explode(':', $turnos->horaFin);
+      			$hFin = $separar[0];
+      			$mFin = $separar[1];
+      			echo "{";
+               	echo '"id":' . $turno->IdTurno . ",";
+               	echo '"start": new Date('.date('Y',$turno->Fecha).','.date('m',$turno->Fecha).','.date('d',$turno->Fecha).','.$hInicio.','.$mInicio.'),';
+               	echo '"end": new Date('.date('Y',$turno->Fecha).','.date('m',$turno->Fecha).','.date('d',$turno->Fecha).','.$hFin.','.$mFin.'),';
+               	echo '"title":"'.$turno->Paciente->Apellido.' '.$turno->Paciente->Nombre;
+               	echo "readOnly : true";
+            	echo "},";
+      		}
+      	?>
+      	]
       };
    }
 
