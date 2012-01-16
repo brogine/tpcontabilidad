@@ -6,7 +6,8 @@ class Login
 
 	public function __construct($Email, $Password){
 		$this->Email = $Email;
-		$this->Password = $Password;
+		$salt = sha1(md5($Password));
+		$this->Password = $Password.$salt;
 	}
 }
 ?>
