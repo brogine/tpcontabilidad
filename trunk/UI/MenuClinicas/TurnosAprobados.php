@@ -38,7 +38,7 @@ include_once '../Commons/Menu/Clinicas.php';
 		<th>Eliminar</th>
 	</tr>
 	<?php 
-//	include_once '../../Servicio/turnoservicio.php';
+	include_once '../../Servicio/turnoservicio.php';
 	include_once '../../Dominio/turno.php';
 		$turnoServicio = new TurnoServicio();
 		$listaTurnos = $turnoServicio->ListarProfesional(1);

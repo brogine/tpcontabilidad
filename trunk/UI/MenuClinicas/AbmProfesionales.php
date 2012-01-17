@@ -116,7 +116,7 @@ include_once '../Commons/Header/Header.php';
 					$listaEspecialidades = $especialidadesServicio->Listar();
 					if(isset($listaEspecialidades)){
 						foreach ($listaEspecialidades as $Especialidad){
-							echo "<option value=$Especialidad->IdEspecialidad>".$Especialidad->Nombre."</option>";
+							echo "<option value='".$Especialidad->IdEspecialidad."'>".$Especialidad->Nombre."</option>";
 						}
 					}
 				?>
