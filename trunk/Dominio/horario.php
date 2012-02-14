@@ -1,18 +1,24 @@
 <?php
+include 'sucursal.php';
 class Horario
 {
 	public $Medico;
+	public $Sucursal;
 	public $HoraInicio;
 	public $HoraFin;
 	public $DiaSemana;
 	public $Duracion;
+	public $Estado;
 	
-	public function __construct(Medico $Medico, $HoraInicio, $HoraFin, $DiaSemana, $Duracion){
+	public function __construct(Medico $Medico, $HoraInicio, $HoraFin, $DiaSemana, $Duracion, Sucursal $Sucursal, $Estado)
+	{
 		$this->Medico = $Medico;
 		$this->HoraInicio = $HoraInicio;
 		$this->HoraFin = $HoraFin;
 		$this->DiaSemana = $DiaSemana;
 		$this->Duracion = $Duracion;
+		$this->Sucursal = $Sucursal;
+		$this->Estado = $Estado;
 	}
 	
 	public function DiaSemanaToForm($valor) {

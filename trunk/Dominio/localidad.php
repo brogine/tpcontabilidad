@@ -1,4 +1,5 @@
 <?php
+include 'provincia.php';
 class Localidad
 {
 	public $IdLocalidad;

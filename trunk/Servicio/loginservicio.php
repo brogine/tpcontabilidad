@@ -14,7 +14,7 @@ class LoginServicio{
     public function Validar(Login $Login)
     {
         $resultado = $this->loginRepositorio->Validar($Login);
-        if($resultado)
+        if(!is_null($resultado))
 		{
 			$this->succ_msg = '<script>location.href="/megaturnos/UI/MenuPrincipal/MenuPrincipal.php";</script>';
 		}

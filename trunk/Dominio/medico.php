@@ -1,17 +1,17 @@
 <?php
-include 'persona.php';
-class Medico extends Persona
+include 'usuario.php';
+include 'especialidad.php';
+class Medico extends Usuario
 {
-	public $Clinica;
 	public $Especialidad;
 
-	public function __construct($IdPersona = NULL, $Apellido, $Nombre, Contacto $Contacto, Clinica $Clinica, Especialidad $Especialidad){
-		$this->IdPersona = $IdPersona;
-		$this->Apellido = $Apellido;
+	public function __construct($IdUsuario,$Nombre,$Email,$Pass,array $ListaEspecialidades)
+	{
+		$this->IdUsuario = $IdUsuario;
 		$this->Nombre = $Nombre;
-		$this->Contacto = $Contacto;
-		$this->Clinica = $Clinica;
-		$this->Especialidad = $Especialidad;
+		$this->Email = $Email;
+		$this->Password = $Pass;
+		$this->Especialidad=$ListaEspecialidades;
 	}
 }
 
