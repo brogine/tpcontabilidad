@@ -26,6 +26,7 @@ class LoginRepositorio{
 			LEFT JOIN personas p
 			ON l.Email = p.Email
 			WHERE l.Email = '".$Login->Email."' AND l.Pass = MD5('".$Login->Password."') ";
+    	echo $Consulta;
     	$result = $this->Conexion->ConsultaConRetorno($Consulta);
     	if(mysqli_num_rows($result) == 1){
     		$DataRow = mysqli_fetch_array($result);
