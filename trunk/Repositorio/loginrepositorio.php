@@ -9,6 +9,22 @@ class LoginRepositorio{
         $this->Conexion = new Conexion();
     }
     
+	public function Validar(Login $Login)
+	{
+		$Consulta = "Select * from Login WHERE Email = '".$Login->Email."' AND Pass = MD5('".$Login->Password."')";
+		echo $Consulta;
+		$Resultado = $this->Conexion->ConsultaConRetorno($Consulta);
+		echo mysqli_num_rows($Resultado);
+		if(mysqli_num_rows($Resultado) > 0)
+		{
+			return TRUE;
+		}
+		else 
+		{
+			return FALSE;
+		}
+	}
+/*	
     public function Validar(Login $Login)
     {
     	$Consulta = "SELECT c.idClinica, p.IdPersona,
@@ -46,8 +62,11 @@ class LoginRepositorio{
 			$_SESSION['mtTipo'] = $DataRow['Tipo'];
 			$_SESSION['mtNombre'] = $DataRow['Nombre'];
     		return $DataRow['Tipo'];
-    	}
+  	}
+ 
     }
+ * 
+ */
 }
 
 ?>
