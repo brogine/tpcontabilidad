@@ -42,7 +42,7 @@
 <link rel="stylesheet" type="text/css" media="all" href="../Commons/text.css" />
 <link rel="stylesheet" type="text/css" media="all" href="../Commons/960.css" />
 
-<link href="Clinica.css" type="text/css" rel="stylesheet" />
+<link href="Inicio.css" type="text/css" rel="stylesheet" />
 <link href="../Commons/Login/Login.css" type="text/css" rel="stylesheet" />
 
 <link href="../Commons/Publicidad/Publicidad.css" type="text/css" rel="stylesheet" />
