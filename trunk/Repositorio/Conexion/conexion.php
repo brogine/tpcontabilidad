@@ -6,11 +6,15 @@ class Conexion
 	private $User;
 	private $Pass;
 	private $BDD;
-	private $Conex;
+	private static $Conex;
 	
 	public function __construct(){
-		$this->LeerXml("Configuracion.xml");
-    	$this->Conex = mysqli_connect($this->Server, $this->User, $this->Pass, $this->BDD) or die(mysqli_connect_error());
+		// La variable $Conex va a ser la que defina nuestro patron singleton
+		if (is_null (self::$Conex)) {
+			$this->LeerXml("Configuracion.xml");
+    		self::$Conex = mysqli_connect($this->Server, $this->User, $this->Pass, $this->BDD) or die(mysqli_connect_error());
+		}
+		return self::$Conex;
 	}
   
   	public function StoreProcedureConRetorno($StoreProcedure, $Parametros = '')
