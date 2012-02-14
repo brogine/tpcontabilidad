@@ -1,4 +1,5 @@
 <?php
+include 'pais.php';
 class Provincia
 {
 	public $IdProvincia;
