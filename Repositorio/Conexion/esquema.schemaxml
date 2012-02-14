@@ -40,10 +40,12 @@
   `DiasSemana` int(5) NOT NULL,
   `HoraInicio` time DEFAULT NULL,
   `HoraFin` time DEFAULT NULL,
+  `Duracion` int(5) DEFAULT NULL,
+  `Estado` tinyint(1) DEFAULT NULL,
   PRIMARY KEY (`IdMedico`,`IdSucursal`),
   KEY `FK_horarios_sucursal` (`IdSucursal`),
-  CONSTRAINT `FK_horarios_sucursal` FOREIGN KEY (`IdSucursal`) REFERENCES `sucursales` (`IdSucursal`),
-  CONSTRAINT `FK_horarios_medico` FOREIGN KEY (`IdMedico`) REFERENCES `usuarios` (`IdUsuario`)
+  CONSTRAINT `FK_horarios_medico` FOREIGN KEY (`IdMedico`) REFERENCES `usuarios` (`IdUsuario`),
+  CONSTRAINT `FK_horarios_sucursal` FOREIGN KEY (`IdSucursal`) REFERENCES `sucursales` (`IdSucursal`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1</sql_create_table>
 </table>
 <table name="medico_especialidad" view="colnames">
