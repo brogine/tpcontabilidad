@@ -1,7 +1,7 @@
 <?PHP
 include_once 'Conexion/conexion.php';
 include_once '../../Dominio/medico.php';
-include_once 'personarepositorio.php';
+include_once 'usuariorepositorio.php';
 class MedicoRepositorio
 {
 	private $conexion;
@@ -15,39 +15,32 @@ class MedicoRepositorio
 	
 	public function Agregar(Medico $Medico)
 	{
-		/*
-		$parametros = array();
-		$parametros = $this->PersonaRepo->CompletarDatosPersonalesBasicos($Profesional, $parametros);
-	    $parametros[4]=$Profesional->Titulo;
-	    $parametros[5]=$Profesional->Especialidad;
-	    $parametros[6]=$Profesional->TelGuardia;
-	    $parametros[7]=$Profesional->Estado;
-	    //$this->Conexion->StoreProcedureSinRetorno('ProfesionalesAlta',$parametros); 
-	    */
-		$Consulta = " INSERT INTO personas (Apellido, Nombre, Email, Telefono) VALUES 
-		('" . $Medico->Apellido . "', '" . $Medico->Nombre . "', '" . $Medico->Contacto->Email . "', '" . $Medico->Contacto->Telefono . "'); ";
-		$result = $this->conexion->ConsultaSinRetorno($Consulta);
-		$IdPersona = $this->conexion->GetLastID();
-		$Consulta = " INSERT INTO medicos (IdClinica, IdPersona) VALUES (" . $Medico->Clinica->IdClinica . ", " . $IdPersona .  "); ";
-		$Consulta .= " INSERT INTO medicos_especialidad (IdPersona, IdEspecialidad) VALUES (" . $IdPersona . ", " . $Medico->Especialidad->IdEspecialidad . "); ";
-		$this->conexion->MultipleConsulta($Consulta);
-		return $IdPersona;
+	$UsuarioRepositorio = new UsuarioRepositorio();
+	$UsuarioRepositorio->Agregar($Medico);
+	foreach ($Medico->Especialidad as $Especialidad) 
+	{
+		$Consulta = "Insert Into Medico_Especialidad(IdMedico,IdEspecialidad) values($Medico->IdMedico,$Especialidad->IdEspecialidad)";
+		$this->conexion->ConsultaSinRetorno($Consulta);
+	}    
 	}
 	
 	public function Modificar(Medico $Medico)
 	{
-	    $parametros = array();
-		$parametros = $this->PersonaRepo->CompletarDatosPersonalesBasicos($Profesional, $parametros);
-	    $parametros[4]=$Profesional->Titulo;
-	    $parametros[5]=$Profesional->Especialidad;
-	    $parametros[6]=$Profesional->TelGuardia;
-	    $parametros[7]=$Profesional->Estado;
-	    $this->Conexion->StoreProcedureSinRetorno('ProfesionalesMod',$parametros); 
+		$UsuarioRepositorio = new UsuarioRepositorio();
+		$UsuarioRepositorio->Modificar($Medico);
+		$BorrarDatos = "Delete from Medico_Especialidad where IdMedico = $Medico->IdMedico";
+		$this->conexion->ConsultaSinRetorno($BorrarDatos);
+		foreach ($Medico->Especialidad as $Especialidad) 
+		{
+		$Consulta = "Insert Into Medico_Especialidad(IdMedico,IdEspecialidad) values($Medico->IdUsuario,$Especialidad->IdEspecialidad)";
+		$this->conexion->ConsultaSinRetorno($Consulta);
+		}    
+		
 	}
 	
-	public function Buscar($IdPersona)
+	public function Buscar($IdUsuario)
 	{
-		$result = $this->conexion->ConsultaConRetorno(" SELECT * FROM medicos m INNER JOIN personas p ON m.IdPersona = p.IdPersona ");
+		$result = $this->conexion->ConsultaConRetorno(" SELECT * FROM Usuarios M inner join Medicos_Especialidad E on M.IdUsuario=E.IdMedico where M.IdUsuario= $IdUsuario");
 		$datarow = mysqli_fetch_array($result);
 		return $this->Mapear($datarow);
 	}
@@ -57,10 +50,12 @@ class MedicoRepositorio
 	    $this->conexion->StoreProcedureSinRetorno('ProfesionalesBorrar',$Profesional->DniCuitCuil);
 	}
 	
-	public function ListarPorEspecialidad(Medico $Medico)
+	public function ListarPorEspecialidad($IdEspecialidad)
 	{  
 		$lista = array();
-	    $result = $this->conexion->StoreProcedureConRetorno('ProfesionalesListar',$Profesional->Especialidad);
+		$consulta = "Select * from Usuarios M inner Join Medicos_Especialidad E on E.IdMedico=M.IdUsuario where E.IdEspecialidad=$IdEspecialidad";
+		
+	    $result = $this->conexion->ConsultaConRetorno($consulta);
 	    while($Datarow=mysql_fetch_array($result))
 	    {
 			$lista[i]=$this->Mapear($Datarow);
@@ -72,11 +67,10 @@ class MedicoRepositorio
 	public function ListarPorEspecialidadYLocalidad($Localidad,$IdEspecialidad)
 	{  
 		$lista = array();
-	    //$result = $this->conexion->StoreProcedureConRetorno('ProfesionalesListar',$Profesional->Especialidad)
-        $Consulta = "select c.IdClinica, p.Nombre,p.Apellido,p.Telefono,p.Email, e.idEspecialidad as Especialidad from medicos m inner join personas p on p.IdPersona = m.IdPersona
-		inner join clinicas c on m.IdClinica = c.IdClinica inner join medicos_especialidad me
-		on me.IdPersona = m.IdPersona inner join especialidades e on me.IdEspecialidad = e.IdEspecialidad inner join Localidad l on c.idLocalidad = l.Idlocalidad
-		where l.Nombre = '".$Localidad."'  and  e.IdEspecialidad = $IdEspecialidad order by c.IdClinica; ";
+	    $Consulta = "Select M.IdUsuario,M.Nombre,M.Email,M.Pass,M.IdLocalidad,E.IdEspecialidad from Usuarios M inner Join 
+        Medicos_Especialidad E on E.IdMedico=M.IdUsuario inner join 
+        Horarios H on M.IdUsuario=H.IdMedico inner join 
+        Sucursales S on S.IdSucursal = H.IdSucursal where S.IdLocalidad = $Localidad and E.IdEspecialidad = $IdEspecialidad";
         $i=0;
         $result = $this->conexion->ConsultaConRetorno($Consulta);
         if($result)
@@ -93,7 +87,7 @@ class MedicoRepositorio
 	public function ListarPorClinica($idClinica){
     	$lista = array();
 	    //$result = $this->conexion->StoreProcedureConRetorno('ProfesionalesListar',$Profesional->Especialidad)
-        $Consulta = "select p.Nombre,p.Apellido, e.idEspecialidad as Especialidad from medicos m inner join personas p on p.IdPersona = m.IdPersona
+        $Consulta = "select  from Usuarios m inner join personas p on p.IdPersona = m.IdPersona
 		inner join clinicas c on m.IdClinica = c.IdClinica inner join medicos_especialidad me
 		on me.IdPersona = m.IdPersona inner join especialidades e on me.IdEspecialidad = e.IdEspecialidad where c.IdClinica = " . $idClinica . " order by p.Nombre, p.Apellido; ";
         $i = 0;
@@ -111,17 +105,19 @@ class MedicoRepositorio
 	
 	public function Mapear($Datarow)
 	{
-		include_once 'clinicarepositorio.php';
-		include_once 'especialidadrepositorio.php';
-		$ClinicaRepo = new ClinicaRepositorio();
-		$Clinica = $ClinicaRepo->Buscar($Datarow['IdClinica']) ;
-		$Contacto = new Contacto($Datarow['Email'], $Datarow['Telefono']);
-		$Nombre = $Datarow['Nombre'];
-		$Apellido = $Datarow['Apellido'];
-		$EspRepo = new EspecialidadRepositorio();
-		$Especialidad = $EspRepo->Buscar($Datarow['Especialidad']); 
-	    $Medico = new Medico(null, $Apellido, $Nombre, $Contacto, $Clinica, $Especialidad);
-	    return $Medico;
+		$arrayEspecialidades;
+		$i=0;
+		$EspecialidadRepositorio = new EspecialidadRepositorio();
+		foreach ($Datarow as $Medico) 
+		{
+			
+			$arrayEspecialidades[i]=$EspecialidadRepositorio->Buscar($Medico['IdEspecialidad']);
+			$i++;
+		}
+		$LocalidadRepositorio = new LocalidadRepositorio();
+		$Localidad = $LocalidadRepositorio->Buscar($Datarow['IdLocalidad']);
+		$Medico= new Medico($Datarow['IdUsuario'],$Datarow['Nombre'],$Datarow['Email'],$Datarow['Pass'],$Localidad,$arrayEspecialidades);
+		return $Medico;
 	}
 }
 ?>
