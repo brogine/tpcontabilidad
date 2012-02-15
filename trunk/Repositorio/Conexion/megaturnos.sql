@@ -77,11 +77,11 @@ CREATE TABLE `localidades` (
 
 /*Data for the table `localidades` */
 
-/*Table structure for table `medico_especialidad` */
+/*Table structure for table `medicos_especialidad` */
 
-DROP TABLE IF EXISTS `medico_especialidad`;
+DROP TABLE IF EXISTS `medicos_especialidad`;
 
-CREATE TABLE `medico_especialidad` (
+CREATE TABLE `medicos_especialidad` (
   `IdMedico` int(10) NOT NULL,
   `IdEspecialidad` int(10) NOT NULL,
   `Matricula` int(50) DEFAULT NULL,
@@ -91,7 +91,7 @@ CREATE TABLE `medico_especialidad` (
   CONSTRAINT `FK_medico_especialidad` FOREIGN KEY (`IdEspecialidad`) REFERENCES `especialidades` (`IdEspecialidad`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
-/*Data for the table `medico_especialidad` */
+/*Data for the table `medicos_especialidad` */
 
 /*Table structure for table `paises` */
 
