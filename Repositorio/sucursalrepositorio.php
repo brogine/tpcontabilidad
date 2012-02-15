@@ -42,7 +42,8 @@ private $Conexion;
 	{
 		$Result=$this->Conexion->ConsultaConRetorno("Select * from Sucursales Where IdSucursal=$IdSucursal");
 		$Datarow=mysqli_fetch_array($Result);
-		$this->Mapear($DataRow)
+		return $this->Mapear($DataRow);
+		
 	}
 	
 	public function ListarSucursal()
@@ -77,7 +78,7 @@ private $Conexion;
 	return $lista;
 	}
 	
-	public function Mapear($DataRow)
+    private function Mapear($DataRow)
 	{
 		$ClinicaRepositorio = new ClinicaRepositorio();
 		$LocalidadRepositorio = new LocalidadRepositorio();

@@ -1,7 +1,8 @@
 <?PHP
 include_once 'Conexion/conexion.php';
 include_once '../../Dominio/medico.php';
-include_once 'usuariorepositorio.php';
+include_once '../../Repositorio/medicorepositorio.php';
+
 class MedicoRepositorio
 {
 	private $conexion;
