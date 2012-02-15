@@ -43,7 +43,8 @@ class UbicacionRepositorio
     	$i = 0;
         $result = $this->Conexion->ConsultaConRetorno("Select * From Pais");
         
-        if($result){
+        if($result)
+        {
 	        while ($DataRow = mysqli_fetch_array($result)){
 	        	$lista[$i] = $this->MapearPais($DataRow);
 	        	$i++;
