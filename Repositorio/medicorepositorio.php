@@ -84,12 +84,11 @@ class MedicoRepositorio
 	    return $lista;
 	}
 	
-	public function ListarPorClinica($idClinica){
+	public function ListarPorClinica($IdClinica){
     	$lista = array();
 	    //$result = $this->conexion->StoreProcedureConRetorno('ProfesionalesListar',$Profesional->Especialidad)
-        $Consulta = "select  from Usuarios m inner join personas p on p.IdPersona = m.IdPersona
-		inner join clinicas c on m.IdClinica = c.IdClinica inner join medicos_especialidad me
-		on me.IdPersona = m.IdPersona inner join especialidades e on me.IdEspecialidad = e.IdEspecialidad where c.IdClinica = " . $idClinica . " order by p.Nombre, p.Apellido; ";
+        $Consulta = "Select M.IdUsuario,M.Nombre,M.Email,M.Pass,M.IdLocalidad,E.IdEspecialidad from Usuarios M inner join Medicos_Especialidad E on M.IdUsuario=E.IdMedico
+        inner join Horarios H on M.IdUsuario=H.IdMedico inner join Sucursales S on S.IdSucursal=H.IdSucursal where H.IdClinica=$IdClinica";
         $i = 0;
         $result = $this->conexion->ConsultaConRetorno($Consulta);
         if($result)
@@ -108,14 +107,17 @@ class MedicoRepositorio
 		$arrayEspecialidades;
 		$i=0;
 		$EspecialidadRepositorio = new EspecialidadRepositorio();
+		
 		foreach ($Datarow as $Medico) 
 		{
 			
 			$arrayEspecialidades[i]=$EspecialidadRepositorio->Buscar($Medico['IdEspecialidad']);
 			$i++;
 		}
+		
 		$LocalidadRepositorio = new LocalidadRepositorio();
 		$Localidad = $LocalidadRepositorio->Buscar($Datarow['IdLocalidad']);
+		
 		$Medico= new Medico($Datarow['IdUsuario'],$Datarow['Nombre'],$Datarow['Email'],$Datarow['Pass'],$Localidad,$arrayEspecialidades);
 		return $Medico;
 	}

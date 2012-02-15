@@ -9,26 +9,28 @@ class ClinicaRepositorio{
 		$this->Conexion = new Conexion();
 	}
 	
-	public function Agregar(Clinica $Clinica){
-		$Consulta = " Insert Into login (Email, Pass) Values ('".$Clinica->Login->Email."', MD5('".$Clinica->Login->Password."')); ";
-		$Consulta .= " Insert Into clinicas (Nombre, idLocalidad, Telefono, Email, Domicilio, Foto) Values ('".$Clinica->Nombre."', ".$Clinica->Ubicacion->Localidad->IdLocalidad.", '".$Clinica->Contacto->Telefono."', '".$Clinica->Contacto->Email."', '".$Clinica->Ubicacion->Domicilio."', '".$Clinica->Foto."'); ";
-		if($this->Conexion->MultipleConsulta($Consulta)) {
-			return $this->Conexion->GetLastID();
-		}
-		else {
-			return "No se pudo agregar la clinica";
-		}
+	public function Agregar(Clinica $Clinica)
+	{
+	$Nombre=$Clinica->Nombre;
+	$Email=$Clinica->Email;
+	$Web=$Clinica->Web;
+	$Consulta="Insert Into Clinicas(Nombre,Email,Web) values ($Nombre,$Email,$Web)";
+	$this->Conexion->ConsultaSinRetorno($Consulta);	
     }
     
-    public function Modificar(Clinica $Clinica){
-    	$Consulta = " Update Clinicas Set Nombre = '$Clinica->Nombre', IdLocalidad = $Clinica->Ubicacion->Localidad->IdLocalidad, Telefono = '$Clinica->Contacto->Telefono', Domicilio = '$Clinica->Ubicacion->Domicilio', Foto = '$Clinica->Foto' Where IdClinica = $Clinica->IdClinica ";
-    	$Consulta .= " Update Login Set Pass = '$Clinica->Login->Pass' Where IdClinica = $Clinica->IdClinica ";
-    	$this->Conexion->MultipleConsulta($Consulta);
+    public function Modificar(Clinica $Clinica)
+    {
+    $IdClinica=$Clinica->IdClinica;	
+    $Nombre=$Clinica->Nombre;
+	$Email=$Clinica->Email;
+	$Web=$Clinica->Web;
+	$Consulta="Update Clinicas Set Nombre=$Nombre,Email=$Email,Web=$Web where IdClinica= $IdClinica";
+	$this->Conexion->ConsultaSinRetorno($Consulta);	
     }
     
     public function Buscar($idClinica){
         //$result = $this->Conexion->StoreProcedureConRetorno($StoreProcedure, $idRubro);
-    	$result = $this->Conexion->ConsultaConRetorno(" Select C.*, L.Pass From Clinicas C Inner Join Login L On C.Email = L.Email Where C.IdClinica = $idClinica ");
+    	$result = $this->Conexion->ConsultaConRetorno("Select * From Clinicas Where IdClinica=$idClinica");
     	if($result){
     		$DataRow = mysqli_fetch_array($result);
         	return $this->Mapear($DataRow);
@@ -38,32 +40,23 @@ class ClinicaRepositorio{
     	}
     }
     
-    public function Listar(){
+    public function Listar()
+    {
     	$lista = array();
     	$i = 0;
-        //$result = $this->Conexion->StoreProcedureConRetorno('RubrosList');
-        $result = $this->Conexion->ConsultaConRetorno(" Select C.*, L.Pass From Clinicas C Inner Join Login L On C.Email = L.Email ");
-        while ($DataRow = mysqli_fetch_array($result)){
+        $result = $this->Conexion->ConsultaConRetorno(" Select * from Clinicas ");
+        while ($DataRow = mysqli_fetch_array($result))
+        {
         	$lista[$i] = $this->Mapear($DataRow);
         	$i++;
         }
         return $lista;
     }
     
-    private function Mapear($DataRow){
-    	include_once 'ubicacionrepositorio.php';
-    	include_once '../../Dominio/ubicacion.php';
-    	include_once '../../Dominio/contacto.php';
-    	include_once '../../Dominio/login.php';
-    	$repoUbicacion = new UbicacionRepositorio();
-    	$Localidad = $repoUbicacion->BuscarLocalidad($DataRow['idLocalidad']);
-    	$Ubicacion = new Ubicacion($Localidad, $DataRow['Domicilio']);
-    	
-    	$Contacto = new Contacto($DataRow['Email'], $DataRow['Telefono']);
-    	
-    	$Login = new Login($DataRow['Email'], $DataRow['Pass']);
-    	
-		$Clinica = new Clinica($DataRow['idClinica'], $DataRow['Nombre'], $Ubicacion, $Contacto, $DataRow['Foto'], $Login);
+    private function Mapear($DataRow)
+    {
+    	   	
+    	$Clinica = new Clinica($DataRow['IdClinica'], $DataRow['Nombre'],$DataRow['Email'],$DataRow['Web']);
 		return $Clinica;
     }
 }

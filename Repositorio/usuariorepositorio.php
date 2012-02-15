@@ -20,12 +20,14 @@ class PacienteRepositorio{
 		$this->Conexion->ConsultaSinRetorno($Consulta);
 	}
     
-    public function Modificar(Usuario $Usuario){
+    public function Modificar(Usuario $Usuario)
+    {
+		$IdUsuario=$Usuario->IdUsuario;	
 		$Nombre=$Usuario->Nombre;
 		$Email = $Usuario->Email;
 		$Pass = $Usuario->Password;
 		$Localidad = $Usuario->Localidad->IdLocalidad;
-		$Consulta = "Update Usuarios set Nombre=$Nombre,Email=$Email,Pass=$Pass,IdLocalidad=$Localidad";
+		$Consulta = "Update Usuarios set Nombre=$Nombre,Email=$Email,Pass=$Pass,IdLocalidad=$Localidad where $IdUsuario";
 		$this->Conexion->ConsultaSinRetorno($Consulta);
     }
     
