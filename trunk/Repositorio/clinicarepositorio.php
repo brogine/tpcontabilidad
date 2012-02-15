@@ -29,7 +29,6 @@ class ClinicaRepositorio{
     }
     
     public function Buscar($idClinica){
-        //$result = $this->Conexion->StoreProcedureConRetorno($StoreProcedure, $idRubro);
     	$result = $this->Conexion->ConsultaConRetorno("Select * From Clinicas Where IdClinica=$idClinica");
     	if($result){
     		$DataRow = mysqli_fetch_array($result);
@@ -55,7 +54,6 @@ class ClinicaRepositorio{
     
     private function Mapear($DataRow)
     {
-    	   	
     	$Clinica = new Clinica($DataRow['IdClinica'], $DataRow['Nombre'],$DataRow['Email'],$DataRow['Web']);
 		return $Clinica;
     }
